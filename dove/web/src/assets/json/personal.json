@@ -1,0 +1,71 @@
+[
+  {
+    "title": "cash_account",
+    "iconClass": "cash_account",
+    "key": 0,
+    "component": [
+      "cashAccount"
+    ]
+  },
+  {
+    "title": "coupon.name",
+    "iconClass": "coupon",
+    "key": 0,
+    "component": [
+      "coupon",
+      "unused",
+      "used",
+      "expired"
+    ]
+  },
+  {
+    "title": "deposit",
+    "iconClass": "deposit",
+    "key": 0,
+    "component": [
+      "deposit",
+      "deposit_channel_1",
+      "deposit_channel_2",
+      "deposit_channel_3"
+    ]
+  },
+  {
+    "title": "withdrawal",
+    "iconClass": "withdrawal",
+    "key": 1,
+    "component": [
+      "withdrawal",
+      "withdrawal_channel_1",
+      "withdrawal_channel_2",
+      "withdrawal_channel_3"
+    ]
+  },
+  {
+    "title": "recommendation",
+    "iconClass": "recommendation",
+    "key": 2,
+    "component": [
+      "refund",
+      "sponsoredLinks",
+      "myRefund",
+      "refundHistory"
+    ]
+  },
+  {
+    "title": "history_record",
+    "iconClass": "history_record",
+    "key": 3,
+    "component": [
+      "historyRecord",
+      "rechargeRecord",
+      "withdrawalsRecord",
+      "gameRecord"
+    ]
+  },
+  {
+    "title": "personal_setting",
+    "iconClass": "personal_setting",
+    "key": 4,
+    "component": ["personalSettings", "personalInformation", "changePassword"]
+  }
+]

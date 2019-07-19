@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>朋友圈</title> 
+</head>
+<body>
+ 
+ <a href="wechat_moments.html?page=login"> gogo </a><!-- 要跳转的页面 -->
+ 
+ <ul>
+ 	<li id='384'>384</li>
+ 	<li id='385'>385</li>
+ </ul>
+
+<script src="../js/jquery.js"></script> 
+<script src="../js/common.js"></script>
+<script type="text/javascript"> 
+
+
+var ps1pub = PageStorge.createNew(true,"_");//一个对象,包含设置删除等功能
+console.log(ps1pub.pageName);//"_"
+ps1pub.set("ps1pub22",123);
+ps1pub.set("ps1pub22",123);
+
+
+var ps_login = PageStorge.createNew(true); 
+console.log(ps_login)
+console.log( ps_login.pageName );//"login"
+console.log( ps_login.set("saisai",12124123)); 
+
+
+
+var node = $('#384').html();
+console.log(node);
+
+ 
+var PostNodeItem = { 
+      createNew: function(id){   
+　 		  var pni = {};  
+		  //init
+		   pni.id =id; 
+		   //加入
+		   pni.getNode = function(){ 
+			   var node = $('#'+pni.id).html();
+			   console.log(node);
+		   }; 
+		   return pni; 
+	   } 
+};
+
+var pni1=PostNodeItem.createNew("384")
+var pni2=PostNodeItem.createNew("385")
+var pni3=PostNodeItem.createNew("386")
+
+var NodeAarry =[]; 
+NodeAarry.push(pni1);
+NodeAarry.push(pni2);
+NodeAarry.push(pni3);
+
+ 
+
+console.log(NodeAarry);
+
+//console.log(pni3.getNode('384').get('li'));
+console.log(pni3.getNode('385'));
+
+ 
+</script>
+</body>

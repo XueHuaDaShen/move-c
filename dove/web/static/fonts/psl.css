@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'PSLXDISPLAY';
+  /* src: url('./tahoma_1.ttf'); */
+  /* src: url('./tahoma_bold.ttf'); */
+  /* src: url('./psl.ttf'); */
+  /* src: url('./sb-m.ttf'); */
+  /* src: url('./p1.otf'); */
+  /* src: url('./p1.ttf'); */
+  src: url('./ek-l.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

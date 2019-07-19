@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script src="../jquery.js"></script>
+<script>
+let uploader=(function(){
+    var fun=function(options){
+        // eventEmitter.call(this);
+        var defaultOptions={
+            acceptTypes:['.apk','.ipa'],
+            auto:true,
+            formDataKey:'file',
+            url:'/api',
+            setHeaders:function(xhr){
+                return {
+                    // 'Content-Type':'application/x-www-form-urlencoded;charset-utf-8'
+                }
+            },
+            setBody:function(){
+                return {
+
+                }
+            }
+
+        },options=Object.assign(defaultOptions,options);
+
+
+        var file=document.createElement('input'),fileInfo={},ext=null;
+        file.type='file';
+        document.body.appendChild(file);
+        this.getPrivate=function(){
+            return {
+                file:file,
+                options:options,
+                fileInfo:fileInfo,
+                ext:ext
+            };
+        }
+        var self=this;
+        file.onclick = function () {
+
+            this.value = null;
+        };
+        file.onchange=function(){
+            self.emit('CHANGE',self.getPrivate());
+            console.log('file change--:',arguments,file.files);
+            var _fileInfo=file.files[0],_ext=_fileInfo.name.split('.').reverse()[0];
+            if(options.acceptTypes.indexOf('.'+_ext)===-1){
+                self.emit('TYPE_ERROR',self.getPrivate())
+                return false;
+            }
+            fileInfo=_fileInfo;
+            ext=_ext;
+            if(options.auto){
+                setTimeout(function(){
+                    self.start();
+                })
+
+            }
+        }
+    }
+    fun.prototype.start=function(){
+        // alert('start')
+        var info=this.getPrivate(),
+            self=this;
+        console.log('info---------------:',info);
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', info.options.url, true);
+        var headers=info.options.setHeaders(xhr);
+        for(var i in headers){
+            xhr.setRequestHeader(i, headers[i]);
+        }
+
+        // info.options.beforeStart(xhr);
+        var formData = new FormData();
+        formData.append(info.options.formDataKey,info.fileInfo);
+        var body=info.options.setBody(info);
+        for(var i in body){
+            formData.append(i,body[i]);
+        }
+
+        xhr.upload.onprogress = function (e) {
+            if (e.lengthComputable) {
+                var percentage = parseInt((e.loaded / e.total) * 100, 10);
+                // console.log('percent:',percentage);
+                var p={
+                    percentage:percentage,
+                    info:info
+                }
+                console.log('progress info:',p);
+                self.emit('PROGRESS',p)
+
+            }
+        };
+        xhr.onerror = function (e) {
+            var str = 'An error occurred while submitting the form. Maybe your file is too big';
+            console.warn(str);
+            console.log('error info:',info);
+            self.emit('ERROR',info);
+        };
+        xhr.onload=function(){
+            var res;
+            console.log('xhr res------:',this);
+            try{
+                res=JSON.parse(this.responseText);
+            }catch(e){
+                res=this.responseText
+            }
+            var p={
+                info:info,
+                res:typeof(res)==='object'?res:{
+                    data:res,
+                    code:null,
+                    error:'意外错误，请检查网络连接',
+                    msg:'意外错误，请检查网络连接'
+                }
+            };
+            console.log('success info:',p);
+            self.emit('SUCCESS',p)
+            document.body.removeChild(info.file);
+        }
+        xhr.send(formData);
+
+    }
+    fun.prototype.open=function(){
+        this.getPrivate().file.click();
+    }
+
+
+    return fun;
+})();
+uploader()
+</script>

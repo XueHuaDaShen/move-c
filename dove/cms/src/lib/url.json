@@ -1,0 +1,346 @@
+{
+  "menu": [
+    {
+      "title": "资金管理",
+      "color": "#FF9291",
+      "name": "Fund Management",
+      "data": [
+        {
+          "title": "帐变记录",
+          "url": "/home/fundManager/accountChange/accountChange",
+          "name": "Account change",
+          "data": [
+            {
+              "title": "帐变记录",
+              "url": "accountChange"
+            }
+          ]
+        },
+        {
+          "title": "充值",
+          "url": "/home/fundManager/deposit/deposit",
+          "name": "Deposit",
+          "data": [
+            {
+              "title": "充值",
+              "url": "deposit"
+            },
+            {
+              "title": "第三方充值",
+              "url": "thirdDeposit"
+            },
+            {
+              "title": "充值记录",
+              "url": "depositHistory"
+            },
+            {
+              "title": "管理员充值",
+              "url": "adminDeposit"
+            }
+          ]
+        },
+        {
+          "title": "提现",
+          "url": "/home/fundManager/withdrawal/withdrawal",
+          "name": "Withdrawal",
+          "data": [
+            {
+              "title": "提现",
+              "url": "withdrawal"
+            }
+          ]
+        },
+        {
+          "title": "返点",
+          "url": "/home/fundManager/refund/refund",
+          "name": "refund",
+          "data": [
+            {
+              "title": "返点",
+              "url": "refund"
+            }
+          ]
+        },
+        {
+          "title": "转账",
+          "url": "/home/fundManager/bankTransaction/bankTransaction",
+          "name": "bankTransaction",
+          "data": [
+            {
+              "title": "转账",
+              "url": "bankTransaction"
+            }
+          ]
+        },
+        {
+          "title": "支持银行卡",
+          "url": "/home/fundManager/supportedBank/supportedBank",
+          "name": "Supported Bank",
+          "data": [
+            {
+              "title": "支持银行卡",
+              "url": "supportedBank"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "用户管理",
+      "color": "#51E6C2",
+      "name": "User Management",
+      "data": [
+        {
+          "title": "会员管理",
+          "url": "/home/user/userList/userList",
+          "name": "User List",
+          "data": [
+            {
+              "title": "用户列表",
+              "url": "userList"
+            }
+          ]
+        },
+        {
+          "title": "推广码",
+          "url": "/home/user/recommend/recommend",
+          "name": "Recommend",
+          "data": [
+            {
+              "title": "契约管理",
+              "url": "recommend"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "游戏管理",
+      "color": "#FBB91B",
+      "name": "Game Management",
+      "data": [
+        {
+          "title": "游戏记录",
+          "url": "/home/gameManager/gameLog/gameLog",
+          "name": "Game History",
+          "data": [
+            {
+              "title": "游戏记录",
+              "url": "gameLog"
+            }
+          ]
+        },
+        {
+          "title": "游戏列表",
+          "url": "/home/gameManager/gameList/gameList",
+          "name": "Game List",
+          "data": [
+            {
+              "title": "游戏记录",
+              "url": "gameList"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "操作管理",
+      "color": "#E15454",
+      "name": "Operation Management",
+      "data": [
+        {
+          "title": "活动推广",
+          "url": "/home/operation/promotion/promotion",
+          "name": "promotion",
+          "data": [
+            {
+              "title": "活动推广",
+              "url": "promotion"
+            }
+          ]
+        },
+        {
+          "title": "会员公告",
+          "url": "/home/operation/announcement/announcement",
+          "name": "announcement",
+          "data": [
+            {
+              "title": "会员公告",
+              "url": "announcement"
+            }
+          ]
+        },
+        {
+          "title": "充值套餐",
+          "url": "/home/operation/depositPackage/depositPackage",
+          "name": "Deposit Package",
+          "data": [{
+            "title": "充值套餐",
+            "url": "depositPackage"
+          }]
+        }
+      ]
+    },
+    {
+      "title": "统计报表",
+      "color": "#5BD4FF",
+      "name": "Report Management",
+      "data": [
+        {
+          "title": "平台报表",
+          "url": "/home/report/platformReport/platformReport",
+          "name": "Platform Report",
+          "data": [
+            {
+              "title": "平台报表",
+              "url": "platformReport"
+            }
+          ]
+        },
+        {
+          "title": "用户报表",
+          "url": "/home/report/userReport/userReport",
+          "name": "User Report",
+          "data": [
+            {
+              "title": "会员报表",
+              "url": "userReport"
+            }
+          ]
+        },
+        {
+          "title": "游戏报表",
+          "url": "/home/report/gameReport/gameReport",
+          "name": "Game Report",
+          "data": [
+            {
+              "title": "游戏报表",
+              "url": "gameReport"
+            }
+          ]
+        },
+        {
+          "title": "User Analyze",
+          "url": "/home/report/userAnalyze/userAnalyze",
+          "name": "User Analyze",
+          "data": [
+            {
+              "title": "User Analyze",
+              "url": "userAnalyze"
+            }
+          ]
+        },
+        {
+          "title": "Lotto Analyze",
+          "url": "/home/report/lottoAnalyze/lottoAnalyze",
+          "name": "Lotto Analyze",
+          "data": [
+            {
+              "title": "Lotto Analyze",
+              "url": "lottoAnalyze"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "数据管理",
+      "color": "#B831FF",
+      "name": "DATA",
+      "data": [
+        {
+          "title": "User Data",
+          "url": "/home/userData/userData/userData",
+          "name": "User Data",
+          "data": [
+            {
+              "title": "User Data",
+              "url": "userData"
+            }
+          ]
+        },
+        {
+          "title": "User Retention",
+          "url": "/home/userData/userRetention/userRetention",
+          "name": "User Retention",
+          "data": [
+            {
+              "title": "userRetention",
+              "url": "userRetention"
+            }
+          ]
+        },
+        {
+          "title": "Deposit Retention",
+          "url": "/home/userData/depositRetention/depositRetention",
+          "name": "Deposit Retention",
+          "data": [
+            {
+              "title": "depositRetention",
+              "url": "depositRetention"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "后台管理",
+      "color": "#E98DF3",
+      "name": "CMS Management",
+      "data": [
+        {
+          "title": "后台用户",
+          "url": "/home/cms/admin/adminList",
+          "name": "CMS User",
+          "data": [
+            {
+              "title": "账户列表",
+              "url": "adminList"
+            },
+            {
+              "title": "群组列表",
+              "url": "roleList"
+            },
+            {
+              "title": "修改密码",
+              "url": "editPassword"
+            }
+          ]
+        },
+        {
+          "title": "后台记录",
+          "url": "/home/cms/cmsHistory/loginLog",
+          "name": "CMS History",
+          "data": [
+            {
+              "title": "登录记录",
+              "url": "loginLog"
+            },
+            {
+              "title": "操作记录",
+              "url": "operationLog"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "系统配置",
+      "color": "#8EB4FF",
+      "name": "System Management",
+      "data": [
+        {
+          "title": "常规设置",
+          "url": "/home/system/generalSetting/menu",
+          "name": "General Setting",
+          "data": [
+              {
+              "title": "设置项",
+              "url": "menu"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

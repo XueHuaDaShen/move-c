@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- <my-button disabled open>123</my-button> -->
+	<my-button-ex></my-button-ex>
+	<button is="fancy-button">Fancy button!</button>
+</body>
+</html>
+<script src="button.js"></script>
+<script>
+let button = new MyButton();
+button.textContent = 'test';
+document.body.appendChild(button)
+
+// let btn = new FancyButton();
+// btn.textContent = 'btn';
+// document.body.appendChild(btn)
+</script>

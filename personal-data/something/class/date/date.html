@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+*{
+
+	padding:0;
+	margin:0;
+}
+.box{
+	position:relative;
+}
+.date{
+	width:295px;
+	background:#3e3e3e;
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	position:absolute;
+	display:none;
+}
+.week b{
+	display:block;
+	width:30px;
+	height:20px;
+	padding:5px;
+	text-align: center;
+}
+.week{
+	display:-webkit-box;
+	-webkit-box-pack:justify;
+}
+.date-body{
+	width:100%;
+	height:252px;
+	overflow: hidden;
+}
+.date-body div{
+	display: flex;
+    flex-wrap: wrap;
+}
+.date-body span{
+	display:block;
+	width:32px;
+	height:32px;
+	line-height: 32px;
+	padding:5px;
+	text-align: center;
+	position: relative;
+}
+.date-body span a{
+	display:block;
+	text-decoration: none;
+	color:#fff;
+}
+.date-body span em{
+	font-size: 12px;
+	position: absolute;
+	top:-5px;
+	color:#fff;
+}
+/*.date-body span em.arrive{
+	color:green;
+}
+.date-body span em.leave{
+	color:red;
+}*/
+.currentCheck a, .active a{
+	border:1px solid #000;
+}
+.active{
+	
+}
+.date-body .nowDate a{
+	background:#ccc;
+	border:1px solid blue;
+	color:#000;
+
+}
+.date-body .nextMonth a{
+	color:#999;
+}
+.date-body .prevMonth a{
+	color:#999;
+}
+.date-head .year-month h2{
+	display:-webkit-box;
+	-webkit-box-pack:justify;
+	height:50px;
+	color:#fff;
+}
+.date-head .year-month h2 p{
+	height:100%;
+	display:-webkit-box;
+	-webkit-box-align:center;
+}
+.date-head .year-month h2 p.title{
+	margin-left:10px;
+	display:-webkit-box;
+}
+.date-head .year-month h2 p.ctrlBtn{
+	cursor: pointer;
+	margin-right:10px;
+	display:-webkit-box;
+}
+.date-head .year-month h2 p .prevBtn{
+	cursor: pointer;
+	/*padding:5px;*/
+	border:1px solid #ccc;
+	display:block;
+	text-align: center;
+	line-height: 25px;
+	width:30px;
+	height:25px;
+	font-size: 12px;
+}
+.date-head .year-month h2 p .nowBtn{
+	cursor: pointer;
+	border:1px solid #ccc;
+	display:block;
+	text-align: center;
+	line-height: 25px;
+	width:30px;
+	height:25px;
+	font-size: 12px;
+}
+.date-head .year-month h2 p .nextBtn{
+	border:1px solid #ccc;
+	display:block;
+	text-align: center;
+	line-height: 25px;
+	width:30px;
+	height:25px;
+	font-size: 12px;
+}
+em{
+	font-style: normal;
+}
+b{
+	color:#fff;
+}
+</style>
+<body>
+	<div class="box">
+		<input type="text" id="myDateClass">
+		<div class="date">
+			<div class="date-head">
+				<div class="year-month">
+					<h2>
+						<p class="title"><em class="yy">2017</em>年<em class="mm">05</em>月</p>
+						<p class="ctrlBtn">
+							<span class="prevBtn">◀</span>
+							<span class="nowBtn">●</span>
+							<span class="nextBtn">▶</span>
+						</p>
+					</h2>
+				</div>
+				<div class="week">
+					<b>一</b>
+					<b>二</b>
+					<b>三</b>
+					<b>四</b>
+					<b>五</b>
+					<b>六</b>
+					<b>日</b>
+				</div>
+			</div>
+			<div class="date-body">
+				
+			</div>
+		</div>
+	</div>
+	<input type="date">
+</body>
+</html>
+<script src="../../jquery-3.1.1.min.js"></script>
+<script>
+function MyDateClass(hotel){
+	this.nowTime =  new Date();
+	this.nowYear = this.nowTime.getFullYear();
+	this.prevMonth = this.nowTime.getMonth();
+	this.nowMonth = this.prevMonth+1;
+	this.month = this.prevMonth+1;
+	this.date = this.nowTime.getDate();
+	this.init(this.nowYear, this.nowMonth, this.date);
+	this.hotel = typeof hotel === 'boolean'? hotel : false;
+	this.calendar = !this.hotel;
+	this.bindEvent();
+	this.ok = $(".date-body>div").length == 1 ;
+	this.clickNum = 1;
+
+	var that = this;
+	$(".nextBtn").on("click", function(){
+		var bindClick = $(this).attr("class");
+		that.ok && that.bindNext(bindClick)
+	})
+	$(".nowBtn").on("click", function(){
+		that.bindNow()
+	})
+	$(".prevBtn").on("click", function(){
+		var bindClick = $(this).attr("class");
+		that.ok && that.bindPrev(bindClick)
+	})
+}
+MyDateClass.prototype={
+
+	init: function(year, month, date, bindClick, checkDate){
+		this.nowTime =  new Date(year, month-1, date);
+		this.nowYear = this.nowTime.getFullYear();
+		this.nowMonth = this.nowTime.getMonth()+1;
+		this.ok = false;
+		this.renderTime(this.nowYear, this.nowMonth, bindClick, checkDate);
+	},
+
+
+	total: function(year, month){
+		return new Date(year, month, 0).getDate();//获取当月的总天数；
+	},
+
+	oneDay: function(year, month){
+		var date = new Date(year, month, 1).getDay();//获取当月的一号是周几；这里的month代表下个月，所以获取的的时候要-1；
+		date = date > 0? date : 7;
+		return date;
+	},
+
+	renderTime: function(year, month, bindClick, checkDate){
+		var that = this;
+		var totalDay = this.total(year, month);//总天数
+		var date = this.oneDay(year, month-1);//周几
+		var day = month == this.nowTime.getMonth()+1 ? this.nowTime.getDate() : "";//今天的日期
+		var str = '<div>';
+		var nextI = 1;
+		var prevI = this.total(year, month-1);
+		var addTime = new Date(year, month);
+		for( var i = 1; i < date; i++ ){
+			str += '<span class="prevMonth"><a href="javascript:;">'+(prevI-(date-i)+1)+'</a></span>';
+		}
+		let currentDayClass = '';
+		for(var i = 1; i < 43-date+1; i++ ){
+			if(i == checkDate){
+				currentDayClass = 'currentCheck';
+			}else{
+				currentDayClass = '';
+			}
+			if( i > totalDay ){
+				
+				str += '<span class="nextMonth '+currentDayClass+'"><a href="javascript:;">'+nextI+'</a></span>';
+				nextI++;
+				
+			}else{
+				if( day == this.date && i == day ){
+					str += '<span class="nowMonth nowDate"><a href="javascript:;">'+i+'</a></span>';
+				}else{
+					str += '<span class="nowMonth '+currentDayClass+'"><a href="javascript:;">'+i+'</a></span>';
+				}
+			}
+		}
+		str += '</div>';
+		if( bindClick == "nextBtn" ){
+			$(".date-body").append(str);
+			$(".date-body").find("div").eq(0).css({
+				"marginTop": "-252px",
+				"transition": "all .3s"
+			})
+			setTimeout(function(){
+				$(".date-body").find("div").eq(0).remove();
+				$(".date-body").find("div").eq(0).css({
+					"marginTop": "0",
+					"transition": "none"
+				});
+				that.ok = $(".date-body>div").length == 1;
+			},500)
+		}else if( bindClick == "prevBtn" ){
+			$(".date-body").prepend(str);
+			$(".date-body").find("div").eq(0).css({
+				"marginTop": "-252px",
+				"transition": "none"
+			})
+			setTimeout(function(){
+				$(".date-body").find("div").eq(0).css({
+					"marginTop": "0",
+					"transition": "all .3s"
+				});
+			},50)
+			setTimeout(function(){
+				$(".date-body").find("div").eq(1).remove();
+				that.ok = $(".date-body>div").length == 1;
+			},500)
+		}else{
+			$(".date-body").html(str);
+			that.ok = $(".date-body>div").length == 1; 
+		}
+		$(".yy").html(year);
+		if( month < 10 ){
+			$(".mm").html( "0" + month );
+		}else{
+			$(".mm").html( month );
+		}
+		checkDate = checkDate? checkDate : this.date;
+		$("#myDateClass").val($(".title").text()+checkDate+"日")
+	},
+
+	bindNext: function(bindClick, checkDate){
+		this.nowMonth += 1;
+		var date = this.nowMonth == this.month? this.date : 1;
+		
+		this.init(this.nowYear, this.nowMonth, date, bindClick, checkDate);
+		
+	},
+
+	bindNow: function(){
+		var time = new Date(),
+			year = time.getFullYear(),
+			month = time.getMonth()+1,
+			date = time.getDate();
+		// num = 1;
+		this.clickNum = 1;
+		this.init(year, month, date)
+	},
+
+	bindPrev: function(bindClick, checkDate){
+		this.nowMonth -= 1;
+		var date = this.nowMonth == this.month? this.date : 1;
+		this.init(this.nowYear, this.nowMonth, date, bindClick, checkDate)
+		
+	},
+
+	bindEvent: function(){
+		var that = this;
+		$(document).on("mouseover", ".date-body span", function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		})
+		$(document).on("mouseout", ".date-body span", function(){
+			$(this).removeClass("active");
+		})
+		if( this.hotel ){
+			$(document).on("click", ".date-body span", function(){
+				var str1 = '<em class="arrive">入</em>';
+				var str2 = '<em class="leave">离</em>';
+				var nowDateText = $(".nowDate").find("a").text()*1;
+				var thisClass = $(this).attr("class");
+				var checkText1, checkText2;
+				if( that.clickNum == 1 ){
+					checkText1 = $(this).find("a").text()*1;
+					if( thisClass.indexOf("nextMonth") > -1 ){
+						$(this).append(str1);
+						that.clickNum ++;
+					}else if( checkText1 < nowDateText ){
+						alert("亲，就算是上帝也不能回到过去");
+					}else{
+						$(this).append(str1);
+						that.clickNum ++;
+					}
+					
+					
+				}else if( that.clickNum == 2 ){
+					checkText2 = $(this).find("a").text()*1;
+					if( thisClass.indexOf("nextMonth") > -1 ){
+						if( !(checkText2 > $(".arrive").siblings("a").text()*1) ){
+							alert("亲，你还没住就要走吗？")
+						}else{
+							$(this).append(str2);
+							that.clickNum ++;
+						}
+						
+					}else{
+						alert("亲，你还没住就要走吗？");
+					}
+				}else{
+					$(".arrive").remove();
+					$(".leave").remove();
+					that.clickNum = 1;
+				}
+			})
+		}else{
+			$(document).on("click", ".date-body span", function(){
+				var spanClass = $(this).attr("class");
+				var checkDate = $(this).find("a").text();
+				if( spanClass.indexOf("nextMonth") > -1 ){
+
+					that.ok && that.bindNext("nextBtn", checkDate);
+
+				}else if( spanClass.indexOf("prevMonth") > -1 ){
+
+					that.ok && that.bindPrev("prevBtn", checkDate);
+
+				}else if( spanClass.indexOf("nowMonth") > -1 ){
+					$(this).addClass("currentCheck").siblings().removeClass("currentCheck");
+					$("#myDateClass").val($(".title").text()+checkDate+"日")
+					$(".date").hide();
+
+				}
+			})
+			// $(document).on("click", ".nextMonth", function(){
+			// 	that.ok && that.bindNext("nextBtn");
+			// })
+			// $(document).on("click", ".prevMonth", function(){
+			// 	that.ok && that.bindPrev("prevBtn");
+			// })
+		}
+		
+		
+	}
+}
+
+new MyDateClass()
+
+$("#myDateClass").on("focus", function(){
+	$(".date").show()
+})
+
+// console.log(document)
+$(document).on("click", function(e){
+	if (e.target.parentNode == document) {
+		$(".date").hide()
+	}
+})
+// console.log((new Date("2017/5/26/ 10:25:25")))
+console.log($("#myDateClass").val().replace(/[\u4e00-\u9fa5]/g, "/"))
+// var num = 1;
+// $(document).on("click", ".date-body span", function(){
+// 	var str1 = '<em class="arrive">入</em>';
+// 	var str2 = '<em class="leave">离</em>';
+// 	var nowDateText = $(".nowDate").find("a").text()*1;
+// 	var thisClass = $(this).attr("class");
+// 	var checkText1, checkText2;
+// 	if( num == 1 ){
+// 		checkText1 = $(this).find("a").text()*1;
+// 		if( thisClass.indexOf("nextMonth") > -1 ){
+// 			$(this).append(str1);
+// 			num ++;
+// 		}else if( checkText1 < nowDateText ){
+// 			alert("亲，就算是上帝也不能回到过去");
+// 		}else{
+// 			$(this).append(str1);
+// 			num ++;
+// 		}
+		
+		
+// 	}else if( num == 2 ){
+// 		checkText2 = $(this).find("a").text()*1;
+// 		if( thisClass.indexOf("nextMonth") > -1 ){
+// 			$(this).append(str2);
+// 			num ++;
+// 		}else if( checkText2 < nowDateText ){
+// 			alert("亲，这么想逆转时光吗？");
+// 		}else if( !(checkText2 > $(".arrive").siblings("a").text()*1) ){
+// 			alert("亲，你还没住就要走吗？")
+// 		}else{
+// 			$(this).append(str2);
+// 			num ++;
+// 		}
+// 	}else{
+// 		$(".arrive").remove();
+// 		$(".leave").remove();
+// 		num = 1;
+// 	}
+// })
+
+</script>

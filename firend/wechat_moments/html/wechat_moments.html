@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>朋友圈</title> 
+</head>
+<body>
+ 
+
+<script src="../js/jquery.js"></script> 
+<script src="../js/common.js"></script>
+<script type="text/javascript"> 
+
+
+
+var ps_moments = PageStorge.createNew(true); 
+
+console.log( ps_moments.pageName );
+console.log( ps_moments.set("dddd",123));
+console.log( ps_moments.set("dddd",123));
+console.log( ps_moments.get("dddd") );
+
+
+var ps_prev = PageStorge.createNew(false); 
+
+console.log( ps_prev.pageName ); ;
+console.log( ps_prev.get("saisai")); 
+
+
+
+
+	function getPostFormPage(page){ 
+		DoGet("/moments/listPost",
+			  {
+			        'page.currentPage': page,
+			        'user.userId':12,
+			        'page.pageSize':3
+		},onData);	
+	}
+	
+	function onData(data){ 
+		
+        if(data.success){
+            console.log(data);
+        }else{
+            alert (data.message);
+        }
+        return;  
+	}
+	
+	getPostFormPage(2);
+ 
+</script>
+</body>

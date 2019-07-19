@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="down.css">
+</head>
+<style>
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+.round{
+	width:43px;
+	height:43px;
+	background:#000;
+	border-radius:50%;
+	color:#fff;
+	font-size:24px;
+	text-align:center;
+	line-height: 43px;
+	display:block;
+	position:fixed;
+	right:100px;
+	top:100px;
+}
+</style>
+<body>
+	<div class="deadline">
+		<div class="deadline-number">
+			<em class="hour-left">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+			<em class="hour-right">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+			<span class="space">:</span>
+			<em class="min-left">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+			<em class="min-right">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+			<span class="space">:</span>
+			<em class="sec-left">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+			<em class="sec-right">
+				<b class="deadline-number-mask"></b>
+				<span class="deadline-num deadline-num-next-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-next-b">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-t">
+					<span class="inner">0</span>
+				</span>
+				<span class="deadline-num deadline-num-b">
+					<span class="inner">0</span>
+				</span>
+			</em>
+		</div>
+	</div>
+	<!-- <div class="round">12</div> -->
+</body>
+</html>
+<script src="jquery.js"></script>
+<script>
+//倒计时 时长 minutes;
+var countDownTime = '09:15';
+var st;
+(function(){
+	var minLeft = countDownTime.charAt(0);
+	var minRight = countDownTime.charAt(1);
+	var secLeft = countDownTime.charAt(3);
+	var secRight = countDownTime.charAt(4);
+	$(".min-left").find('.inner').html(minLeft);
+	$(".min-right").find('.inner').html(minRight);
+	$(".sec-left").find('.inner').html(secLeft);
+	$(".sec-right").find('.inner').html(secRight);
+	st = setInterval(function(){
+		secRight -= 1;
+		if( secRight < 0 && secLeft > 0 ){
+			secRight = 9;
+			secLeft -= 1;
+			$(".sec-left").addClass("min-left-anim")
+			setHtmlone(".sec-left", secLeft);
+			$(".sec-right").addClass("min-left-anim")
+			setHtmlone(".sec-right", secRight);
+		}else if( secRight < 0 && secLeft < 1 && minRight > 0 ){
+			minRight -= 1;
+			secLeft = 5;
+			secRight = 9;
+			$(".min-right").addClass("min-left-anim")
+			setHtmlone(".min-right", minRight);
+			$(".sec-left").addClass("min-left-anim")
+			setHtmlone(".sec-left", secLeft);
+		}
+		$(".sec-right").addClass("min-left-anim")
+		setHtmlone(".sec-right", secRight);
+		setTimeout(function(){
+			$(".min-right").removeClass("min-left-anim");
+			$(".sec-left").removeClass("min-left-anim");
+			$(".sec-right").removeClass("min-left-anim");
+			setHtmltwo(".sec-right", secRight);
+			setHtmltwo(".min-right", minRight);
+			setHtmltwo(".sec-left", secLeft);
+		},600)
+		if( minLeft == 0 && minRight == 0 && secLeft == 0 && secRight == 0 ){
+			clearInterval(st)
+		}
+	},1000)
+})()
+function setHtmlone(par, val){
+	$(par).find('.deadline-num-next-t>.inner').html(val);
+	$(par).find('.deadline-num-next-b>.inner').html(val);
+}
+function setHtmltwo(par, val){
+	$(par).find('.deadline-num-t>.inner').html(val);
+	$(par).find('.deadline-num-b>.inner').html(val);
+}
+//彩票下注规则
+// 直选复式：
+// 五星：用5个数组的长度叠乘，即可得到下注的注数；
+// 四星：4个数组
+// 直选组合：
+// 类似于直选复式，用直选复式的结果 乘以 星数 得到 注数
+// 组选120：
+// 五星：10*9*8*7*6 / 5*4*3*2*1 252
+// 组选60：
+// 遍历 二重号 数组，在 单号数组里查找，如果找到，就用 单号数组的length-1 开始算，找不到就用 单号数组的length算
+// var arr2 = [0,1,2,3,9],
+// 	arr1 = [0,1,2,3,4,5,6,7,8,9];
+// var result = 0;
+// var len = 0;
+// for(var i in arr2){
+// 	if(arr1.indexOf(arr2[i])>-1){
+// 		len = arr1.length-1
+// 	}else{
+// 		len = arr1.length;
+// 	}
+// 	var n = len;
+// 	var m = 1;
+// 	for(var j=1; j<3; j++){
+// 		n*=(len-j)
+// 		m*=(j+1)
+// 	}
+// 	result += n/m;
+// }
+// console.log(result)
+// 组选30：
+// var arr1 = [0,1,2,3,4,5,6,7,8,9],
+// 	arr2 = [0,1,2,3,4,5,6,7,8,9];
+// var result = 0;
+// var len = 0;
+// for(var i in arr2){
+// 	if(arr1.indexOf(arr2[i])>-1){
+// 		len = arr1.length-1
+// 	}else{
+// 		len = arr1.length;
+// 	}
+// 	var n = len;
+// 	var m = 1;
+// 	for(var j=1; j<2; j++){
+// 		n*=(len-j)
+// 		m*=(j+1)
+// 	}
+// 	result += n/m;
+// }
+// console.log(result)
+// 直选和值：
+// var arr = [];
+// for(var i=0; i<1000; i++){
+// 	arr.push(i)
+// }
+// // console.log(arr)
+// var newArr = [];
+// arr.filter(function(v){
+// 	var numArr = v.toString().split('');
+// 	var num = numArr.reduce(function(p, c){
+// 		const value = Number(c);
+// 		if (!isNaN(value)) {
+// 		   	return p*1 + c*1;
+// 		} else {
+// 		   	return p*1;
+// 		}
+// 	})
+// 	newArr.push(num);
+// })
+// var n = 0;
+// var arr2 = [1,2,3,15,19,20]
+// for(var j in arr2){
+// 	for(var i in newArr){
+// 		if( newArr[i] == arr2[j] ){
+// 			n++
+// 		}
+// 	}
+// }
+// console.log(n)
+// 组选和值：
+// var arr = [];
+// for(var i=1; i<1000; i++){
+// 	var val = i.toString().split('');
+// 	if(val[0] == val[1] && val[0] == val[2]){
+// 		// console.log(i)
+// 		continue;
+// 	}
+// 	if( i < 10 ){
+// 		i = '00'+i
+// 	}else if( i < 100 ){
+// 		i = '0'+i
+// 	}
+// 	arr.push(i)
+// }
+// var newArr = [];
+// arr.filter(function(v){
+// 	var numArr = v.toString().split('');
+// 	var newNum = Number(numArr.sort(function(a,b){
+// 		return a-b;
+// 	}).join(''))
+// 	newArr.push(newNum);
+// })
+// var arr1 = [];
+// for(var i in newArr){
+// 	if( arr1.indexOf(newArr[i]) < 0 ){
+// 		arr1.push(newArr[i])
+// 	}
+// }
+// console.log(arr1)
+// var newArr1 = [];
+// arr1.filter(function(v){
+// 	var numArr = v.toString().split('');
+// 	var num = numArr.reduce(function(p, c){
+// 		const value = Number(c);
+// 		if (!isNaN(value)) {
+// 		   	return p*1 + c*1;
+// 		} else {
+// 		   	return p*1;
+// 		}
+// 	})
+// 	newArr1.push(num);
+// })
+// var n = 0;
+// var arr2 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+// for(var j in arr2){
+// 	for(var i in newArr1){
+// 		if( newArr1[i] == arr2[j] ){
+// 			n++
+// 		}
+// 	}
+// }
+// console.log(n)
+// 任选二：
+// 直选复式：
+// var po = ['万', '千', '百', '十', '个'];
+// var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var d = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var e = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var po = [a, b, c, d, e];
+// console.log(po)
+// var n = 0;
+// var len = 0;
+// var r = 0;
+// for(var i=0; i<po.length; i++){
+// 	len = 0;
+// 	for(var j = i+1; j<po.length; j++){
+// 		len += po[j].length;
+// 	}
+// 	n = po[i].length*len;
+// 	r += n;
+// 	// console.log(n)
+// }
+// console.log(r)
+// 任选三：
+// 直选复式：
+// var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var d = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var e = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var po = [a, b, c, d, e];
+// var n = 0;
+// var len = 0;
+// var r = 0;
+// for(var i=0; i<po.length; i++){
+// 	for(var k = i+1; k<po.length; k++){
+// 		len = 0;
+// 		for(var j = k+1; j<po.length; j++){
+// 			len += po[j].length;
+// 		}
+// 		n = ( po[i].length*po[k].length )*len;
+// 		r += n;
+// 	}
+// }
+// console.log(r)
+// 任选四：
+// 直选复式：
+// var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var d = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var e = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var po = [a, b, c, d, e];
+// var n = 0;
+// var len = 0;
+// var r = 0;
+// for(var i=0; i<po.length; i++){
+// 	for(var k = i+1; k<po.length; k++){
+// 		for(var m = k+1; m<po.length; m++){
+// 			len = 0;
+// 			for(var j = m+1; j<po.length; j++){
+// 				len += po[j].length;
+// 			}
+// 			n = ( po[i].length*po[k].length*po[m].length )*len;
+// 			r += n;
+// 		}
+// 	}
+// }
+// console.log(r)
+// var arr = [1,1,1];
+// console.log(Math.max.apply( Math, arr ))
+// console.log(Math.min.apply( Math, arr ))
+
+// var a = [1, 1, 1, 2, 2]
+// var b = [1, 2]
+// var c = [];
+// var d = [];
+// for(let i in b){
+// 	d.push(b[i])
+// }
+// a.filter((v, i) => {
+// 	let n = d.indexOf(v)
+//   	if(n < 0){
+//     	c.push(v)
+//   	}else{
+//   		d.splice(n,1)
+//   	}
+// })
+// console.log(c)
+// for(let i in 9){
+// 	console.log(i)
+// }
+
+// //yinglilv 盈利率
+		//prize 所有注单的单倍价格  奖金
+		//onePrice 注单 总价
+		//times 需要运行的期数
+		//multiple 起始倍数
+		//maxnum 最大可设的倍数
+var		getMultipleByYinglilv =function(yinglilv, prize, onePrice, times, multipleBase, maxnum){
+				//总金额
+				//debugger;
+			var amountAll =  multipleBase * onePrice,
+				//标记原始计算出的倍数
+				oldMultiple = 0,
+				//每次运算结果倍数变量
+				multiple,
+				i = 0,
+				result = [];
+
+			//当期倍数＝ceil((总花销*(1+盈利率)/(单倍奖金-单倍成本*(1+盈利率)))
+			for(;i < times;i++){
+				multiple = Math.ceil(   amountAll * (1 + yinglilv)  /  (prize - onePrice * (1 + yinglilv))   );
+				if(multiple < 1){
+					break;
+				}
+				oldMultiple = multiple;
+				multiple = multiple > maxnum ? maxnum : multiple;
+				if(i == 0){
+					amountAll = multiple * onePrice;
+				}else{
+					amountAll = amountAll + (multiple * onePrice);
+				}
+				result.push({'multiple':multiple, 'amountAll':amountAll,'winAmountAll':prize * multiple - amountAll, 'oldMultiple':oldMultiple});
+			}
+			console.log(result)
+			// return result;
+		}
+getMultipleByYinglilv(1.5, 36, 6, 10, 1, 22222)
+var sec_to_time = function(s) {
+        var t;
+        if(s > -1){
+            var hour = Math.floor(s/3600);
+            var min = Math.floor(s/60) % 60;
+            var sec = s % 60;
+            if(hour < 10) {
+                t = '0'+ hour + ":";
+            } else {
+                t = hour + ":";
+            }
+
+            if(min < 10){t += "0";}
+            t += min + ":";
+            if(sec < 10){t += "0";}
+            t += sec;
+        }
+        return t;
+    }
+    console.log(sec_to_time(478))
+</script>

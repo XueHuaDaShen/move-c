@@ -1,0 +1,123 @@
+.lottery-dialog{
+  display:none;
+}
+.lottery-dialog, .lottery-dialog .bj{
+  width:100%;
+  height:100%;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index:99999;
+}
+.lottery-dialog .bj{
+  background:#000;
+  opacity:.5;
+  z-index:9!important;
+}
+.lottery-dialog .close{
+  position: absolute;
+  right:0;
+  top:-5.33vw;
+  width:9.2vw;
+  height:9.2vw;
+  z-index:11;
+	background-image: url(../images/image-4.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.showIn{
+  animation: showModal .5s ease-in-out;
+}
+@keyframes showModal{
+  0%{-webkit-transform:scale(.1);transform:scale(.1)}
+  to{-webkit-transform:scale(1);transform:scale(1)}
+}
+.lottery-dialog .container{
+  width:85.6vw;
+  position: absolute;
+  z-index:10;
+  top:28.27vw;
+  right:7.2vw;
+  border-radius: 8px;
+}
+.prizeTop.imgShow {
+	background-image: url(../images/image-3.png);
+	background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: 0 1vw; */
+}
+.prizeTop {
+  font-size: 0;
+  text-align: center;
+  width:85.6vw;
+  height: 76.93vw;
+  position: relative;
+  z-index: 2;
+  transform: translateY(38.4vw);
+  animation: move .5s linear .4s forwards;
+}
+.prizeTop>img {
+  height:48.13vw;
+  margin-top:29.53vw;
+}
+@keyframes move{
+  0%{-webkit-transform:translateY(38.4vw);transform:translateY(38.4vw)}
+  to{-webkit-transform:translate(0);transform:translate(0)}
+}
+.prizeMain.imgShow {
+  background-image: url(../images/image-1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.prizeMain {
+  width: 78.67vw;
+  margin: 0 auto;
+  height: 40.27vw;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  font-size: 0;
+  margin-top:-1vw;
+}
+.prizeMain>h3 {
+  overflow: hidden;
+  font-size: 5.6vw;
+  color: #fff;
+  margin-top: 3.47vw;
+  text-align: center;
+  font-weight:400;
+}
+.prizeMain>p {
+  width: 53.33vw;
+  height: 9.87vw;
+  background: #327ff7;
+  line-height: 9.87vw;
+  margin: 0 auto;
+  border-radius: 1.33vw;
+  color: #fff;
+  margin-top: 3.2vw;
+  margin-bottom: 2.8vw;
+  font-size: 4.53vw;
+  text-align:center;
+}
+.btngo>a {
+  display: block;
+  position: relative;
+  /* -webkit-animation: skip .8s linear infinite alternate; */
+  animation: skip .8s linear infinite alternate;
+}
+.btngo>a>img {
+  width: 61.33vw;
+  display: block;
+  margin: 0 auto;
+}
+.btngo>a>strong {
+  color: #71888d;
+  position: absolute;
+  top: 2.6vw;
+  width: 100%;
+  font-size: 4.27vw;
+  text-align: center;
+  font-weight: 400;
+}
+@keyframes skip{0%{-webkit-transform:scale(.95);transform:scale(.98)}to{-webkit-transform:scale(1);transform:scale(1)}}

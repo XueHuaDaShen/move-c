@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>upLoadVideo</title>
+</head>
+<body>
+	<input type="file" id="file" name="avatar">
+	<button id="submit">upload</button>
+	<br>
+	<progress id="progress" max=100 style="width:200px;margin-top:20px" value=0></progress><span id="isok" style="display:none">上传完成</span>
+	<div class="test" style="font-size:20px;color:#000"></div>
+</body>
+</html>
+<script src="../jquery-3.1.1.min.js"></script>
+<script>
+$("#submit").on("click", function(){
+  var formData = new FormData(); 
+  formData.append("avatar", document.getElementById('file').files[0]);
+  formData.append('loginid', '654532165');
+  $.ajax({ 
+    url: "http://123.56.6.6:8018/api/v1/man/short/video/upload", 
+    type: "POST",
+    headers: {
+      "token": localStorage.getItem('A-TOKEN')
+    }, 
+    data: formData, 
+    processData: false, // 不要对data参数进行序列化处理，默认为true
+    contentType: false, // 不要设置Content-Type请求头，因为文件数据是以 multipart/form-data 来编码
+    xhr: function(){
+        myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){
+          // var num = 0;
+          // var sTime = 0 ;
+          myXhr.upload.addEventListener('progress',function(e) {
+            // var size = e.loaded - num;
+            // var eTime = e.timeStamp - sTime;
+            // num = e.loaded;
+            // sTime = e.timeStamp;
+            // console.log((e.loaded/1024).toFixed(2))
+            // console.log("size>>>>>>>"+(size/1024).toFixed(2)+"kb")
+            if (e.lengthComputable) {
+		        var sizeKB = (e.loaded/1024).toFixed(2);//kb
+		        var time = (e.timeStamp/1000).toFixed(2)
+		        var speed = ( sizeKB / time ).toFixed(2)
+		        var sizeM = (sizeKB/1024).toFixed(2);//M
+		        var totalSize = (e.total/1024/1024).toFixed(2);
+		        var mm = Math.ceil((e.total-e.loaded)/1024/speed);
+
+		        // console.log("sizeKB>>>>>>>"+)
+
+
+              var percent = Math.floor(e.loaded/e.total*100);
+              if(percent <= 100) {
+                // $("#J_progress_bar").progress('set progress', percent);
+                // $(".test").html('已上传：'+percent+'%');
+                $("#progress").val(percent)
+                $(".test").html('速度：'+ speed + 'KB/S|已上传' + sizeM + 'M/' + totalSize + 'M|剩余时间：' + mm + '秒');
+              }
+              if(percent >= 100) {
+              	$("#isok").show()
+                // $("#J_progress_label").html('文件上传完毕，请等待...');
+                // $("#J_progress_label").addClass('success');
+              }
+            }
+          }, false);
+        }
+        return myXhr;
+    },
+    success: function(res){ 
+        // 请求成功
+        console.log(200)
+    },
+    error: function(res) {
+        // 请求失败
+        console.log(res);
+    }
+  });
+})
+</script>

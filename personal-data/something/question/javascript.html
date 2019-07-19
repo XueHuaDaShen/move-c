@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+</html>
+<script>
+// 页面中已有 id 为 container 的 div，请实现如下函数 foo，满足后续执行需求：
+// function foo(n) {
+//   /* 在此处填写实现 */
+// }
+
+// const bar = foo(5);
+// bar();
+// 使得当函数 bar 执行的时候：
+// 在 container 中动态创建 5 个按钮，使得每个按钮的显示内容分别为 1 到 5 的整数，点击每个按钮的时候，在控制台输出 n 的值，n 为该按钮的显示内容。
+// 在 container 中创建显示内容为 all 的按钮，使得点击按钮时，按照从 1 到 5 的顺序逐条执行如下任务：延时 n 秒之后在控制台输出 n 的值。
+// 延时 1 秒，输出 1
+// ...
+// 延时 5 秒，输出 5
+// 要求：在 foo 方法体内，不得出现数字 5；不能引入第三方库，需要使用原生 JavaScript 操作 DOM 实现。
+function foo(n){
+	return function (){
+		let i = 1;
+		let str = '';
+		while(i<=n){
+			str += '<button>'+i+'</button>';
+			i++;
+		}
+		let div = document.getElementById('container');
+		div.innerHTML = str;
+		let all = document.createElement('button');
+		all.innerHTML = 'all';
+		div.appendChild(all);
+		div.addEventListener("click",function(e){
+			var self = e.target,
+				text = self.innerHTML;
+			if( self.parentNode==div ){
+				if( text == 'all' ){
+                    for(var i=1; i<=n; i++){
+                        setTimeout((function(m){
+                            return function(){
+                                console.log(m);
+                            }
+                        })(i), i*1000)
+                    }
+				}else{
+					console.log(text)
+				}
+			}
+		})
+	}
+}
+const bar = foo(5);
+bar();
+// function foo(n) {
+//     return function(){
+//         var c=document.getElementById('container'),button;
+//         for(var i=1;i<=n;i++){
+//             button=document.createElement('button');
+//             button.innerHTML=i;
+//             button.onclick=function(){console.log(this.innerHTML)};
+//             c.appendChild(button);
+//         }
+//         button=document.createElement('button');
+//         button.innerHTML='all';
+//         button.onclick=function(){
+//             for(var i=1;i<=n;i++)setTimeout((function(i){return function(){console.log(i)}})(i),i*1000);
+//         }
+//         c.appendChild(button);
+//     }
+// }
+
+// const bar = foo(5);
+// bar();
+</script>

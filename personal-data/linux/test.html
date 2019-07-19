@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<link rel="stylesheet" href="./animate.css">
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+ul,ol{
+	list-style: none;
+}
+	div{
+		background:#2F2236;
+	}
+	#div{
+	    background:#000;
+	    width:100px;
+	    height:100px;
+	    border-radius:10px;
+	    overflow: hidden;
+	}
+	#div>span{
+		display:block;
+	    width: 0;
+	    height: 0;
+	    border-bottom: 100px solid red;
+	    border-right: 100px solid transparent;
+	}
+	.jiantou {
+        position:absolute;
+        width:8px;
+        height:8px;
+        right: 20px;
+        top:18px;
+        /*border-top: 2px solid  rgba(179, 193, 198, 1);
+        border-right: 2px solid  rgba(179, 193, 198, 1);*/
+        border-top: 2px solid  #646464;
+        border-right: 2px solid  #646464;
+        transform:rotate(45deg);
+        -ms-transform:rotate(45deg); 	/* IE 9 */
+        -moz-transform:rotate(45deg); 	/* Firefox */
+        -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+        -o-transform:rotate(45deg);
+    }
+    #myFont{
+    	background:#fff;
+    	font-family: "Arial";/*,"Microsoft YaHei","黑体","宋体",sans-serif*/
+    }
+    .box{
+    	width:500px;
+    	height:200px;
+    	border:1px solid red;
+    	background:#fff;
+    	overflow-y: auto;
+    	transform:all .3s;
+    }
+    .two{
+    	width:500px;
+    	height:50px;
+    	border:1px solid red;
+    	background:#fff;
+    	/*overflow-x: auto;*/
+    	margin-top:10px;
+    	/*transform:all .3s;*/
+		overflow: hidden;
+    }
+	#list2{
+		/*width:100%;*/
+		/*height:100%;*/
+		display:-webkit-box;
+		/*white-space: nowrap;*/
+	}
+	#list2 li{
+		width:60px;
+		height:30px;
+		line-height:30px;
+		background:#ccc;
+		margin: 0 4px;
+	}
+</style>
+<body>
+	<!-- <div>
+		<img src="img/11.png" alt="">
+		<img src="img/12.png" alt="">
+		<img src="img/21.png" alt="">
+		<img src="img/22.png" alt="">
+		<img src="img/31.png" alt="">
+		<img src="img/32.png" alt="">
+		<img src="img/41.png" alt="">
+		<img src="img/42.png" alt="">
+	</div>
+	<div id="div">
+		<span></span>
+		<div class="jiantou"></div>
+	</div>
+	<video src="./pid110925 VJ：wow! (snap)  SNAP BY：Nunid Naka.mp4" controls></video> -->
+	<div id="myFont">
+		<span>你好</span>
+		<span>hello world</span>
+		<span>123455</span>
+	</div>
+	<select name="" id="sel">
+		<option value="SimSun">宋体</option>
+		<option value="SimHei"  selected = "selected">黑体</option>
+		<option value="Microsoft JhengHei">微软雅黑</option>
+		<option value="NSimSun">新宋体</option>
+		<option value="PMingLiU">新细明体</option>
+		<option value="MingLiU">细明体</option>
+		<option value="KaiTi">楷体</option>
+	</select>
+	<input type="button" value="add1" id="add">
+	<input type="button" value="add2" id="add2">
+	<input type="button" value="animate" id="animate">
+	<input type="button" value="search" id="search">
+	<input type="text" id="text">
+	<div class="box">
+		<ul id="list">
+			<li>1</li>
+		</ul>
+	</div>
+	<div class="two">
+		<ol id="list2">
+			<li>1</li>
+		</ol>
+	</div>
+	<p id="content" style="width:700px;position:absolute;top:30px;left:700px">The grounds were covered with dark green grass through which stretched a straight white stone path. On both sides of the path were planted what I believed to be poinsettias. Now the flowers were surrounded by pinkish leaves instead of bright red ones as they should have been. Trimmed with light green edges，the leaves looked delicate and charming. Along the long path I often took a stroll which world take me to a wide terrace，where I could watch the enchanting glow of sunset，and occasionally catch the sight of a train puffing and hooting on its way southward. On my way back I would pass by the laboratory and library building whose large French windows had soft curtains let fall to the floor. Just outside the windows kapod flowers glowed red in full bloom. A short way off stood the dining hall，where I found a tree bearing snow-white blossoms so graceful and soft to the touch. Viewed together from the distance，they were as beautiful as a bridal veil. Later I learned that it was a tree called datura which I had so often read about in books.</p>
+</body>
+</html>
+<script src="./jquery.js"></script>
+<script>
+$(document).on("keydown", function(e){
+	if( e.ctrlKey && e.keyCode == 70 ){
+		console.log(true)
+	}
+})
+console.log(Boolean('123'))
+// var list = document.getElementById('list');
+// list.className = '123'
+// $("#sel").on("change", function(){
+// 	var v = $(this).val(),
+// 		t = $(this).text();
+// 	$("#myFont").css("fontFamily",v)
+// 	console.log(v)
+// })
+// console.log($("#sel").val())
+// // var defaultFont = 'getComputedSylte' in window?getComputedStyle(document.documentElement)['font-family']:document.documentElement.currentStyle['font-family'];
+// // console.log(defaultFont)
+
+// $("#add").on('click', function(){
+// 	var num = $("#list").find("li").length;
+// 	var li = $("#list").find("li").eq(0).height();
+// 	$("#list").append($("<li>"+(num*1+1)+"</li>"))
+// 	var h = $("#list").height();
+	
+// 		var scrollH = $(".box").scrollTop();
+// 		$(".box").animate({scrollTop: scrollH+h}, 300);
+	
+// })
+// $("#add2").on('click', function(){
+// 	var num = $("#list2").find("li").length;
+// 	var li = $("#list2").find("li").eq(0).outerWidth();
+// 	$("#list2").append($("<li>"+(num*1+1)+"</li>"))
+// 	if( num>6 ){
+// 		$('#list2 li:first').animate({"width": 0},300,function(){
+// 			$('#list2 li:first').remove();
+// 		})
+// 	}
+// 	var h = $("#list2").width();
+	
+// 		// var scrollH = $(".two").scrollLeft();
+// 		// $(".two").animate({scrollLeft: scrollH+h}, 300);
+	
+// })
+// $("#animate").on("click", function(){
+// 	$("#myFont").addClass("animated bounce");
+// 	setTimeout(function(){
+// 		$("#myFont").removeClass("animated bounce");
+// 	},1000)
+// })
+// $("#search").on("click", function(){
+// 	var text = $("#text").val();
+// 	var p = $("#content").text();
+// 	var reg = new RegExp(text,'gi')
+// 	var str = '';
+// 	if(text){
+// 		str = p.replace(reg,function(v){
+// 			return '<span style="background:yellow">'+v+'</span>'
+// 		})
+// 		$("#content").html(str)
+// 	}else{
+// 		$("#content").html(p)
+// 	}
+// })
+// function ran(){
+// 	var num = Math.floor(Math.random()*10);
+// 	return num;
+// }
+// console.log(ran())
+// // var a1 = ['', 10, 11, 12, 13, 4, 40, 5, 49, 32, 6, 23, 26, 2, 7, 1, 38, 46, 28, 29, 8, 14, 20, 37, 39, 24, 19, 33, 3, 31, 17, 22, 0, 18, 30, 36, 35, 27, 41, 42, 43, 9, 15, 16, 21, 25, 34, 44, 45, 47, 48, 50],
+// // 	a2 = [24, 0, 1, 2, 4, 20, 44, 21, 51, 6, 22, 29, 31, 9, 23, 12, 40, 48, 33, 34, 13, 10, 26, 39, 41, 30, 25, 5, 8, 17, 7, 28, 19, 18, 15, 38, 37, 32, 42, 45, 43, 14, 11, 3, 27, 16, 36, 46, 47, 49, 50, 52];
+// // console.log(a1.length)
+// // console.log(a2.length)
+// // function count(a){
+// // 	return a.sort(function(x, y){
+// // 		return x-y;
+// // 	})
+// // }
+// // console.log(count(a1))
+// // console.log(count(a2))
+// var data = [
+// 	{"key": "2017-07-21", "val": 1},
+// 	{"key": "2017-07-22", "val": 2},
+// 	{"key": "2017-07-25", "val": 5},
+// 	{"key": "2017-07-26", "val": 6},
+// 	{"key": "2017-08-2", "val": 7}
+// ]
+
+// var is = true;
+// function completionData(data){
+	
+// 	if(is){
+// 		for(var i=data.length-1; i>0; i--){
+// 			if( (i-1)>=0 ){
+// 				var time = new Date(data[i].key);
+// 				var time2 = new Date(data[i-1].key);
+// 				if( (time-time2)/1000/60/60/24 > 1 ){
+// 					var y = time.getFullYear(),
+// 						m = time.getMonth(),
+// 						d = time.getDate();
+// 					var newTime = new Date(y,m,d-1);
+// 						ny = newTime.getFullYear(),
+// 						nm = newTime.getMonth()+1,
+// 						nd = newTime.getDate();
+// 					nm = nm<10?'0'+nm:nm;
+// 					nd = nd<10?'0'+nd:nd;
+// 					var str = ny+"-"+nm+"-"+nd
+// 					data.splice(i,0,{"key":str,"val":0})
+// 					is = true;
+// 					break
+// 				}else{
+// 					is = false;
+// 				}
+// 			}
+// 		}
+// 		return completionData(data)
+// 	}else{
+// 		return data;
+// 	}
+// }
+// console.log(completionData(data))
+
+
+// var timeStr = '/Date(21273164)/';
+// var num = '';
+// var newTimeStr = timeStr.replace(/\d/g,function(v){
+// 	num+=v
+// 	return '';
+// })
+// console.log(newTimeStr)
+// console.log(num)
+
+// // var arr1 = new Map([[1,'a'],[2,'b'],[3,'c']]);
+// // arr1.forEach(function(e,i,s){
+// // 	console.log(e);
+// // 	console.log(i);
+// // 	console.log(s);
+// // })
+// var imgs = document.getElementsByTagName('img');
+// imgs = new Set(imgs)
+// imgs.forEach(function(e,i,s){
+// 	console.log(e);
+// 	console.log(i);
+// 	console.log(s);
+// })
+
+// var newStr = '{"role":[{"sid":"42","sname":"初检不合格","result":[{"rid":"15","rname":"不合格","function":[{"fid":"95","fname":"修改时限"}]},{"rid":"14","rname":"合格","function":[{"fid":"91","fname":"审核"}]},{"rid":"75","rname":"正常","function":[{"fid":"6","fname":"报验"}]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]},{"sid":"43","sname":"已报验","result":[{"rid":"15","rname":"不合格","function":[]},{"rid":"14","rname":"合格","function":[]},{"rid":"75","rname":"正常","function":[]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]},{"sid":"90","sname":"已审核","result":[{"rid":"15","rname":"不合格","function":[]},{"rid":"14","rname":"合格","function":[]},{"rid":"75","rname":"正常","function":[]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]}]}'
+// console.log(JSON.parse(newStr))
+
+// var obj = JSON.parse(newStr);//将字符串转化为对象
+// for(var i=obj.role.length-1; i>=0; i--){//获取对象里的数组，并遍历，选择倒序遍历是为了方便删除
+// 	var data = obj.role[i].result;//获取数组中每一项的result  也就是内嵌的数组
+// 	var val = concatFn(data);//调用去除空数组的方法，并获取返货的结果，结果是一个数组
+// 	if(val.length==0){
+// 		obj.role.splice(i,1)//如果返回的是空数组，就将当前这个数组删掉
+// 	}else{
+// 		obj.role[i].result = val;//如果返回的数据有值，则将这个数组替换当前的数组
+// 	}
+// }
+// console.log(obj)
+// function concatFn(val){
+// 	for(var i=val.length-1; i>=0; i--){//倒序遍历
+// 		if(val[i]['function'].length==0){
+// 			val.splice(i,1)//如果为空就删除当前的元素
+// 		}
+// 	}
+// 	return val;
+// }
+</script>

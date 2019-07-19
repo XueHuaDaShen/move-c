@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+body {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+	position: relative;
+}
+html,body,img,{
+	width:100%;
+	height:100%;
+}
+img{
+	display:block;
+}
+canvas{
+	/*border:1px solid #ccc;*/
+}
+.header{
+	width:100%;
+	padding:20px 0;
+	display:-webkit-box;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+#bj{
+	width:260px;
+	height:auto;
+}
+.main{
+	width:100%;
+	margin:20px 0;
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.main>div{
+	width:100%;
+	display:-webkit-box;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.left .inner{
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.btn{
+	width:100%;
+	height:40px;
+	line-height: 40px;
+	text-align: center;
+}
+.btn>a{
+	background-color: #189094;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,.5);
+    font-size: 16px;
+    text-shadow: none;
+    position: relative;
+}
+.btn input{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.wrap{
+	width:100%;
+	margin-top:20px;
+	position: relative;
+}
+.upload-msg{
+	padding: 30px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    font-size: 24px;
+    text-align: center;
+    color:rgb(136, 136, 136);
+}
+.imgBox{
+	/*display:none;*/
+	width:750px;
+	height:670px;
+	margin:0 auto;
+	background:url('bj.png') no-repeat;
+	background-size:cover;
+	overflow: hidden;
+	cursor:move;
+	position: relative;
+}
+#canvas{
+	position: absolute;
+	left:0;
+	top:0;
+}
+#canbj{
+	position: absolute;
+	left:0;
+	top:0;
+	z-index: 33;
+}
+.range{
+	text-align: center;
+	margin:20px 0;
+	display: none;
+}
+#export_box{
+	margin-top:20px;
+	display:none;
+}
+#export_img{
+	margin-bottom:65px;
+}
+</style>
+<body>
+	<header class="header">
+		<img src="bj.png" id='bj'>
+	</header>
+	<hr>
+	<main class="main">
+		<div class="left">
+			<div class="inner">
+				<div class="btn">
+					<a>
+						<span>Choose an Image</span>
+						<input type="file" id="file">
+					</a>
+				</div>
+				<div class="wrap" id="wrap">
+					<div style="width:300px;margin:0 auto;">
+						<div class="upload-msg">Upload a file to start cropping</div>
+					</div>
+					<div class="imgBox">
+						<img src="bj.png" id='canbj' draggable="false">
+					</div>
+					<div class="range">
+						<input id="num" type="range" step='0.01' min='0.3506' oninput="changeFn(this)" max='2.5000' value="0">
+					</div>
+					<div class="btn" style="display:none;">
+						<a id="create">
+							<span>Choose an Image</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="inner" id='ok'>
+				<div class="btn" style="visibility:hidden;">
+					<a>
+						<span>Choose an Image</span>
+						<input type="file" id="file">
+					</a>
+				</div>
+				<div id="export_box">
+					<div id="export_img">
+						
+					</div>
+					<div class="btn">
+						<a id="export">
+							<span>export</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+</body>
+</html>
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+var size = {
+	x: 750,
+	y: 670
+};
+var site = {
+	w: 0,
+	h: 0
+};
+
+
+var _this, cvs;
+var start = $("#num").val();
+var num = 0;
+var cs = null;
+var sx = 0, sy = 0;
+$("#file").on("change", function(e){
+	var reader = new FileReader();
+	reader.onload = function(e){
+	    var data = e.target.result;
+	    var img = new Image();
+	    img.setAttribute("crossOrigin", "anonymous");
+	    img.src = data;
+	    $(img).css({
+	    	"position": "absolute",
+	    	"left": 0,
+	    	"top": 0,
+	    	"z-index":-999,
+	    	"opacity": 0
+	    })
+	    img.onload = function(){
+	    	_this = this;
+	    	$("body").append(this)
+	    	var imgW = $(this).width(),
+	    		imgH = $(this).height();
+	    	if( imgW > imgH ){
+	    		$(this).css({
+	    			"width": "auto",
+	    			"height": "670px"
+	    		})
+	    	}else{
+	    		$(this).css({
+	    			"width": "750px",
+	    			"height": "auto"
+	    		})
+	    	}
+	    	createImg(this);
+	    }
+	}
+	reader.readAsDataURL(e.target.files[0]);
+})
+$("#create").on("click", function(){
+	// var dataURL = cvs.toDataURL("image/png");
+	var dataURL = cvs.toDataURL('image/jpeg', 1.0);
+    var newImg = document.createElement("img");
+    newImg.src = dataURL;
+    $("#export").attr("href", dataURL).attr("download", "");
+    $("#export_box").show()
+    $("#export_img").html(newImg);
+})
+function createImg(that) {
+	var w = $(that).width(), h = $(that).height();
+	var canvas = document.createElement('canvas');
+	canvas.width = w;
+	canvas.height = h;
+	site.w = w;
+	site.h = h;
+	var ctx = canvas.getContext('2d');
+	// var bj = document.getElementById('bj');
+	ctx.drawImage(that, 0, 0, w, h);
+	$(".imgBox").append(canvas)
+	cs = canvas;
+	// console.log(document.defaultView.getComputedStyle(canvas, null))
+	// cvs = newCan;
+    $(".imgBox").prev().hide().siblings().show();
+	
+}
+function changeFn(e){
+	num = e.value-start;
+	// console.log($("canvas"))
+	$("canvas").css({
+	    "transform": "translate3d("+sx+"px, "+sy+"px, 0) scale("+(1+num*1)+")",
+	    "opacity": 1
+	})
+	// console.log(document.defaultView.getComputedStyle(cs, null))
+}
+var imgBox = document.getElementsByClassName('imgBox')[0];
+imgBox.onmousedown = function(e){
+	var dEve = e||window.event;
+	var dx = dEve.clientX, dy = dEve.clientY;
+	// var dl = dx-l, dt = dy-t;
+	var count = 1+num*1;
+	var startW = 0, startH = 0;
+	var lx, ly, rx, ry;
+	if( count == 1 ){
+		lx = 0;
+		ly = 0;
+		rx = Math.floor(site.w-750);
+		ry = Math.floor(site.h-670);
+	}else if( count > 1 ){
+		lx = (site.w*count-site.w)/2;
+		ly = (site.h*count-site.h)/2;
+		rx = Math.floor(site.w-750)+lx;
+		ry = Math.floor(site.h-670)+ly;
+	}
+	document.onmousemove = function(e){
+		var mEve = e||window.event;
+		var mx = mEve.clientX, my = mEve.clientY;
+		var cx = mx-dx, cy = my-dy;
+		if( cx > 0 ){
+			sx+=3;
+		}else if( cx < 0 ){
+			sx-=3;
+		}else{
+			sx=sx;
+		}
+		if( cy > 0 ){
+			sy+=3;
+		}else if(cy < 0 ){
+			sy-=3;
+		}else{
+			sy=sy;
+		}
+		sx = sx>lx ? lx:sx;
+		sy = sy>ly ? ly:sy;
+		sx = sx<-rx ? -rx:sx;
+		sy = sy<-ry ? -ry:sy;
+		$("canvas").css({
+		    "transform": "translate3d("+sx+"px, "+sy+"px, 0) scale("+(1+num*1)+")",
+		    "opacity": 1
+		})
+		// createImg(_this);
+		dx = mx; dy = my;
+	}
+}
+document.onmouseup = function(e){
+	$("canvas").css({
+	    "transform-origin": (375*num-sx)+"px "+(335*num-sy)+"px 0",
+	})
+	document.onmousemove = null;
+}
+</script>

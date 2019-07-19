@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+ul,ol{
+	list-style: none;
+}
+li{
+	float:left;
+}
+.AMnav{
+	margin-top:100px;
+}
+.AMnav .pagination li.currentpage a:hover{
+	background:#fff;
+	color:#848484;
+	border:1px solid #939393;
+}
+/*.AMnav .pagination li a.on{
+	background:#fff;
+	color:#848484;
+	border:1px solid #939393;
+}
+.AMnav .pagination li a.on:hover{
+	color: #2a6496;
+    background-color: #eee;
+    border-color: #ddd;
+}*/
+.AMnav{
+	display:-webkit-box;
+	-webkit-box-pack:center;
+}
+.AMnav ul{
+	margin:0;
+}
+.AMnav li a{
+	padding:10px 20px;
+	border:1px solid #939393;
+	border-radius:5px;
+	margin-left:30px;
+	color:#848484;
+	text-decoration: none;
+}
+.pagination>li>a:active {
+  background: lightblue;
+  border-color: #939393;
+}
+.active{
+	background: lightblue;
+  	border-color: #939393;
+}
+/*.AMnav .pagination>li>a.on:active {
+  background: lightblue;
+  border-color: #939393;
+}*/
+.AMnav .pagination li.currentpage a:hover, .AMnav .pagination li.currentpage a:active, .AMnav .pagination li.currentpage a:focus {
+  background: #fff;
+  color: #848484;
+  border: 1px solid #939393;
+  cursor: default;
+}
+#container{
+	padding:10px 100px;
+}
+#container div{
+	width:100%;
+	padding:3px 0;
+	display:-webkit-box;
+}
+#container div span{
+	display:block;
+	width:25%;
+	text-align: center;
+}
+</style>
+<body>
+	<div id="container">
+		<div>
+			<span>title</span>
+			<span>content</span>
+			<span>type</span>
+			<span>os</span>
+		</div>
+	</div>
+
+
+	<nav class="AMnav">
+	    <ul class="pagination">
+	        <li class="begin"><a href="javascript:void(0);">FIRST</a></li>
+	        <li class="prev"><a href="javascript:void(0);">&lt;<!-- &laquo; --></a></li>
+	        <!-- <li class="currentpage"><a href="javascript:void(0);">1/10</a></li> -->
+	        <div class="pageL" style="display:inline-block;float:left">
+		        <li><a href="javascript:;">1</a></li>
+		        <li><a href="javascript:;">2</a></li>
+		        <li><a href="javascript:;">3</a></li>
+		        <li><a href="javascript:;">4</a></li>
+	        	<li><a href="javascript:;">5</a></li>
+	        </div>
+
+	        <li class="next"><a href="javascript:void(0);">&gt;<!-- &raquo; --></a></li>
+	        <li class="end"><a href="javascript:void(0);">LAST</a></li>
+	    </ul>
+	</nav>
+</body>
+</html>
+<script src="../../jquery-3.1.1.min.js"></script>
+<script src="page.js"></script>
+<script>
+$.page({
+	url: "vip.json",
+	begin: ".begin",
+	end: ".end",
+	next: ".next",
+	prev: ".prev"
+})
+</script>

@@ -1,0 +1,323 @@
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media=" only screen and (max-width:1030px)">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+    <link href="../css/animation.css" rel="stylesheet" type="text/css" />
+    <link href="../css/gsgw.css" rel="stylesheet" type="text/css" />
+<style>
+        body {
+            padding-top: 100px;
+
+        }
+
+        .DivTop>div>a {
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            width: 14%;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            color: #333;
+            text-decoration: none;
+            position: relative;
+        }
+        .DivTop>div>a:hover{
+            background: #ccc;
+        }
+
+        div>a {
+            cursor: pointer;
+            color: #858585;
+            transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            /* Firefox 4 */
+            -webkit-transition: all 0.2s;
+            /* Safari 和 Chrome */
+            -o-transition: all 0.2s;
+        }
+
+            a:LINK, a:VISITED, a:ACTIVE {
+                text-decoration: none;
+            }
+
+            a:HOVER {
+                color: #00A6EA;
+                text-decoration: none;
+            }
+
+        #owl-demo {
+            width: 100%;
+        }
+
+            #owl-demo .item {
+                display: block;
+            }
+
+            #owl-demo img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+        .owl-pagination {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            width: 100%;
+            height: 22px;
+            text-align: center;
+        }
+
+        .owl-page {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-image: url(images/bg15.png);
+            *display: inline;
+            *zoom: 1;
+        }
+
+        .owl-pagination .active {
+            width: 25px;
+            background-image: url(images/bg16.png);
+        }
+
+        .owl-buttons {
+            display: none;
+        }
+
+            .owl-buttons div {
+                position: absolute;
+                top: 50%;
+                width: 40px;
+                height: 80px;
+                margin-top: -40px;
+                text-indent: -9999px;
+            }
+
+        .owl-prev {
+            left: 0;
+            background-image: url(images/bg17.png);
+        }
+
+        .owl-next {
+            right: 0;
+            background-image: url(images/bg18.png);
+        }
+
+        .owl-prev:hover {
+            background-image: url(images/bg19.png);
+        }
+
+        .owl-next:hover {
+            background-image: url(images/bg20.png);
+        }
+
+
+            .ulLeftMenu li {
+                list-style-type: none;
+                line-height: 50px;
+                font-size: 16px;
+                margin-left: -10px;
+                border-bottom: 1px #DCDCDC dotted;
+                min-width:100px;
+            }
+                 .default, .current {
+                    color: #00A6EA;
+                }
+
+        .contentRight {
+            -moz-box-shadow: 2px 2px 10px #909090; /*firefox*/
+            -webkit-box-shadow: 2px 2px 10px #909090; /*safari或chrome*/
+            box-shadow: 2px 2px 10px #909090; /*opera或ie9*/
+        }
+        .daoh {
+           
+            position: absolute;
+            padding-right:100px;
+        }
+        .changtu {
+            width: 100%;
+        }
+        
+		 .MinScreen {
+            height: 50px;
+           
+        }
+        #bigMa{
+            position:absolute;
+            display: none;
+            right:-12px;
+            top:0;
+        }
+    </style>
+
+		<form action="">
+	        <div style="width:100%;height: 50px; padding: 10px 0px; position: fixed; left: 0px; top: 0px; background-color: #fff; display: inline" class="DivSousuo">
+	            <div style="width:1000px;margin:0 auto;">
+	                <a href="../index.html"><img src="../picture/logo.png" style="width:120px;height:30px;" /></a>
+	                <img  onmouseover="bigMaOver()" onmouseout="bigMaOut()" src="../picture/erWeiMa.jpg" style="width:30px;height:30px;" />
+                    
+	                
+	                <div style="float:right;">
+		                <input id="imgsousuo" name="imgsousuo" style="width:120px;height:22px;margin-left:0px" type="text" value="" placeholder="输入关键字" />
+		                <button type="submit" style="background:#00A6EA;border:0px;color: rgb(255, 255, 255);">Go</button>
+	                </div>  
+	            </div>
+
+	        </div>
+	    </form>
+
+
+    <!-- 菜单栏 -->
+	    <div style="box-shadow: 0px 2px 4px rgb(161, 161, 161); text-align:center;width:100%;height:50px;position:fixed;left:0px;top:50px;z-index:9999;background-color:#eeeeee;" class="DivTop">
+	        <div style="width:1000px;margin:0 auto;">
+	            <!--<a href="index.html" id="dh_0" >首页</a>-->
+	            <a style="position:relative;" href="../html/about.html" id="dh_1" onmouseover="eleOver(this)" onmouseout="eleOut(this)">关于我们
+                    <span id="bigMa"><img src="../picture/erWeiMa.jpg" style="width:100px;height:100px;" /></span>
+	            	<ul id="about" style="display:none;line-height: 20px;">
+            			<li data-link="about" >公司介绍</li>
+            			<li data-link="culture" >企业文化 </li>
+            			<li data-link="organize" >组织架构</li>
+            			<li data-link="honor" >荣誉资质</li>
+	            	</ul>
+	            </a>
+	            <a href="../html/software.html" id="dh_2" onmouseover="eleOver(this)" onmouseout="eleOut(this)">IT服务
+	            	<ul id="ITservice" style="display:none;line-height: 20px;">
+		            	<li data-link="software">软件外包服务</li>
+		            	<li data-link="resolve">行业解决方案</li>
+		            	<li data-link="system">系统集成服务</li>
+                        <li data-link="teach">IT培训服务</li>
+                        <li data-link="consult">IT咨询服务</li>
+	            	</ul>
+	            </a>
+	            <a href="../html/insurance.html" id="dh_3" onmouseover="eleOver(this)" onmouseout="eleOut(this)">产品研发
+                    <ul id="IDinsurance" style="display:none;line-height: 20px;">
+                        <li data-link="insurance">金融保险类</li>
+                        <li data-link="mobile">保险移动端</li>
+                        <li data-link="web">互联网领域</li>
+                        <li data-link="repair">IT运维管理</li>
+                        
+                    </ul>
+                </a>
+	            <a href="../html/customer.html" id="dh_4" onmouseover="eleOver(this)" onmouseout="eleOut(this)">合作伙伴
+                    <ul id="IDcustomer" style="display:none;line-height: 20px;">
+                        <li data-link="customer">保险</li>
+                        <li data-link="customer">互联网金融</li>
+                        <li data-link="customer">电力</li>
+                        <li data-link="customer">IT高科技</li>
+                        
+                    </ul>
+                </a>
+	            <a href="../html/news.html" id="dh_5" onmouseover="eleOver(this)" onmouseout="eleOut(this)">新闻中心
+                    <ul id="IDnews" style="display:none;line-height: 20px;">
+                        <li data-link="news">公司动态</li>
+                        <li data-link="news">最新资讯</li>
+                        <li data-link="news">典型案例</li>
+                    
+                    </ul>
+                </a>
+	           	<a href="../html/contact.html" id="dh_6">联系我们</a>
+	            <!--<ul id="we" style="display:none;line-height: 20px;">
+	            	<li onmouseover="save(this)" onmouseout="lives(this)" >222</li>
+	            	<li onmouseover="save(this)" onmouseout="lives(this)" >222</li>
+	            	<li onmouseover="save(this)" onmouseout="lives(this)" >222</li>
+	            </ul>-->
+	            <style>
+                    .DivTop ul{position: absolute;width:100%;right:15px;}
+	            	.DivTop ul li{list-style:none;background-color:#ccc;margin-left:-10px; padding:0px auto;border:1px solid #CCC;line-height: 30px;}
+	            	.DivTop ul li:hover{
+					background-color:#eeeeee;
+					}
+	            </style>
+	            <script>
+	            	var a = document.getElementById("dh_1");
+	            	var IDabout = document.getElementById("about");
+                    var IDbigMa = document.getElementById("bigMa");
+	            	var IDITservice=document.getElementById("ITservice");
+                    function bigMaOver(){
+                        IDbigMa.style.display="block";
+                    }
+                    function bigMaOut(){
+                        IDbigMa.style.display="none";
+                    }
+	            	function eleOver(that){
+	            		var ele_ul = that.getElementsByTagName('ul')[0];
+                        ele_ul.style.display="block"
+	            	}
+	            	function eleOut(that){
+	            		var ele_ul = that.getElementsByTagName('ul')[0];
+                        ele_ul.style.display="none"
+	            	}
+	            	function ITOver(){
+	            		IDITservice.style.display="block";
+	            	}
+	            	function ITOut(){
+	            		IDITservice.style.display="none";
+	            	}
+//	            	function save(){
+//	            		erji.style.display="block";
+//	            	}
+//	            	function lives(){
+//	            		erji.style.display="none";
+//	            	}
+	            </script>
+	            <!--<a href="html/software.html" id="dh_2">IT服务</a>
+	            <a href="html/insurance.html" id="dh_3">产品研发</a>
+	            <a href="html/customer.html" id="dh_4">合作伙伴</a>
+	            <a href="html/news.html" id="dh_5">新闻中心</a>
+	           	<a href="html/contact.html" id="dh_6">联系我们</a>-->
+	            
+	            <!--<div id="xiala_1" class="xiala">
+	                <img class="xialatop" src="picture/xialatop.png" />
+	                <div id="gybt" class="xialabody">
+	                    
+	                </div>
+	            </div>
+	
+	            <div id="xiala_2" class="xiala">
+	                <img class="xialatop" src="picture/xialatop.png" />
+	                <div id="jjfa" class="xialabody">
+	                    
+	                </div>
+	            </div>
+	
+	            <div id="xiala_3" class="xiala">
+	                <img class="xialatop" src="picture/xialatop.png" />
+	                <div id="xwzx" class="xialabody">
+	                    
+	                </div>
+	            </div>
+	
+	            <div id="xiala_4" class="xiala">
+	                <img class="xialatop" src="picture/xialatop.png" />
+	                <div id="hzyy" class="xialabody">
+	                    
+	                </div>
+	            </div>
+	
+	            <div id="xiala_5" class="xiala">
+	                <img class="xialatop" src="picture/xialatop.png" />
+	                <div id="jrwm" class="xialabody">
+	                    
+	            </div>-->
+	        </div>                
+	    </div>
+	</div>
+    <script src="../../js/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $(".DivTop").on("click","li",function(){
+                var th_link = $(this).attr("data-link")
+                location.href="../html/"+th_link+".html";
+                return false
+            })
+        })
+    </script>

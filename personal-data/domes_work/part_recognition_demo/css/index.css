@@ -1,0 +1,79 @@
+html, body, .container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.ml-200 {
+  margin-left: 200px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.container {
+  padding-top: 50px;
+}
+.container .upload {
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  background: #fff;
+  cursor: pointer;
+}
+.container .result-wrap {
+  display: none;
+}
+.container .result-table {
+  width: 500px;
+}
+.container .result-table tr td {
+  padding: 7px 0;
+}
+.container .result-table tr td:first-child {
+  width: 200px;
+}
+.container .img-wrap {
+  width: 300px;
+}
+.container .img-wrap img {
+  cursor: zoom-in;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.container .alert-img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  cursor: zoom-out;
+}
+.container .alert-img .bj {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background: #000;
+  opacity: .5;
+}
+.container .alert-img .img {
+  width: 80%;
+  height: auto;
+  position: absolute;
+  left: 10%;
+  top: 0;
+  z-index: 2;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,338 @@
+  // 公用scss
+  .user-common {
+    .user-tab-line {
+      width:100%;
+      line-height: 22px;
+      height: 22px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      color:#fff;
+
+      &::before {
+        background: #fff;
+        width: 4px;
+        height: 16px;
+        margin-right: 10px;
+        content: '';
+        display: inline-block;
+      }
+    }
+    // 个人中心card样式
+    .user-card {
+      width: 420px;
+      // background: rgba(26, 32, 40, 0.5);
+      background:#000000;
+      border-radius: 8px;
+      text-align: center;
+      padding: 30px 40px;
+      font-size: 14px;
+      color: #ababab;
+      
+
+      .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title {
+        font-size: 16px;
+        color: #fff;
+        
+      }
+
+      .red {
+        color: #E84545;
+      }
+
+      .normal-num {
+        color: #9C9EA2;
+      }
+
+      .big-cash {
+        // font-family: Arial-Black;
+        font-size: 28px;
+      }
+    }
+
+    // tab样式
+    .user-tabs {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        z-index: 1;
+        background: #000000;
+      }
+
+      .user-tabs-inner {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+
+        .user-tab-pane {
+          cursor: pointer;
+          flex: 1;
+          text-align: center;
+          
+          font-size: 16px;
+          color: #9C9EA2;
+          padding-bottom: 21px;
+          position: relative;
+
+          &.active {
+            color: #f98c69;
+
+            &::after {
+              content: "";
+              position: absolute;
+              left: 50%;
+              right: 0;
+              bottom: 0;
+              width: 40px;
+              height: 2px;
+              background: #f98c69;
+              border-radius: 1px;
+              z-index: 2;
+              -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+            }
+          }
+        }
+      }
+
+      .user-tabs_active-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: teal;
+        z-index: 1;
+      }
+    }
+
+    // 区域间距
+
+    .mt-120 {
+      margin-top: 96px;
+      padding-bottom: 96px;
+    }
+
+    .mt-60 {
+      margin-top: 60px;
+    }
+
+    .mt-40 {
+      margin-top: 40px;
+    }
+
+    .mt-30 {
+      margin-top: 30px;
+    }
+    .mb-30 {
+      margin-bottom: 30px;
+    }
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+
+    .mt-20 {
+      margin-top: 20px;
+    }
+
+    .mt-10 {
+      margin-top: 10px;
+    }
+
+    .ml-30 {
+      margin-left: 30px;
+    }
+
+    .ml-20 {
+      margin-left: 20px;
+    }
+
+    .ml-10 {
+      margin-left: 10px;
+    }
+
+    .pb-20 {
+      padding-bottom: 20px;
+    }
+
+    // button
+
+    .user-btn {
+      // background: #F2B672;
+      background-image: linear-gradient(134deg, #fadcab 0%, #d99d59 100%, #f2b672 100%);
+      // border-radius: 4px;
+      border-radius: 20px;
+      min-width: 100px;
+      padding: 0 20px;
+      display: inline-block;
+      
+      font-size: 16px;
+      color: #111111;
+      cursor: pointer;
+      outline: none;
+      border: none;
+    }
+
+    // table
+
+    .user-table>table {
+      border-collapse: collapse;
+      width: 100%;
+      text-align: center;
+      // background: #010101;
+      // border-radius: 8px;
+      
+      font-size: 14px;
+      color: #ababab;
+
+      thead {
+        color: #ababab;
+        line-height: 40px;
+        height: 40px;
+        text-align: center;
+        background: #000000;
+        border-radius: 8px 8px 0 0;
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #000000;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          >td {
+            padding: 17px 0;
+          }
+        }
+      }
+
+      .no-result {
+        p {
+          padding: 30px 0;
+        }
+      }
+    }
+
+
+    // 分页器 样式
+    .record-pagination {
+      padding: 30px 0;
+      color: #ababab;
+      // font-family: MicrosoftYaHei;
+    }
+
+    .record-pagination>a {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      background: #E9E9E9;
+      margin-left: 11px;
+      font-size: 12px;
+    }
+
+    .record-pagination>span {
+      font-size: 12px;
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+
+    // input 
+
+    .user-input {
+      background: #1f1e1f;
+      border-radius: 4px;
+      padding: 0 20px;
+      
+      font-size: 14px;
+      color: #fff;
+      width: 100%;
+      height: 100%;
+
+      &::placeholder {
+        
+        font-size: 14px;
+        color: #686868;
+      }
+
+      &::-webkit-input-placeholder {
+        /* WebKit browsers */
+        
+        font-size: 14px;
+        color: #686868;
+      }
+
+      &:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        
+        font-size: 14px;
+        color: #686868;
+      }
+
+      &::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        
+        font-size: 14px;
+        color: #686868;
+      }
+
+      &:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        
+        font-size: 14px;
+        color: #686868;
+      }
+    }
+
+    // flex custom
+
+    .flex-justify-between {
+      justify-content: space-between !important;
+    }
+
+    .flex-col {
+      flex: 1;
+    }
+
+    .flex-justify-start {
+      justify-content: flex-start !important;
+    }
+
+
+    // position:relative
+
+    .position-re {
+      position: relative;
+    }
+
+    // 行内块元素
+
+    .inline-block {
+      display: inline-block;
+    }
+
+
+    .clearfix:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      overflow: hidden;
+    }
+    
+  }

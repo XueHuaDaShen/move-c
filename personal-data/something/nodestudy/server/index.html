@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    td{
+      margin:0;
+      padding:0;
+      height:20px;
+      padding:5px 10px;
+    }
+    input{
+      display:block;
+      height:100%;
+    }
+    #activity{
+      /* width:100px; */
+      border-collapse: collapse;
+    }
+    #activity td{
+      border:1px solid #ccc;
+    }
+  </style>
+<table>
+  <tr>
+    <td>name:</td><td><input type="text" id="name"></td>
+  </tr>
+  <tr>
+    <td>img:</td><td><input type="text" id="img"></td>
+  </tr>
+  <tr>
+    <td>message:</td><td><input type="text" id="message"></td>
+  </tr>
+  <tr><td colspan="2" style="text-align:center;"><button id="create-activity" style="display:inline-block">create</button></td></tr>
+</table>
+<table id="activity">
+
+</table>
+<table>
+  <tr>
+    <td>musicName:</td><td><input type="text" id="musicName"></td>
+  </tr>
+  <tr>
+    <td>musicImg:</td><td><input type="file" id="musicImg"></td>
+  </tr>
+  <tr>
+    <td>filedata:</td><td><input type="file" id="filedata"></td>
+  </tr>
+  <tr>
+    <td>singer:</td><td><input type="text" id="singer"></td>
+  </tr>
+  <tr><td colspan="2" style="text-align:center;"><button id="create-music" style="display:inline-block">create</button></td></tr>
+</table>
+
+
+<script src="../../jquery.js"></script>
+<script>
+var getData = function() {
+  $.ajax({
+    url: 'http://localhost:3000/api/activity/list',
+    method: 'get',
+    success: function(data){
+      let str = '';
+      for(let i in data){
+        str += '<tr>'+
+          '<td>'+data[i].id+'</td>'+
+          '<td>'+data[i].name+'</td>'+
+          '<td><img style="width:30px;height:auto;" src="'+data[i].img+'" /></td>'+
+          '<td>'+data[i].message+'</td>'+
+          '</tr>'
+      }
+      $("#activity").html(str)
+    },
+    error: function(err){
+      if(err){
+        alert("服务器关闭")
+      }
+    }
+  })
+}
+// getData();
+$("#create-activity").click(function() {
+  let name = $("#name").val();
+  let img = $("#img").val();
+  let message = $("#message").val();
+  $.ajax({
+    url: 'http://localhost:3000/api/activity/create',
+    method: 'post',
+    type: 'json',
+    data: {
+      name,
+      img,
+      message
+    },
+    success: function(data){
+      console.log(data)
+      getData()
+      // if(data.returncode)
+    },
+    error: function(err){
+      if(err){
+        alert("服务器关闭")
+      }
+    }
+  })
+})
+$("#create-music").click(function() {
+  let musicName = $("#musicName").val();
+  let musicImg = document.getElementById("musicImg").files[0];
+  let filedata = document.getElementById("filedata").files[0];
+  let singer = $("#singer").val();
+  var form = new FormData();
+  // form.append("musicName", musicName)
+  form.append("musicImg", musicImg)
+  // form.append("filedata", filedata)
+  // form.append("singer", singer)
+  $.ajax({
+    url: 'http://localhost:3000/api/music_img_file_list/create',
+    method: 'post',
+    type:"multipart/form-data",
+    processData: false,
+    data: form,
+    success: function(data){
+      console.log(data)
+      // getData()
+      // if(data.returncode)
+    },
+    error: function(err){
+      if(err){
+        alert("服务器关闭")
+      }
+    }
+  })
+})
+</script>
+</body>
+</html>

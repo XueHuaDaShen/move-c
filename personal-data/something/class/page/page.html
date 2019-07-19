@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+ul,ol{
+	list-style: none;
+}
+li{
+	float:left;
+}
+.AMnav{
+	margin-top:100px;
+}
+.AMnav .pagination li.currentpage a:hover{
+	background:#fff;
+	color:#848484;
+	border:1px solid #939393;
+}
+/*.AMnav .pagination li a.on{
+	background:#fff;
+	color:#848484;
+	border:1px solid #939393;
+}
+.AMnav .pagination li a.on:hover{
+	color: #2a6496;
+    background-color: #eee;
+    border-color: #ddd;
+}*/
+.AMnav{
+	display:-webkit-box;
+	-webkit-box-pack:center;
+}
+.AMnav ul{
+	margin:0;
+}
+.AMnav li a{
+	padding:10px 20px;
+	border:1px solid #939393;
+	border-radius:5px;
+	margin-left:30px;
+	color:#848484;
+	text-decoration: none;
+}
+.pagination>li>a:active {
+  background: lightblue;
+  border-color: #939393;
+}
+/*.AMnav .pagination>li>a.on:active {
+  background: lightblue;
+  border-color: #939393;
+}*/
+.AMnav .pagination li.currentpage a:hover, .AMnav .pagination li.currentpage a:active, .AMnav .pagination li.currentpage a:focus {
+  background: #fff;
+  color: #848484;
+  border: 1px solid #939393;
+  cursor: default;
+}
+#container{
+	padding:10px 100px;
+}
+#container div{
+	width:100%;
+	padding:3px 0;
+	display:-webkit-box;
+}
+#container div span{
+	display:block;
+	width:25%;
+	text-align: center;
+}
+</style>
+<body>
+	
+	<div id="container">
+		<div>
+			<span>title</span>
+			<span>content</span>
+			<span>type</span>
+			<span>os</span>
+		</div>
+	</div>
+
+
+	<nav class="AMnav">
+	    <ul class="pagination">
+	        <li class="begin"><a href="javascript:void(0);">FIRST</a></li>
+	        <li class="prev"><a href="javascript:void(0);">&lt;<!-- &laquo; --></a></li>
+	        <li class="currentpage"><a href="javascript:void(0);">1/10</a></li>
+	        <li class="next"><a href="javascript:void(0);">&gt;<!-- &raquo; --></a></li>
+	        <li class="end"><a href="javascript:void(0);">LAST</a></li>
+	    </ul>
+	</nav>
+
+
+
+
+
+<script src="../../jquery-3.1.1.min.js"></script>
+<script src="page.js"></script>
+<script>
+
+$.page({
+	begin: ".begin",
+	end: ".end",
+	next: ".next",
+	prev: ".prev"
+})
+
+// var _default = {
+// 	url: "http://123.56.6.6:3030/api/v1/im/custom/list",// 请求路径
+// 	token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEiLCJ0aW1lIjoiMjAxNy0wNC0xNFQwMjoxNjowMC41MDRaIiwiaWF0IjoxNDkyMTM2MTYwLCJleHAiOjE0OTIyMjI1NjB9.3uMfS3cZ6nS9o-uY-O2LQ8eBwI3JKMB64kgwEKrdiqg',// 我这边请求的时候必须，ajax 请求的时候  如果没用  记得去js 里修改
+// 	listNum: 1,//当前页
+// 	totalPageNum: 1,//总页数
+// 	total: 10,//总数据
+// 	size: 10,//每页的数据
+// 	Data_container: "#container",//显示数据的盒子
+// 	currentpage: ".currentpage",//分页的页数
+// 	begin: "#begin",//第一页
+// 	end: "#end",//结束页
+// 	next: "#next",//下一页
+// 	prev: "#prev"//上一页
+// };
+
+
+// var monthArr = ["Jan", "Febr", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// //var pageNum = 1;
+// var totalPageNum = 1;
+// var listNum = 1;
+// var size = 10;
+// var url = 'http://123.56.6.6:3030/api/v1/im/custom/list';
+// var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEiLCJ0aW1lIjoiMjAxNy0wNC0xNFQwMjoxNjowMC41MDRaIiwiaWF0IjoxNDkyMTM2MTYwLCJleHAiOjE0OTIyMjI1NjB9.3uMfS3cZ6nS9o-uY-O2LQ8eBwI3JKMB64kgwEKrdiqg';
+// function getList(pageNum, size){
+// 	console.log(pageNum)
+// 	$.ajax({
+//         url: url,
+//         type: 'GET',
+//         headers: {
+//             token: token
+//         },
+//         data: {
+//             'pageNum': pageNum,
+//             "size": size
+//         },
+//         success: function(data) {
+
+//             if (data.returncode == 200) {
+//                 console.log(data);
+//                 // console.log(data.data.totalPageNum);
+
+
+//                 totalPageNum = data.data.totalPageNum;
+//                 listNum = pageNum;
+//                 var str = '<a href="javascript:void(0);">'+pageNum+'/'+totalPageNum+' total '+data.data.total+'</a>';
+//                 										//当前页	//总页数					//总数据
+//                 $(".currentpage").html(str);
+
+
+//                 var html = '';
+//                 for(var i = 0; i< data.data.content.length; i++){
+//                 	html += '<div><span>'+data.data.content[i].content+'</span><span>'+data.data.content[i].source+'</span><span>'+data.data.content[i].status+'</span><span>'+data.data.content[i].size+'</span></div>'
+//                 }
+//                 $("#container").html(html);
+//                 _style()
+//             }
+//         },
+//         fail: function() {
+//             console.log('Ajax Error');
+//         }
+//     });
+// }
+// getList(listNum, size)
+// function _style(){
+// 	$("#container>div:odd").css({
+// 		"background": '#ccc'
+// 	})
+// }
+// $(".begin").on("click",function(){
+//     getList(1, size);
+// })
+// $(".prev").on("click",function(){
+//     if( listNum-1 > 0 ){
+//         getList( listNum-1, size)
+//     }
+// })
+// $(".next").on("click",function(){
+//     if( !(listNum*1+1 > totalPageNum) ){
+//         getList( listNum*1+1, size)
+//     }
+// })
+// $(".end").on("click",function(){
+//     getList(totalPageNum, size)
+// })
+var arr = [1,2,3,4];
+function remove(arr,item){
+	var newArr = arr;
+	return newArr.splice(item,1)
+}
+console.log(remove(arr,2))
+</script>
+</body>
+</html>

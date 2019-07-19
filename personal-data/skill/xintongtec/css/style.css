@@ -1,0 +1,54 @@
+﻿body {
+
+}
+ #owl-demo {
+            width: 1009px;
+        }
+
+            #owl-demo .item {
+                display: block;
+            }
+
+            #owl-demo img {
+                display: block;
+                width: 1009px;
+                height: 400px;
+            }
+
+        .owl-pagination {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            width: 1009px;
+            height: 22px;
+            text-align: center;
+        }
+        #DivFooter {
+            width:1009px;
+        }
+        .item img {
+            width:1009px;
+        }
+.zhyling img {
+width:1009px;
+}
+.carousel-inner{
+	width:1009px;
+}
+/*about*/
+.nrshuoming {
+    height: 50px;
+    line-height: 30px;
+    text-align: center;
+    color: #7f7f7f;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 28px;
+    width: 100%;
+    text-align: center;
+    padding: 0px 0px 15px;
+}
+
+  

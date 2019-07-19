@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<link rel="stylesheet" href="./animate.css">
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+ul,ol{
+	list-style: none;
+}
+	div{
+		background:#2F2236;
+	}
+	#div{
+	    background:#000;
+	    width:100px;
+	    height:100px;
+	    border-radius:10px;
+	    overflow: hidden;
+	}
+	#div>span{
+		display:block;
+	    width: 0;
+	    height: 0;
+	    border-bottom: 100px solid red;
+	    border-right: 100px solid transparent;
+	}
+	.jiantou {
+        position:absolute;
+        width:8px;
+        height:8px;
+        right: 20px;
+        top:18px;
+        /*border-top: 2px solid  rgba(179, 193, 198, 1);
+        border-right: 2px solid  rgba(179, 193, 198, 1);*/
+        border-top: 2px solid  #646464;
+        border-right: 2px solid  #646464;
+        transform:rotate(45deg);
+        -ms-transform:rotate(45deg); 	/* IE 9 */
+        -moz-transform:rotate(45deg); 	/* Firefox */
+        -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+        -o-transform:rotate(45deg);
+    }
+    #myFont{
+    	background:#fff;
+    	font-family: "Arial";/*,"Microsoft YaHei","黑体","宋体",sans-serif*/
+    }
+    .box{
+    	width:500px;
+    	height:200px;
+    	border:1px solid red;
+    	background:#fff;
+    	overflow-y: auto;
+    	transform:all .3s;
+    }
+    .two{
+    	width:500px;
+    	height:50px;
+    	border:1px solid red;
+    	background:#fff;
+    	/*overflow-x: auto;*/
+    	margin-top:10px;
+    	/*transform:all .3s;*/
+		overflow: hidden;
+    }
+	#list2{
+		/*width:100%;*/
+		/*height:100%;*/
+		display:-webkit-box;
+		/*white-space: nowrap;*/
+	}
+	#list2 li{
+		width:60px;
+		height:30px;
+		line-height:30px;
+		background:#ccc;
+		margin: 0 4px;
+	}
+	.faguang{
+		width:300px;
+		height:500px;
+		background:url('./head.png');
+		padding-top:20px;
+	}
+	.test{
+		margin-left:10px;
+		width:100px;
+		height:30px;
+		line-height: 30px;
+		text-align: center;
+		color:#fff;
+		border-radius:15px;
+		border:1px solid #fff;
+		box-shadow:inset 0 0 50px #fff;
+		position: relative;
+		background:none;
+	}
+	.sha{
+		position: absolute;
+		width:100%;
+		height:100%;
+		left:0;
+		top:0;
+		box-shadow: 0 0 100px #fff;
+		background:none;
+		border-radius:15px;
+	}
+	.bj{
+		width:100%;
+		height:1px;
+		position: absolute;
+		left:0;
+		top:50%;
+		border-radius:15px;
+		box-shadow: 0 0 100px #fff;
+		background:none;
+	}
+</style>
+<body>
+	<!-- <div>
+		<img src="img/11.png" alt="">
+		<img src="img/12.png" alt="">
+		<img src="img/21.png" alt="">
+		<img src="img/22.png" alt="">
+		<img src="img/31.png" alt="">
+		<img src="img/32.png" alt="">
+		<img src="img/41.png" alt="">
+		<img src="img/42.png" alt="">
+	</div>
+	<div id="div">
+		<span></span>
+		<div class="jiantou"></div>
+	</div>
+	<video src="./pid110925 VJ：wow! (snap)  SNAP BY：Nunid Naka.mp4" controls></video> -->
+	<div id="myFont">
+		<span>你好&nbsp;</span>
+		<span>hello world</span>
+		<span>123455</span>
+	</div>
+	<select name="" id="sel">
+		<option value="SimSun">宋体</option>
+		<option value="SimHei"  selected = "selected">黑体</option>
+		<option value="Microsoft JhengHei">微软雅黑</option>
+		<option value="NSimSun">新宋体</option>
+		<option value="PMingLiU">新细明体</option>
+		<option value="MingLiU">细明体</option>
+		<option value="KaiTi">楷体</option>
+	</select>
+	<input type="button" value="add1" id="add">
+	<input type="button" value="add2" id="add2">
+	<input type="button" value="animate" id="animate">
+	<input type="button" value="search" id="search">
+	<input type="text" id="text">
+	<div class="box">
+		<ul id="list">
+			<li>1</li>
+		</ul>
+	</div>
+	<div class="two">
+		<ol id="list2">
+			<li>1</li>
+		</ol>
+	</div>
+	<p id="content" style="width:700px;position:absolute;top:30px;left:700px"> <span id="span">nihao</span> The grounds were covered with dark green grass through which stretched a straight white stone path. On both sides of the path were planted what I believed to be poinsettias. Now the flowers were surrounded by pinkish leaves instead of bright red ones as they should have been. Trimmed with light green edges，the leaves looked delicate and charming. Along the long path I often took a stroll which world take me to a wide terrace，where I could watch the enchanting glow of sunset，and occasionally catch the sight of a train puffing and hooting on its way southward. On my way back I would pass by the laboratory and library building whose large French windows had soft curtains let fall to the floor. Just outside the windows kapod flowers glowed red in full bloom. A short way off stood the dining hall，where I found a tree bearing snow-white blossoms so graceful and soft to the touch. Viewed together from the distance，they were as beautiful as a bridal veil. Later I learned that it was a tree called datura which I had so often read about in books.</p>
+	<div class="faguang">
+		<div class="test">
+			<div class="sha"></div>
+			<span>WEEK1</span>
+		</div>
+	</div>
+</body>
+</html>
+<script src="./jquery.js"></script>
+<script>
+$(document).on("keydown", function(e){
+	//f=70
+	if( e.ctrlKey && e.keyCode == 70 ){
+		console.log(true)
+	}
+})
+$(document).on("mousedown",function(e){
+	console.log(e.button)
+	// alert(e.button)
+	// return false
+})
+console.log($("#span"))
+// $.ajax({
+//     url: 'http://123.56.6.6:8018/api/v1/man/qiniu/media/token',
+//     headers: {
+//         "token": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTNiNTcyMTBmMzY2MTFlNjg3ODA2OTAwODA3NmRhNjAiLCJhY2Nlc3NfdG9rZW4iOiIwY2ZjY2Y0NGE0Y2ViYzEzNzYzNTk5Zjk2YjY2ZWExYWI0YzUyYWIwIiwicmVmcmVzaF90b2tlbiI6ImI0MDkxNzQ0NDVjZjM2ODA2NzJjNTk2NGIyNjVlMzFhMWIxYTY0YjEiLCJpYXQiOjE1MTEyMzU0ODQsImV4cCI6MTUxMzgyNzQ4NH0.KjuqS4lIrXCFPaTDResSss_2MnctDVZBxLPzopApTaM'
+//     },
+//     type: "post",
+//     success: function(data){
+//     	console.log(data)
+//     }
+// })
+// NSString *uuid = [[UIDevice currentDevice] uniqueIdentifier];
+// uuid = [[UIDevice currentDevice] uniqueIdentifier]
+var pid = '50138247';
+var userID = '121895975217184';
+// $.ajax({
+// 	url: 'https://dee.tutulive.tv:8446/api/v1/man/host/get?pid='+pid,
+// 	type: 'get',
+// 	success: function(data){
+// 		console.log(data.data)
+// 	}
+// })
+// $.ajax({
+// 	url: 'http://123.56.6.6:8018/api/v1/man/inviterecord/add',
+// 	type: 'post',
+// 	data: {
+// 		loginid: '000da797d215da6d1d404963',
+// 		facebook_id: userID
+// 	},
+// 	success: function(data){
+// 		console.log(data)
+// 	}
+// })
+var loginidArr = [
+	'00104edd12174842151b75f5', '00069af5a0c4b73a10b1487b', '000597473abc383011bbea6e', '0010d95012174842151c9235',
+	'00108177d653cf30159bf66c', '026bbd77c87c58ec7de5688a', '00100b332a32f63615007cd4', '',
+	'000d70b428734d2c1dacb351', '000d7cce0d7cea14394da62f'
+]
+var loginidArr = [
+	'030b839a961f8ce67d1c46fc', '05b6b806961f8ce67d1be404', '046a738d204f36e07d9124ca',
+	'04dc0d863c5088da7d838614', '51038247',
+	'035aa3dac87c58ec7de6edfb', '02650ac8a330088c1abc9702',
+	'03b765952225354d37e30cae', '05bdd06c204f36e07d90e233', '05847920c87c58ec7de7f87f'
+]
+//按照 设计图 主播名字 顺序查找的 loginID
+var loginidArr = [
+	'000da797d215da6d1d404963', '02b1712c3c5088da7d82640e', '000dac057abe756e1da29473', '000db3d7d1325b8f1df94f9f', '01338990204f36e07d908239', '0010cdfd2a32f636150251e7',
+	'000ef9810a277f18305ce17b', '000dc2bc9e0886751daf253f', '024bbad6c87c58ec7de5e44e', '000e256c0a277f18305b5afb', '000da9bed1325b8f1df93467', '00106ceea840c13c155f9a15',
+	'00d93884266fd84737daa59f', '02c9dab0204f36e07d906dac', '000355e982a8c47b4c1d5f63', '000f4767f5c9ce2030abbc53', '000fc0622a32f63615ffa095', '00110bfc2a32f6361502ede6',
+	'00087b1abdb703b14a7187fe', '000dd08c9e0886751daf4eea', '000db4e69e0886751daf02b8', '000db3ee9e0886751daf0143', '000f8338f5c9ce2030ac2e90', '4185027'
+]
+// var list = document.getElementById('list');
+// list.className = '123'
+// $("#sel").on("change", function(){
+// 	var v = $(this).val(),
+// 		t = $(this).text();
+// 	$("#myFont").css("fontFamily",v)
+// 	console.log(v)
+// })
+// console.log($("#sel").val())
+// // var defaultFont = 'getComputedSylte' in window?getComputedStyle(document.documentElement)['font-family']:document.documentElement.currentStyle['font-family'];
+// // console.log(defaultFont)
+
+// $("#add").on('click', function(){
+// 	var num = $("#list").find("li").length;
+// 	var li = $("#list").find("li").eq(0).height();
+// 	$("#list").append($("<li>"+(num*1+1)+"</li>"))
+// 	var h = $("#list").height();
+	
+// 		var scrollH = $(".box").scrollTop();
+// 		$(".box").animate({scrollTop: scrollH+h}, 300);
+	
+// })
+// $("#add2").on('click', function(){
+// 	var num = $("#list2").find("li").length;
+// 	var li = $("#list2").find("li").eq(0).outerWidth();
+// 	$("#list2").append($("<li>"+(num*1+1)+"</li>"))
+// 	if( num>6 ){
+// 		$('#list2 li:first').animate({"width": 0},300,function(){
+// 			$('#list2 li:first').remove();
+// 		})
+// 	}
+// 	var h = $("#list2").width();
+	
+// 		// var scrollH = $(".two").scrollLeft();
+// 		// $(".two").animate({scrollLeft: scrollH+h}, 300);
+	
+// })
+// $("#animate").on("click", function(){
+// 	$("#myFont").addClass("animated bounce");
+// 	setTimeout(function(){
+// 		$("#myFont").removeClass("animated bounce");
+// 	},1000)
+// })
+$("#search").on("click", function(){
+	var text = $("#text").val();
+	var p = $("#content").text();
+	var reg = new RegExp(text,'gi');
+	var str = '';
+	if(text){
+		str = p.replace(reg,function(v){
+			return '<span style="background:yellow">'+v+'</span>'
+		})
+		$("#content").html(str)
+	}else{
+		$("#content").html(p)
+	}
+})
+// function ran(){
+// 	var num = Math.floor(Math.random()*10);
+// 	return num;
+// }
+// console.log(ran())
+// // var a1 = ['', 10, 11, 12, 13, 4, 40, 5, 49, 32, 6, 23, 26, 2, 7, 1, 38, 46, 28, 29, 8, 14, 20, 37, 39, 24, 19, 33, 3, 31, 17, 22, 0, 18, 30, 36, 35, 27, 41, 42, 43, 9, 15, 16, 21, 25, 34, 44, 45, 47, 48, 50],
+// // 	a2 = [24, 0, 1, 2, 4, 20, 44, 21, 51, 6, 22, 29, 31, 9, 23, 12, 40, 48, 33, 34, 13, 10, 26, 39, 41, 30, 25, 5, 8, 17, 7, 28, 19, 18, 15, 38, 37, 32, 42, 45, 43, 14, 11, 3, 27, 16, 36, 46, 47, 49, 50, 52];
+// // console.log(a1.length)
+// // console.log(a2.length)
+// // function count(a){
+// // 	return a.sort(function(x, y){
+// // 		return x-y;
+// // 	})
+// // }
+// // console.log(count(a1))
+// // console.log(count(a2))
+// var data = [
+// 	{"key": "2017-07-21", "val": 1},
+// 	{"key": "2017-07-22", "val": 2},
+// 	{"key": "2017-07-25", "val": 5},
+// 	{"key": "2017-07-26", "val": 6},
+// 	{"key": "2017-08-2", "val": 7}
+// ]
+
+// var is = true;
+// function completionData(data){
+	
+// 	if(is){
+// 		for(var i=data.length-1; i>0; i--){
+// 			if( (i-1)>=0 ){
+// 				var time = new Date(data[i].key);
+// 				var time2 = new Date(data[i-1].key);
+// 				if( (time-time2)/1000/60/60/24 > 1 ){
+// 					var y = time.getFullYear(),
+// 						m = time.getMonth(),
+// 						d = time.getDate();
+// 					var newTime = new Date(y,m,d-1);
+// 						ny = newTime.getFullYear(),
+// 						nm = newTime.getMonth()+1,
+// 						nd = newTime.getDate();
+// 					nm = nm<10?'0'+nm:nm;
+// 					nd = nd<10?'0'+nd:nd;
+// 					var str = ny+"-"+nm+"-"+nd
+// 					data.splice(i,0,{"key":str,"val":0})
+// 					is = true;
+// 					break
+// 				}else{
+// 					is = false;
+// 				}
+// 			}
+// 		}
+// 		return completionData(data)
+// 	}else{
+// 		return data;
+// 	}
+// }
+// console.log(completionData(data))
+
+
+// var timeStr = '/Date(21273164)/';
+// var num = '';
+// var newTimeStr = timeStr.replace(/\d/g,function(v){
+// 	num+=v
+// 	return '';
+// })
+// console.log(newTimeStr)
+// console.log(num)
+
+// // var arr1 = new Map([[1,'a'],[2,'b'],[3,'c']]);
+// // arr1.forEach(function(e,i,s){
+// // 	console.log(e);
+// // 	console.log(i);
+// // 	console.log(s);
+// // })
+// var imgs = document.getElementsByTagName('img');
+// imgs = new Set(imgs)
+// imgs.forEach(function(e,i,s){
+// 	console.log(e);
+// 	console.log(i);
+// 	console.log(s);
+// })
+
+// var newStr = '{"role":[{"sid":"42","sname":"初检不合格","result":[{"rid":"15","rname":"不合格","function":[{"fid":"95","fname":"修改时限"}]},{"rid":"14","rname":"合格","function":[{"fid":"91","fname":"审核"}]},{"rid":"75","rname":"正常","function":[{"fid":"6","fname":"报验"}]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]},{"sid":"43","sname":"已报验","result":[{"rid":"15","rname":"不合格","function":[]},{"rid":"14","rname":"合格","function":[]},{"rid":"75","rname":"正常","function":[]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]},{"sid":"90","sname":"已审核","result":[{"rid":"15","rname":"不合格","function":[]},{"rid":"14","rname":"合格","function":[]},{"rid":"75","rname":"正常","function":[]},{"rid":"76","rname":"滞后","function":[]},{"rid":"77","rname":"暂无结果","function":[]}]}]}'
+// console.log(JSON.parse(newStr))
+
+// var obj = JSON.parse(newStr);//将字符串转化为对象
+// for(var i=obj.role.length-1; i>=0; i--){//获取对象里的数组，并遍历，选择倒序遍历是为了方便删除
+// 	var data = obj.role[i].result;//获取数组中每一项的result  也就是内嵌的数组
+// 	var val = concatFn(data);//调用去除空数组的方法，并获取返货的结果，结果是一个数组
+// 	if(val.length==0){
+// 		obj.role.splice(i,1)//如果返回的是空数组，就将当前这个数组删掉
+// 	}else{
+// 		obj.role[i].result = val;//如果返回的数据有值，则将这个数组替换当前的数组
+// 	}
+// }
+// console.log(obj)
+// function concatFn(val){
+// 	for(var i=val.length-1; i>=0; i--){//倒序遍历
+// 		if(val[i]['function'].length==0){
+// 			val.splice(i,1)//如果为空就删除当前的元素
+// 		}
+// 	}
+// 	return val;
+// }
+var str = 10000000.0000001;
+function toThousands(num){
+　　var re=/\d{1,3}(?=(\d{3})+$)/g;
+　　var n1=(num || 0).toString().replace(/^(\d+)((\.\d+)?)$/,function(s,s1,s2){return s1.replace(re,"$&,")+s2;});
+　　return n1;
+}
+
+// function toThousands(num) {
+//     return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+// }
+console.log(toThousands(str))
+var myd = {id:1}
+function isEmptyObject(e) {  
+    var t;  
+    for (t in e)  
+        return !1;  
+    return !0  
+}
+console.log(isEmptyObject(myd))
+var obj = [
+	{order: 575745, content: "青海湖", id: "461405", num: 0},
+	{order: 108867, content: "鄱阳湖", id: "29bf8a", num: 0},
+	{order: 36612, content: "洞庭湖", id: "5e3d96", num: 0}
+]
+var newarr = [];
+var newarr2 = [];
+for(var i in obj){
+	newarr.push(obj[i].order)
+}
+newarr.sort(order);
+for(var i in newarr){
+	for(var j in obj){
+		if(obj[j].order==newarr[i]){
+			newarr2.push(obj[j])
+		}
+	}
+}
+function order(x,y){
+	return x-y
+}
+console.log(newarr2)
+var nameArr = [
+	'ក្មេងឌឺ', 'ក្មេងខ្មែរ', 'កូនក្មេង', 'កុលាប', 'នីតា', 'ជាតា', 'សាមាន', 'ស្រីរត្', 'ន ចរិយា', 'មិថុនា',
+	'មិនា', 'សាឌី', 'ចាន់ ស្រីណែត', 'កណ្ណិកា', 'កាកា', 'កុសុមៈ', 'មាលា', 'កេសី', 'កួន និមល', 'វិរៈ',
+	'នីសា', 'លីណា', 'បញ្ញា', 'មាស សំណព្វ', 'គង់នៅ', 'ឌី អ', 'ស្តើង ហាក់សេង', 'ប៉ូ លីវណ្ណ', 'ចាន់ ថន', 'មុំ ធារៈ',
+	'ស្រីមុំ', 'ស្រី លក្ខណ៍', 'វិរៈយុទ្ធ', 'សុធា', 'សីហា', 'ក្មេងល្ងង់', 'វុត្ថា', 'បញ្ញារុង', 'សុវណ្ណ', 'សុភក្រ្ត',
+	'វិចិត្រ', 'តុង តុង', 'ខ្មែរ លើ', 'នារី ខ្មែរ', 'គន្ធី', 'គិរី' , 'ប្រថពី', 'តារា', 'ចាន់ធី', 'ចាន់ធូ',
+	'អេ ឡិច', 'សក្តិ', 'រំចង់', 'រីករាយ', 'សាសា', 'នឹម នួន', 'ក្មេងវត្ត', 'ឧត្តម', 'ចំរើន', 'ក្មេង ច្រឡឺម',
+	'ជីវី', 'ឆាយា', 'លីសា', 'លីកា', 'ស្រីពៅ', 'ស្រីតូច', 'សុនីតា', 'សិលា', 'តែល តោល', 'មង្គល',
+	'ស្រី ណុច', 'អា នាថ', 'ធានី', 'មហាសាល', 'មរកត', 'លីលី', 'សេងហួរ', 'សុក្រិត', 'សវតា', 'ក្រវ៉ាន់',
+	'ខេមរា', 'ខ្មោចឆៅ', 'ខ', 'ន្តី សុវុទ្ធី', 'អមរិន្', 'ទ អរុណ', 'រក្សា', 'សត្យា', 'វេហា', 'បណ្តូលចិត្តបង',
+	'បូរមី', 'បុប្ផា', 'ប្រស្នា',  
+	'Baby Cute', 'boy boy', 'Rose', 'Roy', 'Eva', 'Ella', 'Isabelle', 'Alice', 'Florence', 'Rosie',
+	'Lola', 'Lucy', 'Lilly', 'Molly', 'Ellie', 'Eliza', 'Annabelle', 'Amber', 'Summer', 'Hannah',
+	'Zara', 'Anna', 'Maria', 'Katie', 'Amy', 'Julia', 'Victoria', 'Oliver', 'Jack', 'Harry',
+	'Jacob', 'Thomas', 'George', 'Oscar', 'James', 'Charlie', 'Thomas', 'Oscar', 'William', 'Alex',
+	'Arisa', 'Alexander', 'Adam', 'Tommy', 'Luca', 'Luna', 'Jusmine', 'Sonny', 'Robert', 'David',
+	'Richard', 'Anthony', 'Keth', 'Steven', 'Andrew', 'Gary', 'Jerry', 'Peter', 'Johnny'
+],
+	imgUrl = [
+	'http://i1.live.aisoqu.com/f0710f7385d8809f',
+	'http://i1.live.aisoqu.com/1cbb6e8944be7c8e',
+	'http://i1.live.aisoqu.com/882dd41571f481eb',
+	'http://i1.live.aisoqu.com/098bbcf30dc41384',
+	'http://i1.live.aisoqu.com/27c47ba996117877',
+	'http://i1.live.aisoqu.com/e211c46ad1c0f815',
+	'http://i1.live.aisoqu.com/8294d6e708a33570',
+	'http://i1.live.aisoqu.com/bcd999da790eeeb9',
+	'http://i1.live.aisoqu.com/d1b81edf27ec6748',
+	'http://i1.live.aisoqu.com/cb4fb5ac973e9e07',
+	'http://i1.live.aisoqu.com/ddcbee6a63e206bb',
+	'http://i1.live.aisoqu.com/915198a217f9dad6',
+	'http://i1.live.aisoqu.com/747798fcb2845902',
+	'http://i1.live.aisoqu.com/af6c88f814cb7986',
+	'http://i1.live.aisoqu.com/33300cabbdb2e09a',
+	'http://i1.live.aisoqu.com/cf716ffe007af9e3',
+	'http://i1.live.aisoqu.com/71a8aaf37820a3da',
+	'http://i1.live.aisoqu.com/3aa6b6c1cc212dcd',
+	'http://i1.live.aisoqu.com/8067df71a97d5399',
+	'http://i1.live.aisoqu.com/57f417cadd207e25',
+	'http://i1.live.aisoqu.com/71a8aaf37820a3da',
+	'http://i1.live.aisoqu.com/4413099fb4d887fc',
+	'http://i1.live.aisoqu.com/09c2011be5340886',
+	'http://i1.live.aisoqu.com/74d5783315414579',
+	'http://i1.live.aisoqu.com/03dbd27b23d4c117',
+	'http://i1.live.aisoqu.com/6d5c5773b4c64994',
+	'http://i1.live.aisoqu.com/092445a155abef7e',
+	'http://i1.live.aisoqu.com/1e6465a881330e4c',
+	'http://i1.live.aisoqu.com/8b4e2a5cb0ed2e7d',
+	'http://i1.live.aisoqu.com/fc4bf16a51607ea0',
+	'http://i1.live.aisoqu.com/419d32a770986905',
+	'http://i1.live.aisoqu.com/bab436a58dd3aec0',
+	'http://i1.live.aisoqu.com/b43af85998f8c26f',
+	'http://i1.live.aisoqu.com/16175ea643096c69',
+	'http://i1.live.aisoqu.com/0e991db7bf1fd111',
+	'http://i1.live.aisoqu.com/92fe81f8cb0b073d',
+	'http://i1.live.aisoqu.com/1f5a43bba4ff2350',
+	'http://i1.live.aisoqu.com/59c2455792736d04',
+	'http://i1.live.aisoqu.com/8f2b686d62b5a6e9',
+	'http://i1.live.aisoqu.com/14b6de09056043c1',
+	'http://i1.live.aisoqu.com/f7d4185f035214ae',
+	'http://i1.live.aisoqu.com/20e8a3ac66d12659',
+	'http://i1.live.aisoqu.com/d7ffe84e6eface56',
+	'http://i1.live.aisoqu.com/62049a002f900778',
+	'http://i1.live.aisoqu.com/6ac4822769e5f63d',
+	'http://i1.live.aisoqu.com/1b3607083d40781f',
+	'http://i1.live.aisoqu.com/22a97c0821f2ebef',
+	'http://i1.live.aisoqu.com/b65c49673ff511e9',
+	'http://i1.live.aisoqu.com/30c3b7a83b7ea653',
+	'http://i1.live.aisoqu.com/214dfcd843b3016f',
+	'http://i1.live.aisoqu.com/1237a35a60a7dc05',
+	'http://i1.live.aisoqu.com/d213fa8dd312d8d1',
+	'http://i1.live.aisoqu.com/d81afb19081eec8c',
+	'http://i1.live.aisoqu.com/3b96d7ff0bc0b11e',
+	'http://i1.live.aisoqu.com/d2346c1af1e1c080',
+	'http://i1.live.aisoqu.com/eeb8f0cdc1679e84',
+	'http://i1.live.aisoqu.com/43ae93eef66ec23c',
+	'http://i1.live.aisoqu.com/03fbedddf7d62f39',
+	'http://i1.live.aisoqu.com/70b96d212f193ba2',
+	'http://i1.live.aisoqu.com/692d44f1fa5a50d2',
+	'http://i1.live.aisoqu.com/ee729d6d1526ea1a',
+	'http://i1.live.aisoqu.com/088813f84d0cf98b',
+	'http://i1.live.aisoqu.com/1077baa31e77d037',
+	'http://i1.live.aisoqu.com/277dc68988584d11',
+	'http://i1.live.aisoqu.com/bd1aae11e8b2819b',
+	'http://i1.live.aisoqu.com/bfbd372cde32bbf4',
+	'http://i1.live.aisoqu.com/ad0c65d0ac8c3541',
+	'http://i1.live.aisoqu.com/97a5f1da3b6a42a8',
+	'http://i1.live.aisoqu.com/52cac42b68fe1dc2',
+	'http://i1.live.aisoqu.com/805c101d5dcce83e',
+	'http://i1.live.aisoqu.com/4ddcfe4b7ac2baf5',
+	'http://i1.live.aisoqu.com/84fbdbcdd99dbb2f',
+	'http://i1.live.aisoqu.com/cf6c34574c813950',
+	'http://i1.live.aisoqu.com/90221ac44836e783',
+	'http://i1.live.aisoqu.com/256a50f53292b0ee',
+	'http://i1.live.aisoqu.com/54b0d869fac6ce05',
+	'http://i1.live.aisoqu.com/cf9030e3e59304c3',
+	'http://i1.live.aisoqu.com/9c63abcc7a45eaca',
+	'http://i1.live.aisoqu.com/f4f5d6b940fdd261',
+	'http://i1.live.aisoqu.com/b2ff52bc3561b7f9',
+	'http://i1.live.aisoqu.com/5be32f69154624f3',
+	'http://i1.live.aisoqu.com/01be3e9c4d7985cb',
+	'http://i1.live.aisoqu.com/6001e2e287a31633',
+	'http://i1.live.aisoqu.com/e33fe2dfbe2610ff',
+	'http://i1.live.aisoqu.com/3b18e05e60574827',
+	'http://i1.live.aisoqu.com/150e22365d96460e',
+	'http://i1.live.aisoqu.com/f1323afaf460ab7c',
+	'http://i1.live.aisoqu.com/07e69411f043b32b',
+	'http://i1.live.aisoqu.com/a281977fa577a832',
+	'http://i1.live.aisoqu.com/aa76956aee9c09d0',
+	'http://i1.live.aisoqu.com/8c4c3627495b70c3',
+	'http://i1.live.aisoqu.com/a87276bbc3d19f78',
+	'http://i1.live.aisoqu.com/303de6260daf4bec',
+	'http://i1.live.aisoqu.com/a18549aaaa464e80',
+	'http://i1.live.aisoqu.com/447002514acbaceb',
+	'http://i1.live.aisoqu.com/519978c7186894d9',
+	'http://i1.live.aisoqu.com/41a7e8529f254ed6',
+	'http://i1.live.aisoqu.com/ff3a0c055dd9b19b',
+	'http://i1.live.aisoqu.com/2f353244bcf762d6',
+	'http://i1.live.aisoqu.com/b695da6538a5c27c',
+	'http://i1.live.aisoqu.com/563289db98ee68ee',
+	'http://i1.live.aisoqu.com/7ceeed112e1f9435',
+	'http://i1.live.aisoqu.com/a41ae592aba895f1',
+	'http://i1.live.aisoqu.com/788ae173c578891c',
+	'http://i1.live.aisoqu.com/f0309de5c6937e14',
+	'http://i1.live.aisoqu.com/8b9dc0393c584c50',
+	'http://i1.live.aisoqu.com/e2b9afb423945c7b',
+	'http://i1.live.aisoqu.com/eff174de98a58d6f',
+	'http://i1.live.aisoqu.com/d6ff8ff0ab929904',
+	'http://i1.live.aisoqu.com/3d6b1eda3beed257',
+	'http://i1.live.aisoqu.com/4cba29a3b78800c1',
+	'http://i1.live.aisoqu.com/5355b713eeaa1fff',
+	'http://i1.live.aisoqu.com/220020ecdfd6c199',
+	'http://i1.live.aisoqu.com/f5b655300dcc0666',
+	'http://i1.live.aisoqu.com/71ea5a8a29a53149',
+	'http://i1.live.aisoqu.com/d4afc2d0b6445269',
+	'http://i1.live.aisoqu.com/4fcd11da5496347f',
+	'http://i1.live.aisoqu.com/02f0194d8a267c2f',
+	'http://i1.live.aisoqu.com/aa064977e0157045',
+	'http://i1.live.aisoqu.com/03bca9280cd0e9f7',
+	'http://i1.live.aisoqu.com/3c6c4747db26ad6e',
+	'http://i1.live.aisoqu.com/c221498f2bb9748a',
+	'http://i1.live.aisoqu.com/3092a89103543172',
+	'http://i1.live.aisoqu.com/6657de10a4e7111b',
+	'http://i1.live.aisoqu.com/9439a8ef0c10a157',
+	'http://i1.live.aisoqu.com/b14e8b8fc9c8c288',
+	'http://i1.live.aisoqu.com/9b2b45cf9d8cbabb',
+	'http://i1.live.aisoqu.com/b056334d3833a44c',
+	'http://i1.live.aisoqu.com/1ff319489d85557a',
+	'http://i1.live.aisoqu.com/9fcb14bdee9357e3',
+	'http://i1.live.aisoqu.com/890dfcc2e496ee72',
+	'http://i1.live.aisoqu.com/f2fbdcc7fbc58dad',
+	'http://i1.live.aisoqu.com/b6bfb5781c517194',
+	'http://i1.live.aisoqu.com/a52896a2da18a9df',
+	'http://i1.live.aisoqu.com/82a150a895ddfc90',
+	'http://i1.live.aisoqu.com/09e9c9a36e94965a',
+	'http://i1.live.aisoqu.com/09dbda67763aef00',
+	'http://i1.live.aisoqu.com/8cb9e30acb8beded',
+	'http://i1.live.aisoqu.com/71a8aaf37820a3da',
+	'http://i1.live.aisoqu.com/b48f1c247109f3d6',
+	'http://i1.live.aisoqu.com/4e71a242aac64d1f',
+	'http://i1.live.aisoqu.com/84f870dd59822328',
+	'http://i1.live.aisoqu.com/adbe06db0146b1eb',
+	'http://i1.live.aisoqu.com/6bf7a4da99cf8c5a',
+	'http://i1.live.aisoqu.com/78318bd4814f3e89',
+	'http://i1.live.aisoqu.com/12d0b4c455940a9d',
+	'http://i1.live.aisoqu.com/c1152f85a87eeda7',
+	'http://i1.live.aisoqu.com/bfbcda3e0390395a',
+	'http://i1.live.aisoqu.com/d5d7d9b61927fe18',
+	'http://i1.live.aisoqu.com/7c1d4cbc747c0819',
+	'http://i1.live.aisoqu.com/28cf5f037c250d7e',
+	'http://i1.live.aisoqu.com/68b92a61b092e108'
+];
+console.log('name', nameArr.length)
+console.log('url', imgUrl.length)
+
+var mynewdata = [
+	{a: 'a', type: 1},
+	{a: 'b', type: 2},
+	{a: 'c', type: 1},
+	{a: 'd', type: 1},
+	{a: 'e', type: 2},
+];
+function myneorder(x, y){
+	return x.type - y.type;
+}
+var cc = mynewdata.sort(myneorder)
+console.log(cc)
+</script>

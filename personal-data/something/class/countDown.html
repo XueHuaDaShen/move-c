@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+#countDown{
+	color:#000;
+	font-size: 24px;
+}
+</style>
+<body>
+	<div id="countDown">
+		<span id="day">5</span> 天
+		<span id="hour">24</span> :
+		<span id="minutes">00</span> :
+		<span id="seconds">00</span>
+	</div>
+</body>
+</html>
+<script src="../jquery.js"></script>
+<script>
+var future = new Date("2019-2-5");
+function timeDbl(time){
+	var val = time>9 ? time : '0'+time;
+	return val;
+}
+function countDown(){
+	var now = new Date();
+	var diff = future-now;
+	var day = Math.floor(diff/1000/60/60/24);
+	var hour = Math.floor(diff/1000/60/60%24);
+	var minutes = Math.floor(diff/1000/60%60);
+	var seconds = Math.floor(diff/1000%60);
+	hour = timeDbl(hour);
+	minutes = timeDbl(minutes);
+	seconds = timeDbl(seconds);
+	$("#day").html(day);
+	$("#hour").html(hour);
+	$("#minutes").html(minutes);
+	$("#seconds").html(seconds);
+	// console.log("day:  ",day)
+	// console.log("hour:  ",hour)
+	// console.log("minutes:  ",minutes)
+	// console.log("seconds:  ",seconds)
+}
+countDown()
+setInterval(countDown,1000)
+</script>

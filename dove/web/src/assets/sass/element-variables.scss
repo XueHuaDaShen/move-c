@@ -1,0 +1,93 @@
+/* 改变主题色变量 */
+$--color-primary: #F2B672;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+.el-input__inner {
+  height: 36px;
+  line-height: 36px;
+  // background-image: linear-gradient(-180deg, #292D34 0%, #1E2126 100%);
+  background-color: #1f1e1f !important;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+.el-input.is-disabled .el-input__inner{
+  color:#fff;
+}
+
+.el-input__icon {
+  line-height: 36px;
+}
+
+// 个人中心 historyRecord
+.historyRecord {
+
+  .el-date-editor {
+
+    // date-picker 设置空头部图标 
+    .el-input__prefix {
+      display: none;
+    }
+
+    // date-picker 文字居中
+    // 背景色调整
+    .el-input__inner {
+      background: #1f1e1f;
+      border-radius: 4px;
+      text-align: center;
+    }
+  }
+}
+
+// 分页
+.el-pagination {
+  
+  font-size: 16px;
+  color: #9C9EA2;
+
+  button {
+    background-color: transparent;
+    cursor: not-allowed;
+    color: #F2B672;
+
+    &:disabled {
+      background-color: transparent;
+      cursor: not-allowed;
+      color: #F2B672;
+    }
+  }
+
+  .btn-prev {
+    padding-right: 40px;
+    background-color: transparent;
+    color: #F2B672;
+  }
+
+  .btn-next {
+    padding-left: 40px;
+    background-color: transparent;
+    color: #F2B672;
+  }
+}
+
+.el-pagination span:not([class*=suffix]),
+.el-pagination button {
+  
+  font-size: 16px;
+}
+
+.el-pagination .num {
+  color: #fff;
+  min-width: auto !important;
+}
+
+.el-pager {
+  li {
+    background: transparent;
+  }
+}

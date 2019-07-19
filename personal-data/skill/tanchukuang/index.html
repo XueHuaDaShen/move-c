@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, 
+        initial-scale=1, 
+        maximum-scale=1, 
+        user-scalable=no" >
+      <meta name="format-detection" content="telephone=no,email=no"/>
+      <link rel="stylesheet" href="css/dialog.css">
+</head>
+<body>
+	<ul class="product">
+		<li>某某商品1 <button>删除</button></li>
+		<li>某某商品2 <button>删除</button></li>
+		<li>某某商品3 <button>删除</button></li>
+		<li>某某商品4 <button>删除</button></li>
+		<li>某某商品5 <button>删除</button></li>
+	</ul>
+	<!-- <script src="es6版重写带有confirm的全局方法的代码片段.js"></script> -->
+	<script src="js/jquery1.7.js"></script>
+	<script src="js/dialog.js"></script>
+	<script>
+	//调用插件
+		//$.a();
+$(".product").on("click","button",function(){
+	var li=$(this).parent();
+	$.dialog({
+		btn:["确认","取消"],
+		callback:function(){//点击确定执行的动作
+			li.remove();
+		}
+	});
+})
+		
+	</script>
+</body>
+</html>

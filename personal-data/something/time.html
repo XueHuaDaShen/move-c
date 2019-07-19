@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+.box{
+	width:300px;
+	height:300px;
+	text-align: center;
+	line-height: 300px;
+	margin:100px auto;
+}
+.box span{
+    color: #7BDEE4;
+    font-size:24px;
+    text-shadow:0 0 20px #000;
+    /*-webkit-mask-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#7BDEE4), to(rgba(0, 0, 0, 0)));*/
+    /*background: -moz-linear-gradient(top, #7BDEE4 0%, #161F1E 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7BDEE4), color-stop(100%,#161F1E));
+    background: -webkit-linear-gradient(top, #7BDEE4 0%,#161F1E 100%);
+    background: -o-linear-gradient(top, #7BDEE4 0%,#161F1E 100%);
+    background: -ms-linear-gradient(top, #7BDEE4 0%,#161F1E 100%);
+    background: linear-gradient(to bottom, #7BDEE4 0%,#161F1E 100%);
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#7BDEE4), to(#161F1E));*/
+	/*-webkit-background-clip: text;         /* 规定背景的划分区域 */
+	/*-webkit-text-fill-color: transparent;  /* 防止字体颜色覆盖 */
+}
+a{ display: inline-block; width: 10px;height:5px; background: red;line-height: 0;font-size:0;vertical-align: middle;-webkit-transform: rotate(45deg);}
+a:after{content:'/';display:block;width: 20px;height:5px; background: red;-webkit-transform: rotate(-90deg) translateY(-50%) translateX(50%);}
+</style>
+<body style="background:#000;height:100%">
+	<div class="box">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+	</div>
+	<input type="text" id="txt">
+	<input type="button" id="btn" value="test">
+	<a href=""></a>
+    <input type="datetime-local" value="2018-01-12 18:00:00" id="datetime">
+</body>
+</html>
+<script>
+var d = document.getElementById('datetime');
+d.onchange = function(){
+    console.log(d.value)
+}
+document.onkeydown=function(e){
+    console.log(e)
+}
+// 把一根绳子对折一次，再对折一次，然后从中间剪开，得到几根绳子
+var time = new Date('2017-11-22 00:20:22')
+console.log('日期', time.getUTCDate())
+console.log('周几', time.getUTCDay())
+console.log('年份', time.getUTCFullYear())
+console.log('月份', time.getUTCMonth())
+console.log('小时', time.getUTCHours())
+console.log('小时', time.getHours())
+console.log('分钟', time.getUTCMinutes())
+console.log('秒', time.getUTCSeconds())
+console.log('毫秒', time.getUTCMilliseconds())
+var res = /^(?:http(?:s|):\/\/|)(?:(?:\w*?)\.|)(?:\w*?)\.(?:\w{2,4})(?:\?.*|\/.*|)$/;
+// var txt = document.getElementById('txt');
+var btn = document.getElementById('btn');
+btn.onclick = function(){
+	var txt = document.getElementById('txt');
+	var val = txt.value;
+	console.log(val)
+	console.log(res.test(val))
+}
+var str = 1513853224697;
+Date.prototype.Format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+} 
+
+var time1 = new Date().Format("yyyy-MM-dd");
+var time2 = new Date().Format("yyyy-MM-dd hh:mm:ss"); 
+var time3 = new Date().Format("yyyyMMddhhmm");
+
+console.log(time1)
+console.log(time2)
+console.log(time3)
+var str = '123456789';
+console.log(str.slice(-6))
+// var fullname="may";
+// var obj={
+//     fullname:"Colin",
+//     prop:{
+//         fullname:"Rosa",
+//         getFullname:function(){
+//             return this.fullname;
+//         }
+//     }
+// };
+// console.log(obj.prop.getFullname());
+// var test=obj.prop.getFullname;
+// console.log(test.call(obj.prop, ''));
+
+// var arr=['小王','大王'];
+// var newArr = [];
+// for(var i=1; i<=13; i++){
+//     for(var j=0; j<4; j++){
+//         arr.push(i);
+//     }
+// }
+// function randomNum(len){
+//     return Math.floor(Math.random()*len)
+// }
+// function charu(num){
+//     newArr.push(num);
+//     if(newArr.length<5){
+//         return;
+//     }else{
+//         for(var i in newArr){
+//             if( newArr[i] == '小王' || newArr[i] == '大王' ){
+//                 break;
+//             }else{
+//                 if()
+//             }
+//         }
+//     }
+// }
+var cookie = {
+    set:function(key,val){
+        var date=new Date();
+        var expiresHours=9;
+        date.setTime(date.getTime()+expiresHours*3600);
+        console.log(date.toGMTString());
+        document.cookie=key + "=" + val +";expires="+date.toGMTString()+";path=/";
+    },
+    get:function(key){
+        var getCookie = document.cookie.replace(/[ ]/g,"");
+        var arrCookie = getCookie.split(";")
+        var tips;
+        for(var i=0;i<arrCookie.length;i++){
+            var arr=arrCookie[i].split("=");
+            if(key==arr[0]){
+                tips=arr[1];
+                break;
+            }
+        }
+        return tips;
+    }
+}
+cookie.set("id", 456)
+function order(x,y){
+    return x-y
+}
+var mya = [2,112,123]
+console.log(mya.sort(order))
+var ceshi = 1;
+var money = '';
+if( ceshi == 1 ){
+    money = ' Diamonds';
+}else if( ceshi == 2 ){
+    money = ' Cash';
+}else if( ceshi == 3 ){
+    money = ' KHR';
+}
+console.log(money)
+
+var nums = [2, 7, 11, 15], target = 9;
+var n1, n2;
+for(var i=0; i<nums.length; i++){
+    for(var j=i+1; j<nums.length; j++){
+        if(nums[i]+nums[j] === target){
+            n1 = i;
+            n2 = j;
+            break;
+        }
+    }
+}
+console.log(n1, n2)
+var str = '\<script\>document.login.submit();\<\/script\>';
+var reg = /(\<script\>)|(\<\/script\>)/g;
+var str1 = str.replace(reg, function(val){
+    return 'my-split'
+})
+console.log(str1)
+var ar = '00012 00013 00014 00015 00016 00017 00018 00021 00023 00024 00025 00026 00027 00029 0003'
+var checkedBetsNum = ar.replace(/[\W\_]+/g, function(n) {
+    if (!/[\u4e00-\u9fa5]/g.test(n)) {
+        return ' '
+    } else {
+        return n
+    }
+})
+console.log(ar)
+console.log(checkedBetsNum)
+
+var url = 'http://www.8bw.vip/#/reg/elivljw8ev'
+console.log(url.split('#'))
+
+// 数组对象去重 es6
+
+// function objArrayRemoveDuplication(arr){
+//     let s = new Set();
+//     let arr1= []
+//     arr.map((e,i)=>{
+//         s.add(JSON.stringify(e)) 
+//     })
+//     Array.from(s).map((e,i)=>{
+//         arr1.push(JSON.parse(e)) 
+//     })
+//     return arr1
+// }
+</script>

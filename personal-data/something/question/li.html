@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script>window.PointerEvent = undefined</script><!--iscroll卡的现象-->
+	<title>Document</title>
+</head>
+<style>
+
+a:link {color: #000}     /* 未访问的链接 */
+a:visited {color: green}  /* 已访问的链接 */
+a:hover {color: blue}    /* 当有鼠标悬停在链接上 */
+a:active {color: orange}   /* 被选择的链接 */
+
+.box{
+	padding:100px;
+	background:#ccc;
+}
+.cul{
+	width:100px;
+	height:100px;
+	border-radius: 50%;
+	border:10px solid #fff;
+	box-shadow: 0 0 100px #434dca;
+}
+.cal{
+	width:100px;
+	height:100px;
+	border-radius: 50%;
+	border:10px solid #000;
+	box-shadow: 1px 1px 20px #000;
+}
+ul li:nth-child(odd){
+	background:#fff;
+}
+.text{
+	width:40px;
+	height:40px;
+	display:inline-block;
+	border-radius: 50%;
+	line-height: 40px;
+	text-align: center;
+	/*color:#676767;*/
+	font-size: 30px;
+	background: -moz-linear-gradient(top, #BBBBBB 0%, #2F2F2F 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#BBBBBB), color-stop(100%,#2F2F2F));
+    background: -webkit-linear-gradient(top, #BBBBBB 0%,#2F2F2F 100%);
+    background: -o-linear-gradient(top, #BBBBBB 0%,#2F2F2F 100%);
+    background: -ms-linear-gradient(top, #BBBBBB 0%,#2F2F2F 100%);
+    background: linear-gradient(to bottom, #BBBBBB 0%,#2F2F2F 100%);
+    color: -moz-linear-gradient(top, #5F5F5F 0%, #272727 100%);
+    color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5F5F5F), color-stop(100%,#272727));
+    color: -webkit-linear-gradient(top, #5F5F5F 0%,#272727 100%);
+    color: -o-linear-gradient(top, #5F5F5F 0%,#272727 100%);
+    color: -ms-linear-gradient(top, #5F5F5F 0%,#272727 100%);
+    color: linear-gradient(to bottom, #5F5F5F 0%,#272727 100%);
+    -webkit-text-fill-color: transparent;
+	-webkit-text-stroke: 1px #fff;
+}
+</style>
+<body>
+	<ul>
+		<li class="arc   qwe    " id="1" style="font-size:18px;font-weight:bold">WEEK</li>
+		<li class="arc qwe" id="2">2</li>
+		<li class="arc qwe" id="3">3</li>
+		<li class="arc qwe" id="4">4</li>
+		<li class="arc qwe" id="5">5</li>
+	</ul>
+	<select name="" id="" class="sel">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+	</select>
+	<div>
+		<input type="radio" name="a1" class="t1">质量验收<br>
+		<input type="radio" name="a1" class="t2">进度验收</div>
+	<a href="index.html" target="_blank">111</a>
+	<a href="index.html" target="_blank">222</a>
+	<input type="text" id="txt">
+	<textarea name="" style="width:200px;height:200px;display:table-cell;text-align:center;vertical-align:middle;" id="" cols="30" rows="10"></textarea>
+	<div style="width:100px;height:100px;background:#140F16;text-align:center;line-height:100px;">
+		<span class="text">2</span>
+	</div>
+	<div>
+		<input type="checkbox" id="checkall">全选<br>
+		<input type="checkbox" class="ck">1<br>
+		<input type="checkbox" class="ck">2<br>
+		<input type="checkbox" class="ck">3<br>
+		<input type="checkbox" class="ck">4<br>
+		<input type="checkbox" class="ck">5<br>
+		<input type="number" min=0 max=1000>
+	</div>
+	<div class="box">
+		<div class="cul"></div>
+		<div class="cal"></div>
+	</div>
+	<input type="date" id="time">
+</body>
+</html>
+<script src="../jquery-3.1.1.min.js"></script>
+<script>
+$(".sel").on("change", function(){
+	// console.log($(this).val())
+})
+$("#time").on("click", function(){
+	// console.log($(this).val())
+	return false;
+})
+var pp = document.getElementsByTagName('li')[0].parentNode;
+// console.log(pp.parentNode)
+pp.style.background="#ececec";
+
+$("ul li").on("click",function(){
+	var self = $(this).get(0)
+	var selfName = self.className;
+	var classNameArr = selfName.split(" ");
+	var lis = self.parentNode.getElementsByTagName("li");
+	for(var i=classNameArr.length-1; i>0; i--){
+		if( classNameArr[i] === "" ){
+			classNameArr.splice(i,1)
+		}
+	}
+	// var newClass = classNameArr.join(" ");
+	var classIndex = classNameArr.indexOf("abc");
+	if( classIndex > -1 ){
+		classNameArr.splice(classIndex, 1)
+	}else{
+		classNameArr.push("abc");
+	}
+	for(var i in lis){
+		lis[i].removeAttribute("class","abc");
+	}
+	self.className = classNameArr.join(" ")
+
+	if( $(this).text() == 'WEEK' ){
+		$(".t2").prop("checked", true)
+	}else{
+		$(".t2").prop("checked", false)
+	}
+})
+
+
+//input  禁用 表情符号
+var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;//正则匹配用来判断
+$(".text").on("blur", function(){//文本框获取焦点后
+	
+		var value = $(this).val();
+		if(value.match(regRule)) {
+		    // value = value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
+		    $(this).val("")//这一步是说，如果输入了表情，提示不支持表情，并让文本框为空
+		    alert("不支持表情");
+		} 
+	
+})
+var data = {
+	"一级": "",
+	"美术": {
+		"二级": "",
+		"难度": [],
+		"目标": [],
+		"其他...": []
+	}
+}
+// console.log(window.PointerEvent)
+var myObj = [
+	{
+		id: 1,
+		name: "xyh"
+	},{
+		id: 2,
+		name: "xyh"
+	},{
+		id: 3,
+		name: "xyh"
+	},{
+		id: 4,
+		name: "xyh"
+	}
+];
+var youObj = [
+	{
+		id: 1,
+		name: "xyh"
+	},{
+		id: 2,
+		name: "xyh"
+	},{
+		id: 3,
+		name: "xyh"
+	}
+];
+// function re(obj1, obj2){
+// 	var str = '';
+// 	var arr = [];
+// 	var newStr = JSON.stringify(obj2);
+// 	for(var i in obj1){
+// 		str = '"id":'+obj1[i].id;
+// 		if( newStr.indexOf(str) < 0 ){
+// 			arr.push(obj1[i])
+// 		}
+// 	}
+// 	return arr;
+// }
+// var ar = re(myObj, youObj)
+// console.log(JSON.stringify(youObj))
+// console.log(ar)
+
+
+
+// $.ajax({
+//     url: '/shortvideo/save',
+//     type: "POST",
+//     // headers: {
+//     //     "token": localStorage.getItem('A-TOKEN')
+//     // },//看情况，需要再加，什么时候需要 百度
+//     data: {
+//         "key": value //data  传入key 值  对，  
+
+//     },
+//     success: function(data) {
+//     	console.log("成功")
+//     },
+//     fail: function() {
+//         console.log('Ajax Error');
+//     }
+// })
+
+
+// $("#checkall").on("click", function(){
+// 	//console.log($(this).prop("checked"))
+// 	var is_state = $(this).prop("checked");
+// 	$(".ck").prop("checked", is_state)
+// })
+
+
+// var dd = new Date('2017-04-09 23:59:59');
+// var cc = new Date('2017/04/09 23:59:59');
+// console.log(dd)
+// console.log(cc)
+// document.onkeydown=function(e){
+// 	if(e.keyCode == 13){
+// 		cl()
+// 	}
+// }
+// function cl(){
+// 	$("#txt").val("")
+// }
+// var count = 0;
+// var num = 0;
+// var str = '0123456789';
+// function aaa(start){
+// 	if(start==1){
+// 		return count
+// 	}else{
+// 		if( start%2 == 0){
+// 			num = start/2;
+// 		}else{
+// 			num = start - (Math.floor(start/2))
+// 		}
+// 		console.log(num)
+// 		count+=num;
+// 		return aaa(num)
+// 	}
+// }
+// if( localStorage.zanArr ){
+// 	var zanArr = JSON.parse(localStorage.zanArr)
+// }else{
+// 	var zanArr = [];
+// }
+
+// for(var i in zanArr){
+// 	$("#"+zanArr[i]).html(zanArr[i]*1+1)
+// 	console.log(zanArr[i])// 这里 直接获取到 #132
+// }
+
+
+
+// $('ul').find("li").each(function(){
+// 	$(this).on("click",function(){
+// 		var id = $(this).attr("id")
+// 		var num = $(this).html();
+// 		var _index = zanArr.indexOf(id)
+// 		if( _index > -1){
+// 			//说明点过了
+// 			//然后  更换图片的路径
+// 			//同时
+// 			num--;
+// 			$(this).html(num)
+// 			zanArr.splice(_index, 1)
+// 			localStorage.zanArr = JSON.stringify(zanArr)
+// 		}else{
+// 			//说明没点过
+// 			//然后  更换图片的路径
+// 			//同时
+// 			num++;
+// 			$(this).html(num)
+// 			zanArr.push(id)
+// 			localStorage.zanArr = JSON.stringify(zanArr)
+// 		}
+// 	})
+// })
+
+// var _time = new Date();
+// if (_time*1 <= (new Date('2017-04-09 23:59:59'))*1){
+//     flags='first';
+// }else if(_time*1 <= (new Date('2017-04-16 23:59:59'))*1){
+//     flags='second';
+// }else if (_time*1 <= (new Date('2017-04-23 23:59:59'))*1){
+//     flags='third';
+// }else{
+//     flags='fouth';
+// }
+//在整个  代码 写完  之后 
+
+
+// var obj = {
+// 	"马": 0,
+// 	"房": 1600,
+// 	"卡": 4000,
+// 	"饭": 2400,
+// 	"杜": 0
+// }
+// var zong = 12000;
+// function number(obj){
+// 	var zhi = 0;
+// 	for(var i in obj){
+// 		zhi += obj[i]
+// 	}
+// 	return zhi;
+// }
+// var zhi = number(obj)
+// var yu = zong - zhi;
+// console.log("zhi-------"+zhi)
+// console.log("yu-------"+yu)
+
+
+// var a = 'qwer';
+// var b = 'asdf';
+// var arr = [1,2,3,4];
+// var brr = [2,3,4,5]
+// var c = arr.concat(brr);
+// console.log(c)
+// var name = "外部";
+// var obj = {
+// 	name: "内部",
+// 	run: function(){
+// 		console.log(this)
+// 		return this.name;
+// 	}
+// }
+// console.log(obj.run())
+// function fn(f){
+// 	arguments.name = '1'
+// 	console.log(f)
+// 	console.log(f());
+// 	console.log(arguments[0])
+// 	console.log(arguments[0]())
+// }
+
+// fn(obj.run,1)
+// var fn1 = function(){}
+// fn1.prototype.add=function(){
+// 	alert("fn+add")
+// }
+// var fn2 = function(){
+// 	this.add()
+// };
+// fn2.call(new fn1())
+
+// var obj = {};
+
+// var test = '_aa0+_aa1*(aaa/4)+_aaaa';
+// var index = 0;
+// function formula(str){
+// 	if( str.length > 2 ){
+// 		for(var i in str ){
+// 			var opevalue = str.charAt(i);
+// 			var opeindex = str.indexOf(opevalue);
+// 			if( opevalue == '+' ){
+// 				var variable = str.slice(0, opeindex);
+// 				var ope = str.slice(opeindex, opeindex + 1);
+// 				var newStr = str.slice(opeindex + 1);
+// 				var objkey = 'a'+index
+// 				obj[objkey] = ope;
+// 				index++;
+				
+// 				return formula(str);
+// 			} else if( opevalue == '-' ){
+// 				var variable = str.slice(0, opeindex);
+// 				var ope = str.slice(opeindex, opeindex + 1);
+// 				var newStr = str.slice(opeindex + 1);
+// 				var objkey = 'a'+index
+// 				obj[objkey] = ope;
+// 				index++;
+				
+// 				return formula(str);
+// 			} else if( opevalue == '*' ){
+// 				var variable = str.slice(0, opeindex);
+// 				var ope = str.slice(opeindex, opeindex + 1);
+// 				var newStr = str.slice(opeindex + 1);
+// 				var objkey = 'a'+index
+// 				obj[objkey] = ope;
+// 				index++;
+				
+// 				return formula(str);
+// 			} else if( opevalue == '/' ){
+// 				var variable = str.slice(0, opeindex);
+// 				var ope = str.slice(opeindex, opeindex + 1);
+// 				var newStr = str.slice(opeindex + 1);
+// 				var objkey = 'a'+index
+// 				obj[objkey] = ope;
+// 				index++;
+				
+// 				return formula(str);
+// 			}
+// 		}
+// 	} else{
+
+// 	}
+// }
+// formula(test)
+
+ // var str = "(_a00+_b00)*coo/9+d00+9";
+// var arr = [], index = 0;
+// var str = test.replace(/([^+^-^\*^\/^\(^\)]*)/g, function (a) {
+//     console.log(a);
+//     if(a && isNaN(Number(a))) {
+//         arr[index] = a;
+//         index++
+//         return "a" + (index-1);
+//     } else {
+//         return a;
+//     }
+// });
+// console.log(str)
+// console.log(arr)
+// var str = "567/123/abc";
+// var num = str.lastIndexOf("/");
+// console.log(str.slice(num+1))
+// console.log(str.lastIndexOf("/"))
+// function abc(){
+// 	return (a)=>(b)=>{
+// 		return 123
+// 	}
+// }
+// console.log(typeof abc())
+
+/*二级去重*/
+/*---------------------数组[数组]-----------------------*/
+// var arr1 = [[1, 2, 3], [2, 3, ], [1, 2], [3, 3]];
+// var arr2 = [[1, 2, 3], [2, 3, 4]];
+
+// function findSame(arr1,arr2){
+// 	var a1 = arr1.length, a2 = arr2.length;
+// 	var len = a1 < a2 ? a1 : a2;//获取 最小 数组长度（注意是最小的数组长度）
+// 	var newArr = a1 > a2 ? arr1 : arr2;//获取最大数组内容
+// 	var maxArr = a1 > a2 ? arr1 : arr2;//获取最大数组内容
+// 	var minArr = a1 < a2 ? arr1 : arr2;//获取最小数组内容
+
+// 	for( var i = maxArr.length-1; i >= 0; i-- ){
+
+// 		for( var j = 0; j < minArr.length; j++ ){
+// 			var is_like = false;
+// 			if( maxArr[i].length == minArr[j].length ){
+// 				for( var m in maxArr[i] ){
+// 					if( maxArr[i][m] !== minArr[j][m] ){
+// 						is_like = false;
+// 						break;
+// 					}else{
+// 						is_like = true;
+// 					}
+// 				}
+// 			}else{
+// 				is_like = false;
+// 			}
+// 			is_like && newArr.splice(i,1)
+// 		}
+
+// 	}
+// 	return newArr;
+// }
+
+// console.log(findSame(arr1, arr2))
+
+
+/*---------------------数组[对象]-----------------------*/
+// var a=[{name:'dd',value:1},{name:'d2d',value:2},{name:'ddf',value:54},{name:'ddfd',value:543}];
+// var b=[{name:'dd',value:1},{name:'d2d',value:2}]
+
+// function findSame(a1,b1){
+// 	var aL = a1.length, bL = b1.length;
+// 	var len = aL < bL ? aL : bL;//获取 最小 数组长度（注意是最小的数组长度）
+// 	var newArr = aL > bL ? a1 : b1;//获取最大数组内容
+// 	var maxArr = aL > bL ? a1 : b1;//获取最大数组内容
+// 	var minArr = aL < bL ? a1 : b1;//获取最小数组内容
+// 	for(var i = maxArr.length-1; i >= 0; i-- ){//获取最大数组的每一项
+		
+// 		for( var j = 0; j < minArr.length; j++ ){//获取最小数组的每一项
+// 			var is_like = false;
+// 			for( var max in maxArr[i] ){//获取最大数组的每一项的每一项的值
+				
+// 				try{
+// 					if( minArr[j][max] !== maxArr[i][max] ){//将两个数组的每一项中的值进行比较
+// 						is_like = false;
+// 						break;
+// 					}else{
+// 						is_like = true;
+// 					}
+// 				}catch(e){
+// 					console.log("错误>>>>>>"+e)
+// 				}
+// 			}
+// 			is_like && newArr.splice(i,1)//删除完全一样的
+// 		}
+// 	}
+
+// 	return newArr;//返回新的数组
+// }
+// console.log(findSame(a,b))
+function* foo(x) {
+  var y = 2 * (yield (x + 1));
+  var z = yield (y / 3);
+  return (x + y + z);
+}
+
+/*var a = foo(5);
+console.log(a.next()) // Object{value:6, done:false}
+console.log(a.next()) // Object{value:NaN, done:false}
+console.log(a.next()) // Object{value:NaN, done:true}
+console.log(a.next())
+
+var b = foo(5);
+console.log(b.next()) // { value:6, done:false }
+console.log(b.next(12)) // { value:8, done:false }
+console.log(b.next(13)) // { value:42, done:true }
+console.log(b.next())*/
+</script>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+html,body{
+    width:100%;
+    height:100%;
+    background:#000;
+}
+span.sanjian{
+    display: block;
+    width: 0;
+    height: 0;
+    margin:100px auto;
+    box-sizing: border-box;
+    border: 100px solid transparent;
+    border-bottom: 100px solid #fff;
+    border-bottom-right-radius: 10px 20px;
+}
+.ceshi{
+    width:100px;
+    height:30px;
+    background:#fff;
+    color:#000;
+    text-align:justify;
+}
+div.ceshi > span { display: inline-block /* Opera */; padding-left: 100%; }
+</style>
+<body>
+	<span class="sanjian"></span>
+    <div class="ceshi">你好 &lt;<span></span></div>
+    <select name="" id="s1">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+</body>
+</html>
+<script>
+//得到标准时区的时间的函数
+function getLocalTime(i) {
+    //参数i为时区值数字，比如北京为东八区则输进8,西5输入-5
+    if (typeof i !== 'number') return;
+    var d = new Date('2018-05-10T00:00:00Z');
+    //得到1970年一月一日到现在的秒数
+    var len = d.getTime();
+    //本地时间与GMT时间的时间偏移差
+    var offset = d.getTimezoneOffset() * 60000;
+    //得到现在的格林尼治时间
+    var utcTime = len + offset;
+    return new Date(utcTime + 3600000 * i);
+}
+// console.log("*******************东区时间************************************");
+// console.log("零时区-伦敦时间：" + getLocalTime(0));
+// console.log("东一区-柏林时间：" + getLocalTime(1));
+// console.log("东二区-雅典时间：" + getLocalTime(2));
+// console.log("东三区-莫斯科时间：" + getLocalTime(3));
+// console.log("东四区-时间：" + getLocalTime(4));
+// console.log("东五区-伊斯兰堡时间：" + getLocalTime(5));
+// console.log("东六区-科伦坡时间：" + getLocalTime(6));
+// console.log("东七区-曼谷时间：" + getLocalTime(7));
+// console.log("东八区-北京时间：" + getLocalTime(8));
+// console.log("东九区-东京时间：" + getLocalTime(9));
+// console.log("东十区-悉尼时间：" + getLocalTime(10));
+// console.log("东十二区-斐济时间：" + getLocalTime(12));
+// console.log("*******************西区时间************************************");
+// console.log("西十区-斐济时间：" + getLocalTime(-10));
+// console.log("西九区-阿拉斯加时间：" + getLocalTime(-9));
+// console.log("西八区-太平洋时间（美国和加拿大）：" + getLocalTime(-8));
+// console.log("西七区-山地时间（美国和加拿大）：" + getLocalTime(-7));
+// console.log("西六区-中部时间（美国和加拿大）：" + getLocalTime(-6));
+// console.log("西五区-东部时间（美国和加拿大）：" + getLocalTime(-5));
+// console.log("西四区-大西洋时间（加拿大）：" + getLocalTime(-4));
+// console.log("西三区-巴西利亚时间：" + getLocalTime(-3));
+// var arr = [1,2,3]
+// console.log(arr.push(5))
+// console.log(arr)
+// console.log(arr.pop())
+// console.log(arr)
+// if(user_refund>maxRefund) {
+//     lottery.prize = (2*lottery.probability*(user_refund -diff ))/maxRefund;
+//     lottery.max_multiple = Math.floor(maxPrize/lottery.prize);
+// } else {
+//     lottery.prize = (2*lottery.probability*user_refund)/maxRefund;
+//     lottery.max_multiple = Math.floor(maxPrize/lottery.prize);
+// }
+// var str = '小|小|0|0|0';
+// var str = '小|大|0|0|0';
+// var str = '大|大|0|0|0';
+// var str = '一区|一区|0|0|0';
+// var r = str.replace(/(\小)|(\大)/g,function(s){
+//     if(s == '小'){
+//         return '0'
+//     }else{
+//         return '1'
+//     }
+// })
+// console.log(r)
+var str = '01|    02 06| 04 | dfa | g 235 | _ | 03 点数子';
+var reg = new RegExp(/[^[\u4e00-\u9fa5]+\W+][^[\u4e00-\u9fa5]+\_+]/g)
+var a = str.replace(/\s+/g,function(){return 'mySym'})
+// str.match(reg,function(n){
+//     console.log(n)
+// })
+// str.replace(reg,(n)=>{
+//     console.log(n)
+// })
+b = a.replace(/[\W\_]/g,(n)=>{
+    if(!/[\u4e00-\u9fa5]/g.test(n)){
+        return ' '
+    }else{
+        return n
+    }
+})
+// var b = a.replace(reg,function(){return ' '});
+var c = b.split(' ');
+var d = [];
+var e = [];
+console.log('str---',str)
+console.log('a---',a)
+console.log('b------',b)
+
+console.log('c----',c)
+c.filter(v => {
+    d.push(v.replace(/mySym/g,()=>{return ' '}))
+})
+console.log('d------',d)
+d.filter(v => {
+    // let val = v.split(' ');
+    // // console.log('val-----',val)
+    // for(let i=val.length-1; i>=0; i--){
+    //     if(val[i] === ''){
+    //         val.splice(i,1)
+    //     }
+    // }
+    // let num = val.every(n => {
+    //     return !isNaN(n)
+    // })
+    // if(num){
+    //     e.push(val)
+    // }
+    // console.log(v.split(' '))
+    let num = v.replace(/(^\s*)|(\s*$)/g,()=>{return ''});
+    if(num!=='')e.push(num)
+    
+})
+console.log(e)
+var myArr = [];
+for(var i=0; i<5; i++){
+    var a1 = []
+    for(var j=0; j<5; j++){
+        var a2 = [];
+        a1.push(a2)
+    }
+    myArr.push(a1)
+}
+console.log(myArr)
+
+function ceshi(a, b){
+    // if(a === '' || a === null || a === undefined){
+    //     c = true
+    // }else{
+
+    // }
+    let c = true;
+    if(a === false){
+        c = false;
+    }else{
+        c = true;
+    }
+    // let c = a||true;
+    console.log('c---',c)
+}
+ 
+ceshi(false);
+ceshi(1)
+ceshi();
+// var data = {
+//     bank: "1002",
+//     card_no: "1324567891231231213",
+//     cash_apply: "123",
+//     realname: "124124",
+//     receiver: "测试卡",
+//     receiver_no: "1111222233334444",
+//     type:3
+// }
+// console.log(JSON.stringify(data))
+for(var i=0; i<5; i++){
+    (function(i){
+        setTimeout(function(){
+            console.log(i)
+        }, 300)
+    })(i)
+}
+var obj = {
+    hour: 1,
+    min: 2,
+    sec: 3
+}
+var {hour,min,sec} = obj;
+console.log(hour)
+
+var trans = 'translate3d(0px, -0px, 0px)'
+var str = trans.replace(/[\s\,]/g,function(){return ''})
+console.log(str.split('px'))
+
+function regexpPsd(psd) {
+  let exp = new RegExp("^[a-zA-Z0-9]{6,16}$");
+  if (exp.test(psd)) {
+    return true;
+  }
+  return false;
+}
+console.log(regexpPsd('123qweasd'))
+console.log(...[...[1,2,3],...[4,5,6],...[7,8,9]])
+
+
+var str='aaabbcccaabb'
+var obj = [];
+var j = 1;
+for(let i=0; i<str.length; i++){
+    if(str[i]){
+        if(str[i] === str[i+1]){
+            j ++
+        }else{
+            obj.push(j,str[i])
+            j = 1;
+        }
+    }
+}
+console.log('obj----',obj.join('')) //obj---- 3a2b3c2a2b
+
+var str='aaabbcccaabb'
+var obj = {};
+for(let i in str){
+    if(obj[str[i]]){
+        obj[str[i]] = Number(obj[str[i]])+1
+    }else{
+        obj[str[i]] = 1;
+    }
+}
+console.log('obj----',obj) // obj---- {a: 5, b: 4, c: 3}
+var luck_no = '132,123';
+var str = [];
+luck_no.split(',').filter(v => {
+    if(v.length === 6){
+        v = v.slice(0,3)+'-'+v.slice(3,6)
+    }
+    str.push(v);
+})
+console.log(luck_no, str.join(','))
+
+var a1 = [1,2,3,4,5,6], b1 = [1,2,3];
+var newA1 = [];
+for(let i in a1){
+    if(b1.indexOf(a1[i]) < 0){
+        newA1.push(a1[i])
+    }
+}
+console.log(newA1) // [4,5,6]
+
+var countNum = 0; // 计算的次数
+var countFn = function(num) {
+    countNum ++;
+    if(num == 1){
+        return num;
+    }else if(num%2 == 0){
+        num = num/2;
+        return countFn(num);
+    }else{
+        num = num-1;
+        return countFn(num);
+    }
+}
+console.log('正整数计算结果-----------',countFn(10), countNum) // 1,5
+var hello = (function(a) {
+    this.a = a;
+    return function(b){
+        return this.a*b
+    }
+}(function(a, b){
+    return b
+}(1, 2)))
+console.log('hello-----', hello(4))
+// var http = "http://abc.t3bingtuan.cn/view";
+// var http = "abc.t3bingtuan.cn/view/123";
+var http = "http://abc.t3bingtuan.cn/view";
+var reg = /(http:\/\/)?|(https:\/\/)?w+\.(t3bingtuan\.cn)(\/w)*/g;
+console.log('reg-----',reg.test(http)) // 匹配成功 true 不成功 false
+// (!(~+[])+{})[--[~+""][+[]]*[~+[]] + ~~!+[]]+({}+[])[[~!+[]]*~+[]]
+</script>

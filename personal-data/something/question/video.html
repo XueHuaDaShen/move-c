@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+.test_box{
+  width:400px;
+  height:400px;
+  background:#333;
+}
+.week_box{
+  width:100%;
+  display:-webkit-box;
+  -webkit-box-pack:justify;
+}
+.week_box span{
+  color:#7ECFC9;
+  border:1px solid #7ECFC9;
+  width:22%;
+  padding:5px 0;
+  text-align: center;
+  display:block;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 20px;
+}
+.week_box .weeked{
+  color:#96C841;
+  border:1px solid #96C841;
+}
+</style>
+<body>
+	<button id="submit">btn</button>
+	<form id="data" encType="multipart/form-data">
+		
+		<input type="file" id="file" name="avatar">
+		<button id="btn" type="">submit</button>
+	</form>
+  <input type="checkbox" id="ck">
+  <input type="text" id="txt" style="display:none;">
+  <div class="test_box">
+    <div class="week_box">
+      <span class="weeked">WEEK 1</span>
+      <span>WEEK 2</span>
+      <span>WEEK 3</span>
+      <span>WEEK 4</span>
+    </div>
+  </div>
+  <div class="test" style="font-size:20px;color:#000">123</div>
+</body>
+</html>
+<script src="../jquery-3.1.1.min.js"></script>
+<script src="md5.js"></script>
+<script src="hmac-md5.js"></script>
+<script>
+//复选框 点击事件
+$("#ck").on("click", function(){
+  var is_check = $(this).prop("checked");
+  console.log(is_check)// true  或  false
+  if( is_check ){
+    //显示
+    $("#txt").show()
+  }else{
+    //隐藏
+    $("#txt").hide()
+  }
+})
+
+$("#submit").on("click", function(){
+  var formData = new FormData(); 
+  formData.append("avatar", document.getElementById('file').files[0]);
+  formData.append('loginid', '654532165');
+  $.ajax({ 
+    url: "http://123.56.6.6:8018/api/v1/man/short/video/upload", 
+    type: "POST",
+    headers: {
+      "token": localStorage.getItem('A-TOKEN')
+    }, 
+    data: formData, 
+    processData: false, // 不要对data参数进行序列化处理，默认为true
+    contentType: false, // 不要设置Content-Type请求头，因为文件数据是以 multipart/form-data 来编码
+    xhr: function(){
+        myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){
+          // var num = 0;
+          // var sTime = 0 ;
+          myXhr.upload.addEventListener('progress',function(e) {
+            // var size = e.loaded - num;
+            // var eTime = e.timeStamp - sTime;
+            // num = e.loaded;
+            // sTime = e.timeStamp;
+            var sizeKB = (sizeKB/1024).toFixed(2);//kb
+            var time = (eTime/1000).toFixed(1)
+            var speed = ( sizeKB / time ).toFixed(2)
+            var sizeM = (sizeKB/1024).toFixed(2);//M
+            var totalSize = (e.total/1024/1024).toFixed(2);
+            var mm = (totalSize-uploadDid)/speed;
+            // console.log((e.loaded/1024).toFixed(2))
+            // console.log("size>>>>>>>"+(size/1024).toFixed(2)+"kb")
+            if (e.lengthComputable) {
+              var percent = Math.floor(e.loaded/e.total*100);
+              if(percent <= 100) {
+                // $("#J_progress_bar").progress('set progress', percent);
+                // $(".test").html('已上传：'+percent+'%');
+                $(".test").html('速度：'+ speed + 'KB/S|已上传' + sizeM + 'M/' + totalSize + 'M|剩余时间：' + mm + '秒');
+              }
+              if(percent >= 100) {
+                // $("#J_progress_label").html('文件上传完毕，请等待...');
+                // $("#J_progress_label").addClass('success');
+              }
+            }
+          }, false);
+        }
+        return myXhr;
+    },
+    success: function(res){ 
+        // 请求成功
+        console.log(200)
+    },
+    error: function(res) {
+        // 请求失败
+        console.log(res);
+    }
+  });
+})
+
+
+
+// var formData = new FormData(); 
+// formData.append("file", document.getElementById('file').files[0]); 
+// formData.append("token", token_value); // 其他参数按这样子加入
+
+// var xhr = new XMLHttpRequest();
+// xhr.open('POST', '/uploadurl');
+// // 上传完成后的回调函数
+// xhr.onload = function () {
+//   // console.log(xhr.responseText) 获取返回的数据，string格式
+//   if (xhr.status === 200) {
+// 　　console.log('上传成功');
+//   } else {
+//   　console.log('上传出错');
+//   }
+// };
+// // 获取上传进度
+// xhr.upload.onprogress = function (event) {
+//   if (event.lengthComputable) {
+//     var percent = Math.floor(event.loaded / event.total * 100) ;
+//     // 设置进度显示
+//     $("#J_upload_progress").progress('set progress', percent);
+//   }
+// };
+// xhr.send(formData);
+
+
+
+
+
+
+
+// var formData = new FormData();
+$("#file").change(function() {
+  console.log(this.files)
+  handleFiles(this.files);
+  debugger;
+
+	// formData.append('file', $('#file')[0].files[0]);
+	// console.log(formData)
+});
+
+function handleFiles(files) {
+    for (var i=0; i<files.length; i++) {
+
+		console.log(files[i].size/1024)
+    console.log(files.item(i))
+        var reader = new FileReader();
+        console.log(reader)
+        reader.onload = function(e) {
+        	var md5 = CryptoJS.MD5(e.target.result).toString()
+            console.log("MD5 is " + md5);
+        };
+        reader.onerror = function() {
+            console.error("Could not read the file");
+        };
+        reader.readAsBinaryString(files.item(i));
+     }
+ }
+// $("#btn").on("click", function(){
+//   $('#file')[0].attr("files", "")
+// // 	$.ajax({
+// //        url : 'http://123.56.6.6:8018/api/v1/man/short/video/upload',
+// //        type : 'POST',
+// //        headers: {
+// //             "token": localStorage.getItem('A-TOKEN')
+// //         },
+// //        data : formData,
+// //        processData: false,  // tell jQuery not to process the data
+// //        contentType: false,  // tell jQuery not to set contentType
+// //        success : function(data) {
+// //            console.log(data);
+// //            alert(data);
+// //        }
+// // });
+// })
+
+// var arr = [1,2,3,4]
+// console.log(arr.toString())
+
+</script>

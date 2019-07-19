@@ -1,0 +1,144 @@
+@import '../components/button';
+html,body{
+	width:100%;
+	height:100%;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-size:14px;
+}
+
+$defaultColor:red;
+@mixin btn($padd){
+	padding:$padd;
+}
+$danger:darken(red,2%);
+$warning:darken(yellow,2%);
+$success:darken(green,2%);
+@mixin bg($begin,$end){
+	background: -moz-linear-gradient(top, $begin 0%, $end 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$begin), color-stop(100%,$end));
+	background: -webkit-linear-gradient(top, $begin 0%,$end 100%);
+	background: -o-linear-gradient(top, $begin 0%,$end 100%);
+	background: -ms-linear-gradient(top, $begin 0%,$end 100%);
+}
+$p1: 5px 10px 20px 30px;
+$p2: 5px 10px, 20px 30px;
+$font: (h1: 12px, h2: 14px, h3: 16px, h4: 18px, h5: 20px, h6: 22px);
+input,button{
+	border:none;
+	padding:0;
+	margin:0;
+	outline:none;
+}
+.test{
+	width:300px;
+	p{
+		color:$defaultColor;
+		@include btn(nth(nth($p2, 2),1))
+	}
+	// span{
+	// 	color:darken($defaultColor,30%);
+	// 	@include btn(nth(nth($p2, 1), 2))
+	// }
+	@each $head, $size in $font {
+		#{$head}{
+			font-size: $size;
+		}
+	}
+	a{
+		color:$defaultColor;
+		&:hover{
+			color:darken($defaultColor, 20%);
+		}
+	}
+	.triangle{
+		width:8px;
+		height:8px;
+		display:block;
+		border-top:3px solid #000;
+		border-right:3px solid #000;
+		transform: rotate(45deg);
+	}
+	.btn{
+		@include btn(nth($p2,1));
+	}
+	.btn.btn-danger{
+		@include bg($danger,darken($danger,2%));
+		&:hover{
+			@include bg(darken($danger,4%),darken($danger,6%));
+		}
+		&:active{
+			@include bg(darken($danger,5%),darken($danger,2%));
+		}
+	}
+	.btn.btn-warning{
+		@include bg($warning,darken($warning,2%));
+		&:hover{
+			@include bg(darken($warning,4%),darken($warning,6%));
+		}
+		&:active{
+			@include bg(darken($warning,5%),darken($warning,2%));
+		}
+	}
+	.btn.btn-success{
+		@include bg($success,darken($success,2%));
+		&:hover{
+			@include bg(darken($success,4%),darken($success,6%));
+		}
+		&:active{
+			@include bg(darken($success,5%),darken($success,2%));
+		}
+	}
+}
+$pageColor:#fff;
+$pageActive:#000;
+$hover:#666;
+.page{
+	margin-top:10px;
+	position: relative;
+	span{
+		@include btnStyle(nth($newP1,1),darken($pageColor,5%),darken($pageColor,8%),1px,solid,#ccc,#999,nth($newM1,1));
+		transition: all .3s;
+	}
+	.active{
+		@include btnStyle(nth($newP1,1),darken($pageActive,5%),darken($pageActive,10%),1px,solid,#fff,#fff,nth($newM1,1));
+	}
+	.current{
+		&:hover{
+			@include btnStyle(nth($newP1,1),darken($hover,2%),darken($hover,6%),1px,solid,#eee,#fff,nth($newM1,1));
+		}
+	}
+	.default{
+		&:hover{
+			@include btnStyle(nth($newP1,1),darken($hover,2%),darken($hover,6%),1px,solid,#eee,#fff,nth($newM1,1));
+		}
+		&:active{
+			@include btnStyle(nth($newP1,1),darken($hover,8%),darken($hover,15%),1px,solid,#eee,#eee,nth($newM1,1));
+		}
+	}
+}
+.toushi{
+	width:400px;
+	height:268px;
+	float: right;
+	background:#ccc;
+	position: relative;
+	span{
+		width:100px;
+		height:100px;
+		position: absolute;
+		color:#333;
+		background:#fff;
+		border:1px solid #666;
+		font-size:24px;
+		text-align: center;
+		line-height: 100px;
+		left: 50%;
+		top:50%;
+		margin-left:-50px;
+		margin-top:-50px;
+	}
+}

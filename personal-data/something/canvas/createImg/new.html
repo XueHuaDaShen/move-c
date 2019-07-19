@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+body {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+html,body,img,{
+	width:100%;
+	height:100%;
+}
+img{
+	display:block;
+}
+canvas{
+	border:1px solid #ccc;
+}
+.header{
+	width:100%;
+	padding:20px 0;
+	display:-webkit-box;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+#bj{
+	width:260px;
+	height:auto;
+}
+.main{
+	width:100%;
+	margin:20px 0;
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.main>div{
+	width:100%;
+	display:-webkit-box;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.left .inner{
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+}
+.btn{
+	width:100%;
+	height:40px;
+	line-height: 40px;
+	text-align: center;
+}
+.btn>a{
+	background-color: #189094;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,.5);
+    font-size: 16px;
+    text-shadow: none;
+    position: relative;
+}
+.btn input{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.wrap{
+	width:100%;
+	margin-top:20px;
+	position: relative;
+}
+.upload-msg{
+	padding: 30px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    font-size: 24px;
+    text-align: center;
+    color:rgb(136, 136, 136);
+}
+.imgBox{
+	display:none;
+	width:750px;
+	height:670px;
+	margin:0 auto;
+	overflow: hidden;
+	cursor:move;
+}
+#canvas{
+	position: relative;
+	left:-400px;
+	top:-400px;
+}
+.range{
+	text-align: center;
+	margin:20px 0;
+	display: none;
+}
+#export_box{
+	margin-top:20px;
+	display:none;
+}
+#export_img{
+	margin-bottom:65px;
+}
+</style>
+<body>
+	<header class="header">
+		<img src="bj.png" id='bj'>
+	</header>
+	<hr>
+	<main class="main">
+		<div class="left">
+			<div class="inner">
+				<div class="btn">
+					<a>
+						<span>Choose an Image</span>
+						<input type="file" id="file">
+					</a>
+				</div>
+				<div class="wrap">
+					<div style="width:300px;margin:0 auto;">
+						<div class="upload-msg">Upload a file to start cropping</div>
+					</div>
+					<div class="imgBox">
+						<canvas id="canvas" width='1600' height='1600'>浏览器版本过低，不支持canvas</canvas>
+					</div>
+					<div class="range">
+						<input id="num" type="range" step='0.0001' min='0.3506' oninput="changeFn(this)" max='1.5000' value="0">
+					</div>
+					<div class="btn" style="display:none;">
+						<a id="create">
+							<span>Create a Profile Picture</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="inner" id='ok'>
+				<div class="btn" style="visibility:hidden;">
+					<a>
+						<span>Create a Profile Picture</span>
+						<input type="file" id="file">
+					</a>
+				</div>
+				<div id="export_box">
+					<div id="export_img">
+						
+					</div>
+					<div class="btn">
+						<a id="export">
+							<span>export</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+</body>
+</html>
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+//初始化的 起点坐标以及 尺寸
+var init = {
+	x: 0,
+	y: 0,
+	w: 0,
+	h: 0
+}
+var _this, cvs;
+var start = $("#num").val();
+
+//变化的 起点坐标
+var o = {
+	x: 0,
+	y: 0
+}
+
+//变化的图片的 尺寸
+var imgInfo = {
+	w: 0,
+	h: 0
+}
+$("#file").on("change", function(e){
+	var reader = new FileReader();
+	reader.onload = function(e){
+	    var data = e.target.result;
+	    var img = new Image();
+	    img.setAttribute("crossOrigin", "anonymous");
+	    img.src = data;
+	    $(img).css({
+	    	"position": "absolute",
+	    	"left": 0,
+	    	"top": 0,
+	    	"z-index":-999,
+	    	"opacity": 0
+	    })
+	    img.onload = function(){
+	    	_this = this;
+	    	$("body").append(this)
+	    	var imgW = $(this).width(),
+	    		imgH = $(this).height();
+	    	if( imgW > imgH ){
+	    		$(this).css({
+	    			"width": "auto",
+	    			"height": "670px"
+	    		})
+	    		canvas.width = imgW+400;
+				canvas.height = imgW+400;
+	    	}else{
+	    		$(this).css({
+	    			"width": "750px",
+	    			"height": "auto"
+	    		})
+	    		canvas.width = imgH+400;
+				canvas.height = imgH+400;
+	    	}
+	    	var w = $(this).width(), h = $(this).height();
+	    	if( w > h ){
+	    		canvas.width = w+400;
+				canvas.height = w+400;
+	    	}else{
+	    		canvas.width = h+400;
+				canvas.height = h+400;
+	    	}
+			init.x = (w+400-750)/2;
+			init.y = (h+400-670)/2;
+			init.w = w;
+			init.h = h;
+			o.x = (w+400-750)/2;
+			o.y = (h+400-670)/2;
+			imgInfo.w = w;
+			imgInfo.h = h;
+			$(canvas).css({
+				"left": -o.x +"px",
+				"top": -o.y +"px"
+			})
+
+	    	createImg(this);
+	    }
+	}
+	reader.readAsDataURL(e.target.files[0]);
+})
+
+$("#create").on("click", function(){
+	// var dataURL = cvs.toDataURL("image/png");
+	var dataURL = cvs.toDataURL('image/jpeg', 1.0);
+    var newImg = document.createElement("img");
+    newImg.src = dataURL;
+    $("#export").attr("href", dataURL).attr("download", "");
+    $("#export_box").show()
+    $("#export_img").html(newImg);
+})
+
+function createImg(that) {
+
+	var bj = document.getElementById('bj');
+	ctx.clearRect(0,0,imgInfo.w+400,imgInfo.h+400);
+	ctx.drawImage(that, o.x, o.y, imgInfo.w, imgInfo.h);
+	ctx.drawImage(bj, init.x, init.y, 750, 670);
+
+	var newCan = document.createElement("canvas");
+	var nCtx = newCan.getContext("2d");
+	newCan.width = 750, newCan.height = 670;
+	nCtx.drawImage(canvas, init.x, init.y, 750, 670, 0, 0, 750, 670);
+	cvs = newCan;
+    $(".imgBox").prev().hide().siblings().show();
+	
+}
+function changeFn(e){
+	var num = e.value-start;
+	o.x=init.x-num*init.w;
+	o.y=init.y-num*init.h;
+	imgInfo.w=init.w+num*init.w*2;
+	imgInfo.h=init.h+num*init.h*2;
+	createImg(_this);
+	// console.log(_this)
+}
+var imgBox = document.getElementsByClassName('imgBox')[0];
+imgBox.onmousedown = function(e){
+	var dEve = e||window.event;
+	var dx = dEve.clientX, dy = dEve.clientY;
+	document.onmousemove = function(e){
+		var mEve = e||window.event;
+		var mx = mEve.clientX, my = mEve.clientY;
+		var cx = mx-dx, cy = my-dy;
+		o.x=o.x+cx;
+		o.y=o.y+cy;
+		o.x=o.x>init.x?init.x:o.x;
+		o.y=o.y>init.y?init.y:o.y;
+		if( o.x+imgInfo.w<=(750+init.x) ){
+			o.x=(750+init.x)-imgInfo.w
+		}
+		if( o.y+imgInfo.h<=(670+init.y) ){
+			o.y=(670+init.y)-imgInfo.h
+		}
+		createImg(_this);
+		dx = mx; dy = my;
+	}
+}
+document.onmouseup = function(e){
+	document.onmousemove = null;
+}
+</script>

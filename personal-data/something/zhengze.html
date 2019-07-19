@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var animalTextArr = ["猴", "鸡", "狗", "猪", "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊"];
+var defaultYear = 2016;
+var currentYear = new Date().getFullYear();
+var lhc = {
+    ArrPushUnshift: function(t, e) {
+        var i, a = t, n = 0;
+        for (n = 0; n < e; n++)
+            i = a.splice(a.length - 1),
+            a.unshift(i[0]);
+        return a
+    },
+    ZodiacToYear: function(t) {
+        var e = 0;
+        switch (t) {
+        case "猴":
+            e = 2016;
+            break;
+        case "鸡":
+            e = 2017;
+            break;
+        case "狗":
+            e = 2018;
+            break;
+        case "猪":
+            e = 2019;
+            break;
+        case "鼠":
+            e = 2020;
+            break;
+        case "牛":
+            e = 2021;
+            break;
+        case "虎":
+            e = 2022;
+            break;
+        case "兔":
+            e = 2023;
+            break;
+        case "龙":
+            e = 2024;
+            break;
+        case "蛇":
+            e = 2025;
+            break;
+        case "马":
+            e = 2026;
+            break;
+        case "羊":
+            e = 2027
+        }
+        return e
+    },
+
+
+    BackNewYear: function(t) {
+        var e = "";
+        switch (t) {
+        case 2017:
+            e = "2017-01-28 00:00:00";
+            break;
+        case 2018:
+            e = "2018-02-16 00:00:00";
+            break;
+        case 2019:
+            e = "2019-02-05 00:00:00";
+            break;
+        case 2020:
+            e = "2020-01-25 00:00:00";
+            break;
+        case 2021:
+            e = "2021-02-12 00:00:00";
+            break;
+        case 2022:
+            e = "2022-02-01 00:00:00";
+            break;
+        case 2023:
+            e = "2023-01-22 00:00:00";
+            break;
+        case 2024:
+            e = "2024-02-10 00:00:00";
+            break;
+        case 2025:
+            e = "2025-01-29 00:00:00"
+        }
+        return e
+    },
+}
+
+var isNewYear = new Date() - new Date(lhc.BackNewYear(currentYear));
+currentYear = isNewYear < 0 ? currentYear-1 : currentYear;
+
+var diffYear = currentYear - defaultYear;
+diffYear = diffYear >= 12 ? diffYear-12 : diffYear;
+var defaultShengxiao = animalTextArr[diffYear];
+
+var a = {
+	zodiac: [[9, 21, 33, 45], [8, 20, 32, 44], [7, 19, 31, 43], [6, 18, 30, 42], [5, 17, 29, 41], [4, 16, 28, 40], [3, 15, 27, 39], [2, 14, 26, 38], [1, 13, 25, 37, 49], [12, 24, 36, 48], [11, 23, 35, 47], [10, 22, 34, 46]],
+	difyear: 0,
+    shengxiao: lhc.ZodiacToYear(defaultShengxiao),
+}
+
+a.shengxiao >= 2016 && (a.difyear = a.shengxiao - 2016);
+a.zodiac = lhc.ArrPushUnshift(a.zodiac, a.difyear);
+console.log('数组------', a.zodiac)
+console.log('年------', a.shengxiao)
+var data = [
+	{year: '', name: '鼠', number: '', sex: '男', size: '大', wuhang: '五行属水', xiangmao: '凶丑生肖', yinyang: '阴性生肖', neiwai: '野外六兽'},
+	{year: '', name: '牛', number: '', sex: '男', size: '大', wuhang: '五行属土', xiangmao: '吉美生肖', yinyang: '阴性生肖', neiwai: '野外六兽'},
+	{year: '', name: '虎', number: '', sex: '男', size: '大', wuhang: '五行属土', xiangmao: '凶丑生肖', yinyang: '阳性生肖', neiwai: '家内六禽'},
+	{year: '', name: '兔', number: '', sex: '男', size: '大', wuhang: '五行属木', xiangmao: '凶丑生肖', yinyang: '阳性生肖', neiwai: '野外六兽'},
+	{year: '', name: '龙', number: '', sex: '女', size: '大', wuhang: '五行属木', xiangmao: '吉美生肖', yinyang: '阳性生肖', neiwai: '野外六兽'},
+	{year: '', name: '蛇', number: '', sex: '女', size: '大', wuhang: '五行属火', xiangmao: '吉美生肖', yinyang: '阴性生肖', neiwai: '野外六兽'},
+	{year: '', name: '马', number: '', sex: '女', size: '小', wuhang: '五行属金', xiangmao: '吉美生肖', yinyang: '阳性生肖', neiwai: '家内六禽'},
+	{year: '', name: '羊', number: '', sex: '男', size: '小', wuhang: '五行属土', xiangmao: '凶丑生肖', yinyang: '阴性生肖', neiwai: '家内六禽'},
+	{year: '', name: '猴', number: '', sex: '男', size: '小', wuhang: '五行属火', xiangmao: '吉美生肖', yinyang: '阴性生肖', neiwai: '家内六禽'},
+	{year: '', name: '鸡', number: '', sex: '女', size: '小', wuhang: '五行属土', xiangmao: '吉美生肖', yinyang: '阳性生肖', neiwai: '家内六禽'},
+	{year: '', name: '狗', number: '', sex: '女', size: '小', wuhang: '五行属水', xiangmao: '凶丑生肖', yinyang: '阴性生肖', neiwai: '家内六禽'},
+	{year: '', name: '猪', number: '', sex: '男', size: '小', wuhang: '五行属金', xiangmao: '凶丑生肖', yinyang: '阳性生肖', neiwai: '野外六兽'}
+]
+for(let i in data){
+	data[i].year = a.shengxiao;
+	data[i].number = a.zodiac[i].join(',');
+}
+console.log(data)
+// 15000
+// 月供 4500,
+// 房租 3200,
+// 吃饭 1800,
+// 5500
+</script>

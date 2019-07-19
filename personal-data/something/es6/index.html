@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+function* getNum(n){
+	yield getLocalImgData(n);
+}
+function getLocalImgData(n){
+	console.log(n);
+}
+for(var i=0; i<2; i++){
+	getNum(i).next()
+}
+</script>

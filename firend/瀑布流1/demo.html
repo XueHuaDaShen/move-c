@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.wrap{
+		position: relative;
+		margin:0 auto;
+	}
+	.wrap>img{
+		position: absolute;
+	}
+</style>
+<body>
+	<div id="wrap" class="wrap">
+		<img src="img/temp_img01.jpg" alt="">
+		<img src="img/temp_img02.jpg" alt="">
+		<img src="img/temp_img03.jpg" alt="">
+		<img src="img/temp_img04.jpg" alt="">
+		<img src="img/temp_img05.jpg" alt="">
+		<img src="img/temp_img06.jpg" alt="">
+		<img src="img/temp_img07.jpg" alt="">
+		<img src="img/temp_img08.jpg" alt="">
+		<img src="img/temp_img09.jpg" alt="">
+		<img src="img/temp_img10.jpg" alt="">
+		<img src="img/temp_img11.jpg" alt="">
+		<img src="img/temp_img12.jpg" alt="">
+		<img src="img/temp_img13.jpg" alt="">
+	</div>
+	<script src="jquery1.7.js"></script>
+	<script>
+		$(window).load(function(){
+			//获取img的宽度和浏览器的宽度，确定可以放几张图片
+			var imgW=$("#wrap img").outerWidth()+10;
+			var view=Math.floor($(window).width()/imgW);
+			var arr=[];
+			var p=0;
+			$("#wrap").width(view*imgW);
+			function init(start,end){
+				for(var i=start;i<end;i++){
+					if(view>i){
+						arr.push(0);
+					}
+					var imgH=$("#wrap img").eq(i).outerHeight()+10;
+					console.log($("#wrap img").eq(i).outerHeight())//第一次加载的时候，最后的3张可能是还没有放到盒子里，所以获取不到高度，所以出现了重叠的bug，解决方法就是在加载图片的时候设置了一个定时器;
+					var minH=Math.min.apply(Math,arr);
+					var index=$.inArray(minH,arr);
+					$("#wrap img").eq(i).stop().animate({"left":index*imgW,"top":minH},1000);
+					arr[index]+=imgH;
+					console.log(arr);
+					p++;
+				}
+			}
+			init(0,$("#wrap img").length);
+			//滚动加载图片
+			function readering(){
+				var data={"dataimg":[
+					{"src":"img/temp_img01.jpg"},
+					{"src":"img/temp_img02.jpg"},
+					{"src":"img/temp_img03.jpg"},
+					{"src":"img/temp_img04.jpg"},
+					{"src":"img/temp_img05.jpg"},
+					{"src":"img/temp_img06.jpg"},
+					{"src":"img/temp_img07.jpg"},
+					{"src":"img/temp_img08.jpg"},
+					{"src":"img/temp_img09.jpg"},
+					{"src":"img/temp_img10.jpg"},
+					{"src":"img/temp_img11.jpg"},
+					{"src":"img/temp_img12.jpg"},
+					{"src":"img/temp_img13.jpg"}
+				]}
+				// var minH=Math.max.apply(Math,arr);
+				// var index=$.inArray(minH,arr);
+				$.each(data.dataimg,function(i,val){
+					//创建新的img标签，
+					$("<img>").attr(val).appendTo("#wrap");//.css({"left":index*imgW,"top":index})  这个css 没啥用
+				})
+				setTimeout(function(){//10毫秒之后再进行排序，也就是说先执行完添加图片，延迟一会执行排序
+					init(p,$("#wrap img").length);
+				},10)
+				
+			}
+
+			$(window).on("scroll",function(){
+				var top=$(this).scrollTop();
+				var num=$(document).height()-$(window).height();
+				if(top>=num){
+					readering();
+				}				
+			})
+		})
+	</script>
+</body>
+</html>

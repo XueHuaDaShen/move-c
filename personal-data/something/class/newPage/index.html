@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+.box{
+	width:500px;
+	height:auto;
+}
+*{
+	list-style: none;
+	box-sizing:boeder-box;
+	margin:0;
+	padding:0;
+}
+.box{
+	margin:5px;
+	padding:5px;
+}
+header{
+	width:100%;
+	margin-bottom: 10px;
+	border:1px solid blue;
+}
+.content{
+	width:100%;
+}
+.data{
+	width:100%;
+	display:-webkit-box;
+	-webkit-box-pack:justify;
+}
+.content .data:nth-child(odd){
+	background:#ccc;
+}
+.data span{
+	display:block;
+	width:33.3%;
+	text-align: center;
+	padding:5px;
+}
+hr{
+	padding:10px 0;
+	background:#111;
+}
+footer{
+	width:100%;
+}
+.nav{
+	width:100%;
+	display: -webkit-box;
+	-webkit-box-pack:center;
+}
+.nav span{
+	display: block;
+	padding: 5px;
+	margin:5px;
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+.current{
+	display:-webkit-box;
+}
+.on{
+	background:#ccc;
+}
+</style>
+<body>
+	<div class="box">
+		<header>
+			<div class="data">
+				<span>name</span>
+				<span>type</span>
+				<span>version</span>
+			</div>
+		</header>
+		<div class="content">
+			<div class="data">
+				<span>name</span>
+				<span>age</span>
+				<span>phone</span>
+			</div>
+			<div class="data">
+				<span>name</span>
+				<span>age</span>
+				<span>phone</span>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<ul class="nav">
+				<li class="begin"><span>begin</span></li>
+				<li class="prev"><span>prev</span></li>
+				<li class="current">
+					<span>1</span>
+				</li>
+				<li class="next"><span>next</span></li>
+				<li class="end"><span>end</span></li>
+			</ul>
+		</footer>
+	</div>
+</body>
+</html>
+<script src="../../jquery.js"></script>
+<script src="./newPage.js"></script>
+<script src="./myIndex.js"></script>
+<script>
+
+function fanye(that){
+	var num = $(that).text();
+	var params = {
+		"size": 10,
+		"page": num
+	}
+	myPage.getDataList(params)
+	
+}
+</script>
