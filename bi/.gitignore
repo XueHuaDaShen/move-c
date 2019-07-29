@@ -1,0 +1,8 @@
+node_modules
+.idea
+product/*.js
+product/*.map
+product/*.css
+build/*.js
+build/*.map
+build/*.css
