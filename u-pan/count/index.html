@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+function Fn(){
+	this.name="nihao";
+}
+Fn.prototype.age="18";
+console.log(Fn.prototype)
+/*function cont(num){
+	if(num<=1){
+		return num;
+	}else{
+		return num+cont(num-2)
+	}
+}*/
+/*function cont(num){
+	if(num>98){
+		return num;
+	}else{
+		return num+cont(num+2)
+	}
+}*/
+/*alert(cont(99))
+var s=1,step=2,r=0;
+function num(){
+	r+=s
+	s+=step;
+	console.log(r+"--"+s)
+	if(s<100){
+		num()
+	}
+	return r;
+	
+}
+console.log(num())*/
+/*var a=10;
+say()
+function say(){
+	a=a+10;
+	console.log(a)
+	var a=100;
+	return a;
+}
+console.log(a)
+console.log(say()+10)
+function Foo(){
+	this.bar=function(){
+		console.log(this)
+		return this;
+	}
+}*/
+/*Foo.prototype={
+	bar:function(){
+		console.log(this)
+		return this;
+	}
+}*/
+/*var a=new Foo();
+var b=new Foo();
+alert(b==a)
+a.bar();
+console.log(a.bar()==b.bar())*/
+</script>

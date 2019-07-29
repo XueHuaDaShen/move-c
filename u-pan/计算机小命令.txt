@@ -1,0 +1,33 @@
+calc(计算器)
+遇到不同的情况，就做不同的操作
+遇到不同的问题，就做不同的处理
+
+git操作步骤
+一、在桌面点击鼠标右键选中 Git bash here
+二、在命令提示框里输入 ssh -keygen -t rsa -C "(邮箱地址)"
+三、按照给出的路径找到指定文件打开后缀名为pub的文件，在文件最后检查邮箱是否正确
+四、进入git网站，点击自己头像下方  Add a bio 进入操作列表
+五、点击 SSH and GPG keys，选择 新建SSH key，title随意，key 为第三步中那个文件的所有内容
+六、点击右上方"+" 选择 第一个 "New repository"或"新建仓库"
+七、输入名字(随意)，描述可选,
+八、下面两个单选 Public 和 private（一个收费一个免费），最后一个必选，然后点创建
+九、在页面中找到一个绿色的按钮上面是"Clone or download"或者 "复制或下载",点击有两个选项:在桌面打开或者下载ZIP压缩包如果都不愿意的话，复制里面的 链接地址
+十、找一个盘重复第一步，然后输入git clone "(第九步的链接地址)",这个时候会将当前的项目下载到这个 盘 下面
+十一、进入当前这项目的文件里面，新建一个文件(html or css or js),重复第一步，输入 git status，会出现你新建的文件
+十二、git add "(你新建的文件)" 或者 . （.代表所有）
+十三、git commit -m "(当前操作描述)" 这一步骤可省略，但是为了后期维护，知道自己做了什么，建议不要省略；然后可能会提示你" Please tell me who you are",按照上面的提示输入 例：
+	git config --global user.email "xyh_gzyx@163.com"
+	git config --global user.name "XueHuaDaShen"
+十四、如果十三步有提示那么输入 git commit -m "(当前操作描述)",否则输入git push origin master, 然后根据提示输入你的 用户密码 和 密码
+然后就可以去你的git里面查看了，你所新建的项目已经上传成功
+
+全局安装
+npm install -g vue-cli
+
+创建一个基于“webpack”模板的新项目
+vue init webpack my-project
+
+安装依赖
+cd my-project
+npm install
+npm run dev

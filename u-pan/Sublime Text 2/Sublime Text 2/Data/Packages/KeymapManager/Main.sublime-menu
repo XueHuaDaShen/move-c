@@ -1,0 +1,13 @@
+[
+    {
+        "id": "view",
+        "children":
+        [
+            {
+                "caption": "\u5FEB\u6377\u952E\u7BA1\u7406",
+                "id": "keymap-manager",
+                "command": "keymap_manager"
+            }
+        ]
+    }
+]

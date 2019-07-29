@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组与字符串方法</title>
+</head>
+<body>
+
+	<script>
+	//字符串
+	//1.截取字符串的开始/结束内的子串 slice(start,end)
+	document.write("<br/>---------抽取一个子串str.slice(start,end)-----------<br/>")
+	var str1 = "abcdcecg";
+	var str1_1=str1.slice(1,6);;
+	document.write("新字符串是：  "+str1_1+"<br/>"); //输出bcdce (开始下标(start)，结束下标(end))，返回截取的子串,不包括结束下标end(与substring相同)
+
+	var str1_2=str1.slice(1);
+	document.write("新字符串是：  "+str1_2+"<br/>"); //输出bcdcecg 从下标1第二个开始截取到最后结束的字符串  (与substring相同)
+
+	var str1_3 = str1.slice(-2);
+	document.write("新字符串是：  "+str1_3+"<br/>"); //输出cg  如果是负数 返回的从字符串后面开始截取的字符串(与substr相同)
+
+
+	//2.截取字符str.substring(start,end)返回字符串的一个从start到最后（不包含 end ）子串，传入参数是起始位置和结束位置(不包含)
+	document.write("<br/>------str.substring(start,end)--------<br/>")
+	var str1 = "abcdcecg"
+	var str_1=str1.substring(1,6);
+	document.write("新字符串是：  "+str_1+"<br/>"); //输出bcbce 从下标1第二个开始截取到第六个结束的字符 不包含end位置
+
+	var str_2=str1.substring(1);
+	document.write("新字符串是：  "+str_2+"<br/>"); //输出bcdcecg 从下标1第二个开始截取到最后结束的字符串
+
+	var str_3=str1.substring(-2);
+	document.write("新字符串是：  "+str_3+"<br/>"); //输出abcdcecg  如果是负数 返回整个字符串
+
+	var str_4=str1.substring(-1,2)
+	document.write("新字符串是：  "+str_4+"<br/>");//substring(0,2)start和end是负数的话，将自动转为0
+
+	//3.substr 返回字符串的一个子串，传入参数是起始位置和长度
+	document.write("<br/>----------str.substr(start,end)------------<br/>")
+	var str1 = "abcdcecg";
+
+	var str4 = str1.substr(1,6);
+	document.write("新字符串是：  "+str4+"<br/>");//输出结果 bcdc
+	//从下标1第二个开始截取到第六个结束的字符 包含end位置
+
+	var str5 = str1.substr(1);
+	document.write("新字符串是：  "+str5+"<br/>");//输出结果 bcdcecg
+	//从下标1第二个开始截取到最后结束的字符串
+
+	var str6=str1.substr(-2);
+	document.write("新字符串是：  "+str6+"<br/>"); //输出cg  如果是负数 返回的从字符串后面开始截取的字符串
+
+	//4.split 通过将字符串划分成子串，将一个字符串做成一个字符串数组。
+	document.write("<br/>--------分隔符分割成数组str.split(分隔符)----------<br/>")
+	var str1 = "abcdcecg";
+	var s_arr = str1.split("");
+	document.write("新数组是：  "+s_arr+"<br/>"); //s_arr = [a,b,c,d,e,c,g]
+	var str3="border-top-color";
+	document.write("新数组是：  "+str3.split("-")+"<br/>");//在每个-字符处进行分割
+	//数组中
+	//1.从start到end之间的子串不包含end   slice(start,end)
+	document.write("<br/>----arr.slice(start,end)从start到end之间的子串不包含end --<br/>")
+	var arr1 = [6,2,9,4,7,8,9,5]
+	var arr1_1=arr1.slice(1,6);
+	document.write("截取数组是： "+arr1_1+"<br/>") ;//(开始下标(start)，结束下标(end))，返回截取的子元素,原数组不变，不包括结束下标的元素
+
+	var arr1_2=arr1.slice(1);
+	document.write("截取数组是：  "+arr1_2+"<br/>"); // 2,9,4,7,8,9,5 从下标1第二个开始截取到最后结束的数组
+
+	var arr1_3 = arr1.slice(-2);
+	document.write("截取数组是：  "+arr1_3+"<br/>"); //9,5 如果是负数 返回的从数组后面开始截取的数组 (与substr相同)
+
+	var arr1_4 = arr1.slice(1,-1);
+	document.write("截取数组是：  "+arr1_4+"<br/>");//2,9,4,7,8,9,返回从start到length+end长度的新数组
+
+	//2.起始位置，截取长度值，替换的元素  splice(起点,长度,元素)
+	document.write("<br/>--------arr.splice(起点,长度,元素) ----------<br/>")
+	var arr2 = [6,5,6,2,7,5,3,8]
+	var arr2_2=	arr2.splice(1,0,"a,b,c");
+	document.write("被替换的元素是：  "+arr2_2+"<br/>") ;   //返回的是从下标1第二个开始截取的3个元素，弹出这三个被截取的元素5,6,2
+	document.write("新数组是：  "+arr2+"<br/>");  //弹出的是6,a,b,c,7,5,3,8
+
+
+	//3.数组元素的增删改查
+	var arr3=[11,22,30,6,5,4];
+	var arr3_1=arr3.push(7);//追加到数组的最后面
+	console.log(arr3_1)
+
+	var i=arr3.pop()//默认删除最后一个元素,并返回该被删除的元素
+	console.log(arr3+'_'+i)
+
+	var arr3_2=arr3.shift();//默认删除数组第一个元素
+	console.log(arr3_2)
+
+	var arr3_3=arr3.unshift(1);//添加一个元素在数组的第一位，与添加位置push相反
+	console.log(arr3_3)
+
+	var arr3_4=arr1.concat(arr3)//连接数组，把arr3追加到arr1数组的最后面
+	console.log(arr1+'_'+arr3_4)
+	</script>
+
+</body>
+</html>

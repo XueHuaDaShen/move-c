@@ -1,0 +1,83 @@
+[
+    {
+        "caption": "首选项(N)",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "插件设置",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "JsFormat",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/JsFormat/JsFormat.sublime-settings"},
+                                "caption": "设置 – 默认"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/User/JsFormat.sublime-settings"},
+                                "caption": "设置 – 用户"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/JsFormat/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "按键绑定 – 默认"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/JsFormat/Default (OSX).sublime-keymap",
+                                    "platform": "OSX"
+                                },
+                                "caption": "按键绑定 – 默认"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/JsFormat/Default (Linux).sublime-keymap",
+                                    "platform": "Linux"
+                                },
+                                "caption": "按键绑定 – 默认"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "按键绑定 – 用户"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/默认 (OSX).sublime-keymap",
+                                    "platform": "OSX"
+                                },
+                                "caption": "按键绑定 – 用户"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Linux).sublime-keymap",
+                                    "platform": "Linux"
+                                },
+                                "caption": "按键绑定 – 用户"
+                            },
+                            { "caption": "-" }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
