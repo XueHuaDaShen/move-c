@@ -1,1 +1,0 @@
-{"description": "Sublime Text 2 Plugin to compile less files to css on save", "url": "https://github.com/timdouglas/sublime-less2css", "platforms": ["*"], "version": "2017.02.26.08.10.00", "sublime_text": "*", "dependencies": []}
