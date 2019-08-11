@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html, body{
+      widows: 100px;
+      height:100%;
+    }
+    #echart{
+      width:100%;
+      height:500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="echart"></div>
+  <input type="date">
+  <script src="./echarts.min.js"></script>
+  <script>
+    function renderEchart() {
+      var echart = echarts.init(document.getElementById('echart'));
+      // var xAxis = [], yAxis = [];
+      var xAxis = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], yAxis = [120, 200, 150, 80, 70, 110, 130];
+      // for(var i in this.state.tableData){
+      //   xAxis.push(this.state.tableData[i].admin.username);
+      //   yAxis.push(this.state.tableData[i].count);
+      // }
+      // 指定图表的配置项和数据
+      var option = {
+        color: ['#99a8e8'],
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+          data:['采集量']
+        },
+        xAxis: {
+          data: xAxis
+        },
+        yAxis: {},
+        series: [{
+          name: '采集量',
+          type: 'bar',
+          data: yAxis
+        }]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      echart.setOption(option);
+    }
+    window.onload = function() {
+      renderEchart();
+    }
+  </script>
+</body>
+</html>

@@ -45,7 +45,6 @@ Vue.use(ElementUI, {
 // Vue.use(animate)
 
 Vue.config.productionTip = false
-Vue.config.productionTip = false
 
 Vue.http.options.emulateJSON = false
 Vue.http.options.crossOrigin = true

@@ -49,7 +49,9 @@ Vue.config.productionTip = false
 Vue.http.options.emulateJSON = false;
 Vue.http.options.crossOrigin = true;
 // Vue.http.options.emulateHTTP = true;
-
+Vue.http.options.headers = {
+  'Content-Type': 'application/json'
+}
 Vue.http.interceptors.push((request, next) => {
   let url = request.url;
   // https://pg-staging.paysec.com/Intrapay/paysec/v1/payIn/sendTokenForm 第三方支付请求的url 特殊处理
@@ -57,7 +59,7 @@ Vue.http.interceptors.push((request, next) => {
     let TOKEN = localStorage.getItem('dove-web-token');
     if (TOKEN) {
       // 如果请求时TOKEN存在,就为每次请求的headers中设置好TOKENs
-      request.headers.set('authorization', TOKEN);
+      // request.headers.set('authorization', TOKEN);
     }
     if (url) {
       // 如果url存在，拼接host+url;

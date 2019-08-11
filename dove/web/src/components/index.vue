@@ -159,13 +159,13 @@ export default {
   beforeCreate() {},
   created() {
     const vm = this;
-    this.importProviderImg();
-    this.getGameListSlots();
-    this.getGameListLive();
-    this.getBanner();
-    this.getCountCash();
+    // this.importProviderImg();
+    // this.getGameListSlots();
+    // this.getGameListLive();
+    // this.getBanner();
+    // this.getCountCash();
     vm.myInterval = setInterval(() => {
-      vm.getCountCash()
+      // vm.getCountCash()
     }, 3*60*1000)
   },
   beforeMount() {},
@@ -176,9 +176,25 @@ export default {
       this.$store.dispatch('setAlertBG', true);
       this.$store.dispatch('setShowLoginDialog', true);
     }
+    this.ceshi()
   },
   watch: {},
   methods: {
+    ceshi() {
+      this.$http.post('/admin/login', {
+        name: 'admin',
+        password: CryptoJS.HmacMD5(CryptoJS.MD5('pass').toString(), '12345').toString(),
+        random: '12345'
+      }, {
+          emulateJSON: true
+        }).then(res => {
+        console.log('res------------------',res)
+      }).then(err => {
+        if(err){
+          console.log('err-------------',err)
+        }
+      })
+    },
     toThousands(num) {
       num = Math.abs(num).toFixed(2);
       var re = /\d{1,3}(?=(\d{3})+$)/g;

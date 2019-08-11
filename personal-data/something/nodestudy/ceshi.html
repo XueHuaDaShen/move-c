@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+<style>
+canvas{
+  border:1px solid #ccc;
+}
+</style>
+</head>
+<body>
+  <img src="./test.jpg" id="img" width="300" height="200" alt="">
+  <canvas width="300" height="200" id="canvas"></canvas>
+  <script>
+    var img = document.getElementById("img");
+    var canvas = document.getElementById("canvas");
+    // var canvas = document.createElement("canvas");
+    // canvas.width = 300;
+    // canvas.height = 200;
+    ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, 300, 200);
+    var image = ctx.getImageData(0, 0, 300, 200);
+    // console.log(image)
+    var binary = new Uint8Array(image.data.length);
+    for (var i = 0; i < image.data.length; i++) {
+      binary[i] = image.data[i];
+    }
+    var url = 'ws://192.168.111.221:3003/api/v1/operate/preprocess';
+    var ws;
+    function createSocket() {
+      ws = new WebSocket(url);
+      ws.onopen = function(e) {
+        console.log('连接成功......')
+        ws.send(binary.buffer);
+        ws.send('123')
+      }
+      ws.onclose = function (e) {
+        console.log('连接断开......');
+      }
+      ws.onerror = function(e) {
+        console.log('传输异常......')
+      }
+      ws.onmessage = function(data) {
+        console.log('服务器发送的数据----------', data)
+      }
+    }
+    // createSocket()
+    
+  </script>
+</body>
+</html>
