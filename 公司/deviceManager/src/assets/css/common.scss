@@ -1,0 +1,73 @@
+$bgColor: #1e1e1e;
+/* 改变主题色变量 */
+$--color-primary: $bgColor;
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import "~element-ui/packages/theme-chalk/src/index";
+.box-shadow{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.15);
+}
+button{
+  background:$bgColor;
+}
+.search-wrap{
+  padding:30px 10px;
+  background: #fff;
+  display:flex;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+  .item{
+    // width:150px;
+    display:flex;
+    align-items : center; 
+    margin-right:10px;
+    margin-bottom:10px;
+    font-size:14px;
+    label{
+      white-space: nowrap;
+    }
+  }
+}
+.data-content{
+  padding:10px;
+  background: #fff;
+  .title-operate-btn{
+    padding:10px;
+    text-align:left;
+  }
+  .reperate-wrap{
+    display:flex;
+    flex-wrap: wrap;
+    >div{
+      margin:5px;
+    }
+  }
+  .table-pagination{
+    margin-top:30px;
+  }
+}
+.title-operate-btn{
+  .upload-wrap{
+    width:78px;
+  }
+}
+.upload-wrap{
+  position: relative;
+  input[type=file], input[type=text]{
+    position: absolute;
+    width:68px;
+    height:40px;
+    left:0;
+    opacity: 0;
+    z-index:1;
+    cursor: pointer;
+    width:100%;
+  }
+  input[type=text]{
+    opacity: 0;
+    z-index:0;
+  }
+  button{
+    width:100%;
+  }
+}

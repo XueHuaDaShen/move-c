@@ -1,0 +1,54 @@
+.leftbar{
+  background:#5d6bbf !important;
+  overflow-y:auto;
+  border:none !important;
+  .leftbar-menu{
+    // background:#5d6bbf !important;
+    border:none !important;
+    padding:0;
+    .myMenu-item{
+      background:#5d6bbf !important;
+    }
+    // .leftbar .rc-menu-item, .leftbar .rc-menu-submenu
+    .rc-menu-item, .rc-menu-submenu{
+      // background:#5d6bbf !important;
+      border:none !important;
+      color:rgb(126, 143, 213);
+    }
+    .rc-menu-item, .rc-menu-submenu {
+      img{
+        float: left;
+        margin:-6px 3px 0 -10px;
+      }
+      &:hover{
+        background:rgb(74, 86, 152) !important;
+      }
+    }
+    .rc-menu-submenu-selected{
+      .rc-menu-submenu-title{
+        color:#fff;
+      }
+    }
+    .rc-menu-submenu-active{
+      .rc-menu-submenu-title{
+        background:rgb(74, 86, 152) !important;
+      }
+    }
+    .rc-menu-item-selected{
+      color:#fff !important;
+    }
+  }
+}
+
+.rc-menu-inline > .rc-menu-item{
+  padding-top:20px;
+  padding-bottom:20px;
+}
+.rc-menu-sub.rc-menu-inline > .rc-menu-item{
+  padding-top:15px;
+  padding-bottom:15px;
+}
+.rc-menu-inline > .rc-menu-submenu > .rc-menu-submenu-title{
+  padding-top:20px;
+  padding-bottom:20px;
+}

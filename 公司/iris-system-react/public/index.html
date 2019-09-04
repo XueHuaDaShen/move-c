@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" /> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Modernizr 是一个用来检测浏览器功能支持情况的 JavaScript 库，内置了 html5shiv 类库。 -->
+  <!-- <script src="https://as.alipayobjects.com/g/component/modernizr/2.8.3/modernizr.min.js"></script> -->
+  <!-- <script type="text/javascript" src="./md5/hmac-md5.js"></script>
+  <script type="text/javascript" src="./md5/md5.js"></script>
+  <script type="text/javascript" src="./md5/spark-md5.min.js"></script> -->
+  <script src="./echart/echarts.min_new.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> -->
+  <script src="./js/jquery.js"></script>
+  <OBJECT ID="CertCtl" style="position:absolute" name="CertCtl" CLASSID="CLSID:10946843-7507-44FE-ACE8-2B3483D179B7" width="0" height="0"></OBJECT>
+  <object classid="clsid:727f5e7c-4547-49d1-a15d-d3be613a2c0e" id="as3" width="60%" codebase="ActiveQtServer3.dll" style="float: left ; margin:15% 20%;position:absolute">
+    控件加载失败，请联系王新皓
+  </object>
+</head>
+
+<body>
+  <script>
+    // 采集虹膜 相关变量/函数
+    // 开始
+    var timeOut = 30 * 1000; // 采集超时时间 30s
+    var caijiTime = ''; // 采集耗时 毫秒
+    var leftEye = ""; // 左眼图
+    var rightEye = ""; // 右眼图
+    var leftEyeFalse = false; // 左眼不可采集
+    var rightEyeFalse = false; // 右眼不可采集
+    var eleAs3;
+    var showObject = function() {
+      eleAs3.style.display = "block";
+      // as3.openDivice(); // 打开
+      as3.showOnIe(); // 显示
+    }
+    var hideObject = function() {
+      // as3.closeDivice(); // 关闭
+      as3.hideOnIe(); // 隐藏
+      eleAs3.style.display = "none";
+    }
+    var start_caiji_eye = function() {
+      showObject();
+      caijiTime = new Date()*1;
+      if(leftEyeFalse){
+        // 左眼不可采集，采集右眼
+        // alert('采集右眼')
+        as3.enroll_r();
+      }
+      if(rightEyeFalse){
+        // 右眼不可采集，采集左眼
+        // alert('采集左眼')
+        as3.enroll_l();
+      }
+      if(leftEyeFalse && rightEyeFalse){
+        // 双眼都不可采集，强制采集
+        // alert('强制采集')
+      }
+      if(!leftEyeFalse && !rightEyeFalse){
+        // 采集双眼
+        // alert('采集双眼')
+        as3.enroll();
+      }
+    }
+    function as3::enrollResLeftImgEvent(value) {
+      leftEye =  value && value !== 'openDivice' ? value : '';
+      if(rightEye){
+        window.setRcFn();
+      }
+    }
+
+    function as3::enrollResRightImgEvent(value) {
+      rightEye =  value;
+      if(leftEye){
+        window.setRcFn();
+      }
+    }
+    // 结束
+
+    // 读取身份证 相关变量/函数
+    var idCardImg = '';
+    var IDCARD = {
+      empty: true
+    };
+    var readCard = function() {
+      CertCtl.ReadContentType = 1;
+      var result=CertCtl.ReadCard(); 
+      if (result == "0") { 
+        IDCARD = {
+          empty: false,
+          success: '读取成功',
+          name: CertCtl.Name, // 姓名
+          sex: CertCtl.Sex, // 性别
+          nation: CertCtl.Nation, // 民族
+          birth: CertCtl.Born, // 出生年月日
+          address: CertCtl.Address, // 住址（户籍）
+          cardType: CertCtl.CardType, // 证件类型
+          cardNo: CertCtl.CardNo, // 证件号
+          office: CertCtl.IssuedAt, // 签发机关
+          startAt: CertCtl.EffectedDate, // 有效期开始时间
+          endAt: CertCtl.ExpiredDate, // 有效期截至时间
+          img: CertCtl.Picture, // 照片
+        }
+        idCardImg = CertCtl.Picture;
+      } else {
+        IDCARD = {
+          empty: true,
+          error: '读取失败'
+        }
+      }
+      return IDCARD
+    }
+
+    // 采集人脸 相关变量/函数
+    // 开始
+    // var faceImg = '';
+    var caijiFace = function() {
+      // 设置空间的模式为 采集人脸
+      as3.setFaceMode();
+      // 注册
+      as3.enroll()
+    }
+    // 抓取人脸图
+    var takeFacePhoto = function() {
+      as3.takeFacePic()
+    }
+    // 人脸图回调
+    function as3::enrollResFaceImgEvent(value) {
+      // faceImg = value;
+      window.setRcFaceFn(value);
+      as3.closeDivice();
+    }
+    // 结束
+
+    window.onload = function() {
+      var w = $(document).width()*0.6/2;
+      var h = w*2/3;
+      eleAs3 = document.getElementById("as3");
+      eleAs3.style.height = h + 'px';
+      hideObject();
+    }
+  </script>
+  <div id="root"></div>
+</body>
+
+</html>
