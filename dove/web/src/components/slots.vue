@@ -45,7 +45,7 @@ export default {
         {name: 'GSS', value: 'GSS'},
         {name: 'GPI', value: 'GPI'},
         {name: 'SA', value: 'SA'},
-        // {name: 'PP', value: 'PP'}
+        {name: 'PP', value: 'PP'}
       ],
       currentBtn: '',
       defaultBtn: 'All Games'

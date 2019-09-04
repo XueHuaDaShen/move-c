@@ -13,19 +13,112 @@
     html,body{
       overflow: hidden;
     }
+    .container{
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .loading{
+      width: 42px;
+      height: 42px;
+      /* margin: auto;
+      display: flex; */
+    }
+
+    .circular{
+      height: 42px;
+      width: 42px;
+      -webkit-animation: loading-rotate 2s linear infinite;
+      animation: loading-rotate 2s linear infinite
+    }
+
+    .path{
+      animation: loading-dash 1.5s ease-in-out infinite;
+      stroke-dasharray: 90,150;
+      stroke-dashoffset: 0;
+      stroke-width: 2;
+      stroke: #409eff;
+      stroke-linecap: round;
+    }
+
+    @keyframes loading-dash {
+      0% {
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0
+      }
+
+      50% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -40px
+      }
+
+      100% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -120px
+      }
+    }
+
+    @keyframes loading-rotate {
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+      }
+    }
+    input{
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-  <input type="file" onchange="readFile(event)">
+  <input type="file" id="file1">
+  <input type="file" id="file2">
+  <input type="file" id="file3">
+  <input type="file" id="file4">
+  <input type="file" id="file5">
+  <button id="submit">上传</button>
+  <a href="http://192.168.111.67:8010/api/v1/job/download?filename=eagle.jpeg" download="eagle">download</a>
+  <div class="container">
+    <div class="loading">
+      <div class="circular"><div class="path"></div></div>
+    </div>
+  </div>
   <!-- <iframe id="myIframe" src="http://localhost:8080/#/betRecord?create_f_d_template=true" frameborder="0"></iframe> -->
 </body>
+<script src="./jquery.js"></script>
 <script>
-// window.onload = function() {
-//   var myIframe = document.getElementById('myIframe').contentWindow;
-//   myIframe.postMessage('userid', '*');
-// }
-function readFile(e) {
-  console.log(e.target.files[0])
-}
+$("#submit").on("click", function(){
+  var formData = new FormData(); 
+  formData.append("file1", document.getElementById('file1').files[0]);
+  formData.append("file2", document.getElementById('file2').files[0]);
+  formData.append("file3", document.getElementById('file3').files[0]);
+  formData.append("file4", document.getElementById('file4').files[0]);
+  formData.append("file5", document.getElementById('file5').files[0]);
+  formData.append("name", 'upload');
+  formData.append("work", 'system');
+  $.ajax({ 
+    url: "http://192.168.111.67:8010/api/v1/job/batch", 
+    type: "POST",
+    headers: {
+      // "token": localStorage.getItem('A-TOKEN')
+    }, 
+    data: formData, 
+    processData: false, // 不要对data参数进行序列化处理，默认为true
+    contentType: false, // 不要设置Content-Type请求头，因为文件数据是以 multipart/form-data 来编码
+    // xhr: function(){
+    //   // myXhr = $.ajaxSettings.xhr();
+    // },
+    success: function(res){ 
+        // 请求成功
+        console.log(res)
+    },
+    error: function(err) {
+        // 请求失败
+        console.log(err);
+    }
+  });
+})
 </script>
 </html>

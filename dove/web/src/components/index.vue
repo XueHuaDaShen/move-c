@@ -159,13 +159,13 @@ export default {
   beforeCreate() {},
   created() {
     const vm = this;
-    // this.importProviderImg();
-    // this.getGameListSlots();
-    // this.getGameListLive();
-    // this.getBanner();
-    // this.getCountCash();
+    this.importProviderImg();
+    this.getGameListSlots();
+    this.getGameListLive();
+    this.getBanner();
+    this.getCountCash();
     vm.myInterval = setInterval(() => {
-      // vm.getCountCash()
+      vm.getCountCash()
     }, 3*60*1000)
   },
   beforeMount() {},
