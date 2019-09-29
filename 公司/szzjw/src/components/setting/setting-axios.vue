@@ -81,7 +81,8 @@
         <el-row>
           <el-col :span="24">
             <div class="item">
-              <div class="input" style="text-align:right"><el-button size="small" :disabled="isClick" @click="saveCompanyInfo" type="primary">保存</el-button></div>
+              <div class="input" style="text-align:right" v-if="!companyInfo.parentId"><el-button size="small" :disabled="isClick" @click="saveCompanyInfo1" type="primary">保存</el-button></div>
+              <div class="input" style="text-align:right" v-if="companyInfo.parentId"><el-button size="small" :disabled="isClick" @click="saveCompanyInfo2" type="primary">保存</el-button></div>
             </div>
           </el-col>
         </el-row>
@@ -143,6 +144,7 @@
           <el-table
             :data="tableData"
             border
+            max-height="600"
             style="width: 100%">
             <el-table-column
               prop="companyType"
@@ -454,12 +456,39 @@ export default {
       });
     },
     // 保存信息
-    saveCompanyInfo() {
+    saveCompanyInfo1() {
       const vm = this;
       vm.loading = true;
       vm.isClick = true;
       request({
         url: '/company/add',
+        param: vm.companyInfo,
+        method: 'post',
+        onError: err => {
+          vm.loading = false;
+          vm.isClick = false;
+        },
+        vm,
+      }).then(res => {
+        let code = res.code;
+        vm.loading = false;
+        vm.isClick = false;
+        if(code === 200) {
+          vm.$message({
+            message: '保存成功',
+            type: 'success',
+            duration: 1000
+          })
+        }
+      });
+    },
+    // 保存信息
+    saveCompanyInfo2() {
+      const vm = this;
+      vm.loading = true;
+      vm.isClick = true;
+      request({
+        url: '/company/update',
         param: vm.companyInfo,
         method: 'post',
         onError: err => {
@@ -570,6 +599,7 @@ export default {
         vm.loading = false;
         vm.isClick = false;
         if(code === 200){
+          vm.resetForm("dataForm")
           vm.dialogFormVisible = false;
           vm.$message({
             message: '提交成功',
