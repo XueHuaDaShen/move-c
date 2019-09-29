@@ -56,9 +56,9 @@
             <el-select v-model="createForm.devType.val" size="mini" clearable placeholder="请选择" @focus="getDeviceType">
               <el-option
                 v-for="item in createForm.devType.data"
-                :key="item.id"
+                :key="item.code"
                 :label="item.name"
-                :value="item.id">
+                :value="item.code">
               </el-option>
             </el-select>
           </el-form-item>
@@ -77,6 +77,15 @@
           </el-form-item>
           <el-form-item label="设备名称" prop="deviceName">
             <el-input type="text" size="mini" clearable v-model="createForm.deviceName" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="账户名" prop="username" v-if="createForm.devType.val == 102">
+            <el-input type="text" size="mini" clearable v-model="createForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password" v-if="createForm.devType.val == 102">
+            <el-input type="text" size="mini" clearable v-model="createForm.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="端口" prop="port" v-if="createForm.devType.val == 102">
+            <el-input type="text" size="mini" clearable v-model="createForm.port" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer" center>
@@ -101,6 +110,15 @@
           </el-form-item>
           <el-form-item label="设备名称" prop="deviceName">
             <el-input type="text" size="mini" clearable v-model="updateForm.deviceName" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="账户名" prop="username" v-if="updateForm.deviceGroup == 102">
+            <el-input type="text" size="mini" clearable v-model="updateForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password" v-if="updateForm.deviceGroup == 102">
+            <el-input type="text" size="mini" clearable v-model="updateForm.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="端口" prop="port" v-if="updateForm.deviceGroup == 102">
+            <el-input type="text" size="mini" clearable v-model="updateForm.port" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer" center>
@@ -142,6 +160,9 @@ export default {
           ],
         },
         deviceName: '',
+        username: '', // 设备类型 是海康摄像头的时候需要的字段
+        password: '',
+        port: '',
       },
       updateForm: {
         sn: '',
@@ -154,6 +175,10 @@ export default {
           ],
         },
         deviceName: '',
+        deviceGroup: '',
+        username: '', // 设备类型 是海康摄像头的时候需要的字段
+        password: '',
+        port: '',
       },
       rules: {
         sn: [
@@ -170,6 +195,15 @@ export default {
         ],
         deviceName: [
           { required: true, message: '请输入名称', trigger: 'blur' },
+        ],
+        username: [
+          { required: true, message: '请输入账户名', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+        ],
+        port: [
+          { required: true, message: '请输入端口', trigger: 'blur' },
         ]
       }
     }
@@ -220,18 +254,33 @@ export default {
               devType,
               access,
               deviceName,
+              username, // 设备类型 是海康摄像头的时候需要的字段
+              password,
+              port,
             } = vm[formName];
             url = '/device/register';
-            data = {sn, ip, devType: devType.val, access: access.val, deviceName, deviceAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}
+            if(devType.val == 102){
+              data = {sn, ip, devType: devType.val, access: access.val, deviceName, deviceAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'), username, password, port}
+            }else{
+              data = {sn, ip, devType: devType.val, access: access.val, deviceName, deviceAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}
+            }
           }else{
             let {
               sn,
               ip,
               access,
               deviceName,
+              deviceGroup,
+              username, // 设备类型 是海康摄像头的时候需要的字段
+              password,
+              port,
             } = vm[formName];
             url = '/device/update';
-            data = {sn, ip, access: access.val, deviceName}
+            if(deviceGroup == 102) {
+              data = {sn, ip, access: access.val, deviceName, username, password, port}
+            }else{
+              data = {sn, ip, access: access.val, deviceName}
+            }
           }
           vm.deviceReg(url, data, formName);
         } else {
