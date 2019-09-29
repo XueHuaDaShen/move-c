@@ -55,7 +55,7 @@ function encryption(value) {
     console.log('加密后的数据---------', bizDataEnc)
 }
 
-encryption('{"username":"admin","password":"346fa231b89e36e43c3ece86cc8a9834","random":"12345"}');
+// encryption('{"username":"admin","password":"346fa231b89e36e43c3ece86cc8a9834","random":"12345"}');
 
 
 /**
@@ -78,11 +78,11 @@ function decryption(data){
 
 
 
-// fs.readFile('QK1.data', function (err, data) {
-//     if (err) throw err;
-//     console.log(data)
+fs.readFile('QK1.data', function (err, data) {
+    if (err) throw err;
+    console.log(data)
 
-//     let ret = decryption(data)
-//     console.log(ret);
-// })
+    let ret = decryption(data)
+    console.log(ret);
+})
 

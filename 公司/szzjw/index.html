@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>深圳住建委</title>
+    <OBJECT ID="CertCtl" style="position:absolute" name="CertCtl" CLASSID="CLSID:10946843-7507-44FE-ACE8-2B3483D179B7" width="0" height="0"></OBJECT>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript" src="/static/md5/hmac-md5.js"></script>
+    <script type="text/javascript" src="/static/md5/md5.js"></script>
+    <script type="text/javascript" src="/static/md5/spark-md5.min.js"></script>
+    <!-- built files will be auto injected -->
+    <script>
+      // 读取身份证 相关变量/函数
+      var idCardImg = '';
+      var IDCARD = {
+        empty: true
+      };
+      var readCard = function() {
+        CertCtl.ReadContentType = 1;
+        var result=CertCtl.ReadCard(); 
+        if (result == "0") { 
+          IDCARD = {
+            empty: false,
+            success: '读取成功',
+            name: CertCtl.Name, // 姓名
+            sex: CertCtl.Sex, // 性别
+            nation: CertCtl.Nation, // 民族
+            birth: CertCtl.Born, // 出生年月日
+            address: CertCtl.Address, // 住址（户籍）
+            cardType: CertCtl.CardType, // 证件类型
+            cardNo: CertCtl.CardNo, // 证件号
+            office: CertCtl.IssuedAt, // 签发机关
+            startAt: CertCtl.EffectedDate, // 有效期开始时间
+            endAt: CertCtl.ExpiredDate, // 有效期截至时间
+            img: CertCtl.Picture, // 照片
+          }
+          idCardImg = CertCtl.Picture;
+        } else {
+          IDCARD = {
+            empty: true,
+            error: '读取失败'
+          }
+        }
+        return IDCARD
+      }
+    </script>
+  </body>
+</html>
