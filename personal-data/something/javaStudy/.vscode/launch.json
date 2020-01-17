@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorld",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "projectName": "javaStudy_fd759f86"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "启动程序",
