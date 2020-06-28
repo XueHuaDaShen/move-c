@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片缩放、移动、测量、选择物体</title>
+</head>
+<style>
+html, body{
+  width:100%;
+  height:100%;
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+body{
+  padding-top:100px;
+}
+#wrap{
+  width:500px;
+  height:500px;
+  border:1px solid #ccc;
+  margin:0 auto;
+  padding:5px;
+  overflow: hidden;
+}
+.inner, .item{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+}
+#select-wrap{
+  position: fixed;
+  right:30px;
+  top:30px;
+}
+</style>
+<body>
+  <div id="select-wrap">
+    <select name="" id="select">
+      <option value="arc">arc</option>
+      <option value="rect">rect</option>
+    </select>
+  </div>
+  <div id="wrap">
+    <div class="inner">
+      <img class="img" src="../img/123.jpg" alt="">
+    </div>
+  </div>
+  <div id="wrap">
+    <div class="item">
+      <canvas id="canvas"></canvas>
+    </div>
+  </div>
+</body>
+</html>
+<script src="../jquery-3.1.1.min.js"></script>
+<script src="./index.js"></script>
+<script>
+//
+let scale = 1;
+let step = 0.2;
+let min = 1;
+let max = 3;
+let percent = 1;
+let defaultPercent = 1;
+$(".inner").on('mousemove', function() {
+  percent = scale/defaultPercent
+})
+$(".inner").on('mousewheel ', function(e) {
+  let val = e.originalEvent.wheelDelta;
+  let x = e.offsetX;
+  let y = e.offsetY;
+  console.log(x, y)
+  if(val > 0) {
+    // 上滚 放大
+    scale += step;
+    scale = scale > max ? max : scale;
+  }
+  if(val < 0) {
+    // 下滚 缩小
+    scale -= step;
+    scale = scale < min ? min : scale;
+  }
+  $('.img').css({
+    transformOrigin: `${x/percent}px ${y/percent}px`,
+    transform: `scale(${scale})`
+  })
+})
+// 三点确定圆和半径
+function getCenterPos (x1,y1,x2,y2,x3,y3){
+  var a=2*(x2-x1);
+  var b=2*(y2-y1);
+  var c=x2*x2+y2*y2-x1*x1-y1*y1;
+  var d=2*(x3-x2);
+  var e=2*(y3-y2);
+  var f=x3*x3+y3*y3-x2*x2-y2*y2;
+  var x=(b*f-e*c)/(b*d-e*a);
+  var y=(d*c-a*f)/(b*d-e*a);
+  ctx.beginPath();
+  ctx.arc(x,y,2,0,2*Math.PI);
+  ctx.stroke();
+  console.log("x:"+x+"y:"+y);
+  r=Math.sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1));//半径
+  console.log('r--', r)
+  ctx.beginPath();
+  ctx.arc(x,y,r,0,2*Math.PI);
+  ctx.stroke();
+}
+var getAngle = function(a, b) {
+  var dx = b.x - a.x;
+  var dy = b.y - a.y;
+  var dis = Math.sqrt(dx * dx + dy * dy);
+  var rota = dis > 0 ? Math.round(Math.asin(dy / dis) / Math.PI * 180) : 0;
+  // rota范围（-90，90）当b点在a点左边时，必要另处理
+  if (b.x < a.x) {
+      rota = 180 - (180 - rota);
+  }
+  return rota;
+}
+const soryByXy = function (a, b) {
+  return a.val - b.val
+}
+// 四点确定矩形和中心
+function getRect(x1,y1, x2,y2, x3,y3, x4,y4) {
+  // 只需找到最大 最小的 x 和 y 就好了
+  let xs = [{val: x1, label: '1'}, {val: x2, label: '2'}, {val: x3, label: '3'}, {val: x4, label: '4'}].sort(soryByXy)
+  let ys = [{val: y1, label: '1'}, {val: y2, label: '2'}, {val: y3, label: '3'}, {val: y4, label: '4'}].sort(soryByXy)
+  let maxX = xs[xs.length - 1].val
+  let minX = xs[0].val
+  let maxY = ys[ys.length - 1].val
+  let minY = ys[0].val
+  let x = (maxX-minX)/2+minX;
+  let y = (maxY-minY)/2+minY;
+  let getPoint = function(item) {
+    return {
+      x: item.val,
+      y: ys.filter(v => v.label === item.label)[0].val
+    }
+  }
+  let fst = getPoint(xs[0]);
+  let snd = getPoint(xs[1]);
+  let trd = getPoint(xs[2]);
+  let four = getPoint(xs[3]);
+  let lt, lb, rt, rb;
+  if(fst.y < snd.y) {
+    lt = fst;
+    lb = snd;
+  }else{
+    lt = snd;
+    lb = fst;
+  }
+  if(trd.y < four.y) {
+    rt = trd;
+    rb = four;
+  }else{
+    rt = four;
+    rb = trd;
+  }
+  console.log(x1,y1, x2,y2, x3,y3, x4,y4)
+  console.log('lt---',lt)
+  console.log('lb---',lb)
+  console.log('rt---',rt)
+  console.log('rb---',rb)
+  ctx.beginPath();
+  ctx.arc(x,y,2,0,2*Math.PI);
+  ctx.stroke();
+  // ctx.moveTo(minX, minY)
+  // ctx.lineTo(maxX, minY)
+  // ctx.lineTo(maxX, maxY)
+  // ctx.lineTo(minX, maxY)
+  // ctx.lineTo(minX, minY)
+  ctx.moveTo(lt.x, lt.y)
+  ctx.lineTo(rt.x, rt.y)
+  ctx.lineTo(rb.x, rb.y)
+  ctx.lineTo(lb.x, lb.y)
+  ctx.lineTo(lt.x, lt.y)
+  ctx.stroke();
+  console.log(getAngle({x: rb.x, y: rb.y}, {x: lb.x, y: lb.y}))
+  // return {x, y, w, h};
+  // console.log(xs, ys)
+}
+let points = [];
+let type = localStorage.getItem('type') || $("#select").val();
+$("#select").on("change", function() {
+  cleanCanvas();
+  type = $("#select").val();
+  localStorage.setItem('type', type)
+})
+let len = 3;
+var clickCount = new Proxy({}, {
+  get: function (target, propKey, receiver) {
+    // console.log(`getting ${propKey}!`);
+    return Reflect.get(target, propKey, receiver);
+  },
+  set: function (target, propKey, value, receiver) {
+    // console.log(`setting ${propKey}, ${value}!`);
+    if(type === 'arc') {
+      if(value == len) {
+        let x1 = points[0].x, y1 = points[0].y;
+        let x2 = points[1].x, y2 = points[1].y;
+        let x3 = points[2].x, y3 = points[2].y;
+        getCenterPos(x1, y1, x2, y2, x3, y3)
+      }
+    }
+    if(type === 'rect') {
+      if(value == len) {
+        let x1 = points[0].x, y1 = points[0].y;
+        let x2 = points[1].x, y2 = points[1].y;
+        let x3 = points[2].x, y3 = points[2].y;
+        let x4 = points[3].x, y4 = points[3].y;
+        getRect(x1, y1, x2, y2, x3, y3, x4, y4)
+      }
+    }
+    return Reflect.set(target, propKey, value, receiver);
+  }
+});
+clickCount.val = 0;
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+canvas.width = 488;
+canvas.height = 488;
+$("#canvas").on('click', function(e) {
+  let x = e.offsetX;
+  let y = e.offsetY;
+  if(type === 'arc') {
+    len = 3;
+  }
+  if(type === 'rect') {
+    len = 4;
+  }
+  if(points.length < len) {
+    points.push({
+      x, y
+    })
+    console.log(x,y)
+    ctx.beginPath();
+    ctx.arc(x,y,2,0,2*Math.PI);
+    ctx.stroke();
+    clickCount.val += 1;
+  }else{
+    cleanCanvas() 
+  }
+})
+function cleanCanvas() {
+  points = []
+  clickCount.val = 0;
+  ctx.clearRect(0,0,488,488); 
+}
+</script>

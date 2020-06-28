@@ -9,11 +9,37 @@
 	<button id="submit">upload</button>
 	<br>
 	<progress id="progress" max=100 style="width:200px;margin-top:20px" value=0></progress><span id="isok" style="display:none">上传完成</span>
-	<div class="test" style="font-size:20px;color:#000"></div>
+  <div class="test" style="font-size:20px;color:#000"></div>
+  <!-- <embed type="application/x-vlc-plugin" id="video" autostart="true" loop="0" src="rtmp://192.168.111.231:1935/stream/test" pluginspage="rtmp://192.168.111.231:1935/stream/test" /> -->
+  <!-- <video id="video" autoplay="autoplay" controls preload="auto" width="640" height="264">
+    <source src="rtmp://192.168.111.231:1935/stream/test" type="rtsp/flv">
+  </video> -->
+  <video width="320" height="240" controls type="rtsp/flv">
+    <object width="320" data="rtmp://192.168.111.231:1935/stream/test" height="240" type="rtsp/flv">
+      <embed id="video" src="rtmp://192.168.111.231:1935/stream/test" type="rtsp/flv" width="320" height="240">
+    </object> 
+  </video>
+  <button id="play">播放</button>
 </body>
 </html>
+<style>
+  video{
+    width:300px;
+    height:300px;
+  }
+  source{
+    width:100%;
+    height:100%;
+  }
+</style>
 <script src="../jquery-3.1.1.min.js"></script>
 <script>
+//
+var video = document.getElementById('video');
+$("#play").on('click', function() {
+  console.log(video)
+  video.play();
+})
 $("#submit").on("click", function(){
   var formData = new FormData(); 
   formData.append("avatar", document.getElementById('file').files[0]);

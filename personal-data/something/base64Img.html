@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <!-- <img src="" id="base64" alt=""> -->
+  <textarea name="" id="base64" cols="30" rows="10"></textarea>
+  <input type="file" class="fileName">
+</body>
+</html>
+<script>
+//
+var obj = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+  e: 4,
+  f: [5, 6]
+}
+function cp(newobj, obj) {
+  if(typeof obj != 'object') {
+    return obj;
+  }
+  for(let i in obj) {
+    if(obj[i]) {
+      newobj[i] = obj[i]
+    }
+  }
+}
+//
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext("2d");
+var img = new Image();
+img.src = './baseImg/2.jpg';
+img.onload = function() {
+  ctx.drawImage(img, 0, 0, 500, 500);
+  var imgurl = canvas.toDataURL('image/png', 1.0);
+  let base64 = document.getElementById('base64');
+  base64.value = imgurl
+}
+
+// var fso = new ActiveXObject("Scripting.FileSystemObject");
+// var f1 = fso.GetFile("./baseImg/2.jpg");
+// console.log(f1)
+let fileName = document.getElementsByClassName('fileName');
+fileName[0].onchange = function(e) {
+  console.log(e)
+}
+console.log(fileName)
+var reader = new FileReader();//new一个FileReader实例
+reader.onload = function() {
+  console.log(this.result)
+  // $('body').append('<pre>' + this.result + '</pre>');
+}
+reader.readAsText('./baseImg/2.jpg');
+</script>
